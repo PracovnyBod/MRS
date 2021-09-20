@@ -555,6 +555,9 @@ Pre zaujímavosť, ukážme priebeh napätia pre rôzne parametre $R$ a $C$. Pr�
 
 \subsection{Príklad využitia výpočtového softvéru pre časť~\ref{castVybij}}
 
+
+
+
 Na obrázku~\ref{Graffunkcie} je znázornená funkcia \eqref{rawRies2}. Ak by sme chceli túto funkciu graficky znázorniť s využitím jazyka Python (avšak v princípe akéhokoľvek skriptovacieho jazyka), v rámci ktorého využijeme knižnice \lstinline|NumPy| a \lstinline|Matplotlib|, mohlo by to vyzerať nasledovne:
 
 {\catcode`\-=12
@@ -566,6 +569,39 @@ Na obrázku~\ref{Graffunkcie} je znázornená funkcia \eqref{rawRies2}. Ak by sm
 				 linerange=c01-c01,
                  ]{../../PY/MRS01_kTextu.py}
 }
+
+
+
+\bigskip
+
+\noindent
+\hrule
+
+\medskip
+
+\noindent
+Ak sa tu čitateľ prvý krát stretáva s Python-om pre numerické výpočty, azda užitočnými mu budú tieto odkazy:
+
+\paragraph{Python (inštalovaný ako distribúcia balíčkov...)}
+Pre všeobecné používanie Python-u na Windows, obzvlášť pre „vedecké výpočty“, sa čitateľovi odporúča, tak ako sa uvádza aj tu: \url{https://www.scipy.org/install.html}, distribúcia Anaconda: \url{https://www.anaconda.com/}
+
+Ak nie je výslovne uvedené inak, používa sa tu Python vo verzii 3.
+
+\paragraph{Jupyter}
+V týchto súvislostiach je vhodné tiež upozorniť na \url{https://jupyter.org/}. IPython ako aj Jupyter notebook sú súčasťou distribúcie Anaconda.
+
+\paragraph{Spyder}
+Azda pre úplnosť, Spyder (\url{https://github.com/spyder-ide}) je IDE obsiahnuté v~distribúcii Anaconda, ktoré je zamerané na takpovediac vedecké účely (skriptovanie, práca s dátami atď. - nie „programovanie“ vo všeobecnosti).
+
+\medskip
+
+\noindent
+\hrule
+
+\bigskip
+
+
+
 
 Samotná časová funkcia \eqref{rawRies2} je analytickým riešením diferenciálnej rovnice \eqref{diffR}. Ako však bez znalosti tohto analytického riešenia získať obrázok~\ref{Graffunkcie} (teda vyriešiť diferenciálnu rovnicu)?
 
@@ -651,10 +687,71 @@ Týmto sme ukázali príklad využitia výpočtového softvéru v téme, ktorej 
 
 \end{enumerate}
 
+\subsection{Poznámky}
+
+
+\paragraph{Simulink (MATLAB)}
+
+Zaoberáme sa problémom v tvare
+\begin{equation} \label{diffRbeta222}
+    \frac{\text{d}Q(t)}{\text{d}t} = - \frac{1}{RC} Q(t) \qquad Q(0) = Q_0
+\end{equation}
+kde $Q(t)$ je neznáma časová funkcia. Konštanty (nezávislé od času) $R$, $C$ a aj $Q_0$ sú známe.
+
+
+\begin{center}
+
+    \makebox[\textwidth][c]{%
+	\includegraphics[trim=65mm 65mm 65mm 65mm, clip]{sim_Q.pdf}
+	}
+
+    \vspace{-5mm}
+
+	\figcaption{Simulačná schéma zodpovedajúca rovnici  \eqref{diffRbeta222}}
+	\label{sim_Q}
+
+    \vspace{-1mm}
+
+\end{center}
 
 
 
 
+\paragraph{ODE solver (MATLAB)}
+
+Pre numerický výpočet riešenia pomocou procedúry \verb|ode45| je potrebné predmetný systém (rovnicu) zapísať ako funkciu, ktorú bude procedúra \verb|ode45| používať. V tomto prípade:
+\begin{lstlisting}[language=Matlab,]
+function dQ = fundif(t,x);
+R = 10^6;
+C = 10^(-6);
+Q = x;
+dQ = -(1/(R*C)) * Q;
+\end{lstlisting}
+Je potrebné vytvoriť samostatný súbor \verb|fundif.m|, ktorý bude obsahovať uvedenú fuknciu, tak ako je tu uvedené.
+
+Mimochodom, na tomto mieste nebudeme (tu v texte) uvádzať podrobnosti k~ODE solveru. Cieľom je tu len oboznámiť čitateľa s možnosťami ako získať numerické riešenie. Ako to „funguje“ bude jemne komentované neskôr.
+
+Samotné použitie procedúry \verb|ode45| sa vykoná nasledovnými príkazmi (povedzme v skripte v inom m-súbore):
+\begin{lstlisting}[language=Matlab,]
+Q_0 = 2 * 10^(-6);
+[t,y] = ode45('fundif',[0 5],[Q_0]);
+plot(t,y)
+\end{lstlisting}
+Obrázok sa ponecháva na čitateľa\ldots
+
+
+
+
+
+
+
+
+
+\section{Otázky a úlohy}
+
+\begin{enumerate}[leftmargin=0pt, labelsep=3mm, itemsep=0pt]
+	\item Vysvetlite pojem \emph{zosilnenie systému} (alebo \emph{statické zosilnenie systému}).
+\end{enumerate}
 
 
 
@@ -672,8 +769,9 @@ Týmto sme ukázali príklad využitia výpočtového softvéru v téme, ktorej 
 
 \begin{itemize}[leftmargin=0pt, labelsep=3mm, itemsep=0pt]
     \item \url{http://www.cds.caltech.edu/~murray/amwiki/index.php/Second_Edition}
+	\item \url{https://math.libretexts.org/Bookshelves}
+	\item \url{https://matlabacademy.mathworks.com/details/matlab-onramp/gettingstarted}
 \end{itemize}
-
 
 
 
