@@ -1,0 +1,722 @@
+\documentclass[a4paper, 10pt, ]{article}
+
+\input{../misc_LaTeX/preamble.tex}
+
+\def\oznacenieCasti{MRS03 - ZS2021}
+
+
+
+\usepackage{pdflscape}
+\usepackage{longtable}
+
+
+
+\begin{document}
+
+
+\lstset{%
+style=mystyle,
+rangebeginprefix=\#\#\#\ cellB\ ,%
+rangebeginsuffix=\ \#\#\#,%
+rangeendprefix=\#\#\#\ cellE\ ,%
+rangeendsuffix=\ \#\#\#,%
+includerangemarker=false,
+}
+
+
+
+
+\fontsize{12pt}{22pt}\selectfont
+
+\centerline{\textsf{Modelovanie a riadenie systémov} \hfill \textsf{\oznacenieCasti}}
+
+\fontsize{18pt}{22pt}\selectfont
+
+
+
+
+
+\begin{flushleft}
+	\textbf{\textsf{Prenosové funkcie\\a~využitie Laplaceovej transformácie}}
+\end{flushleft}
+
+
+
+
+
+\normalsize
+
+\bigskip
+
+{\hypersetup{hidelinks}
+
+\tableofcontents
+
+}
+
+\bigskip
+
+\vspace{18pt}
+
+
+
+
+
+
+
+
+\section{Úvod {\color{Gray} \normalsize (náznak k podstate prenosovej funkcie)}}
+\label{predchcasttato}
+
+
+\lettrine[lines=3, nindent=0pt]{A}{k} hovoríme o prenosových funkciách, hovoríme o nástroji, ktorý umožňuje analyticky pracovať s dynamickými systémami. Nie je však možné uvažovať akékoľvek dynamické systémy, len tie, ktoré označujeme ako lineárne a časovo invariantné. Ide o~systémy, ktoré je možné vo všeobecnosti vyjadriť obyčajnou diferenciálnou rovnicou.
+
+Napríklad, ak by išlo o homogénnu diferenciálnu rovnicu, mala by tvar:
+\begin{align} \label{vseobDifRov_h}
+	\frac{\text{d}^n y(t)}{\text{d}t^n} + a_{n-1} \frac{\text{d}^{(n-1)} y(t)}{\text{d}t^{(n-1)}} + \cdots + a_0 y(t) = 0
+\end{align}
+kde $y(t)$ je neznáma časová funkcia (hľadáme ju ako riešenie rovnice) a, čo je značne podstatné, $a_{n-1}$ až $a_0$ sú koeficienty rovnice, reálne čísla, keďže ide o obyčajnú diferenciálnu rovnicu.
+
+Nehomogénnou sa rovnica stáva ak uvažujeme aj iný signál ako je neznáma časová funkcia. Jednoduchý príklad by mohol byť v tvare
+\begin{align} \label{vseobDifRov_nhj}
+	\frac{\text{d}^n y(t)}{\text{d}t^n} + a_{n-1} \frac{\text{d}^{(n-1)} y(t)}{\text{d}t^{(n-1)}} + \cdots + a_0 y(t) = u(t)
+\end{align}
+kde u(t) je známa časová funkcia, z hľadiska systému predstavujúca vstup (vstupnú veličinu). Ešte všeobecnejšie zapísané:
+\begin{align} \label{vseobDifRov_nh}
+	\frac{\text{d}^n y(t)}{\text{d}t^n} + a_{n-1} \frac{\text{d}^{(n-1)} y(t)}{\text{d}t^{(n-1)}} + \cdots + a_0 y(t) = b_m \frac{\text{d}^m u(t)}{\text{d}t^m} + b_{m-1} \frac{\text{d}^{m-1} u(t)}{\text{d}t^{m-1}} + \cdots + b_0 u(t)
+\end{align}
+kde sa explicitne uvažuje aj s časovými deriváciami vstupného signálu keďže tieto jednoznačne majú súvis s dynamickým dejom ako takým. $b_{m}$ až $b_0$ sú koeficienty rovnice prislúchajúce k signálu $u(t)$ (obdobne ako $a_{xy}$ pri signále $y(t)$).
+
+
+\paragraph{Linearita}
+
+Keďže sa tu zaoberáme obyčajnými diferenciálnymi rovnicami, ktoré môžu byť vo všeobecnosti vyššieho rádu, vždy je možné takúto rovnicu zapísať ako sústavu rovníc prvého rádu. Zavádza sa pritom vektor veličín (signálov), ktoré sa označujú ako stavové veličiny. Vektor stavových veličín sa označuje $x(t)$, a výslednú sústavu diferenciálnych rovníc je možné písať v tvare
+\begin{subequations} \label{LinearLTIsys}
+\begin{align}
+	\dot x(t) &= A x(t) + b u(t) \\
+	y(t) &= c^\naT x(t)
+\end{align}
+\end{subequations}
+kde $A$, $b$ a $c$ sú matice (vektory) zodpovedajúcich rozmerov. Pri tomto známom zápise je zrejmé, že signály systému ($x(t)$, $y(t)$, $u(t)$) a parametre systému ($A$, $b$, $c$) sú navzájom v lineárnom vzťahu. Preto sa hovorí o lineárnom dynamickom systéme.
+
+
+\paragraph{Časová invariantnosť}
+
+Navyše parametre systému ($A$, $b$, $c$) sú konštanty, nemenia sa v čase. To znamená, že vlastnosti systému sa nemenia v čase. Preto sa takýto systém označuje ako časovo invariantný.
+
+Dôsledkom tejto vlastnosti je dôležitý fakt súvisiaci s výstupom systému ako odpoveďou na vstupný signál.
+
+Celkovú odozvu systému na akýkoľvek vstupný signál je možné vyskladať z~postupnosti čiastkových odoziev na sériu „krátkych impulzov“ (pozri kapitolu \emph{Linear systems} v \cite{AsM08se}).
+
+K tejto vlastnosti sa dá intuitívne dospieť ak uvažujeme vstupný signál, ktorý sa síce mení, ale pozeráme sa naň ako na signál po častiach konštantný. Takýto vstupný signál sa dá vidieť ako súčet mnohých zložiek, ktoré sa skokovo menia (každá zložka sa zmení v inom čase). Ku každej zložke možno priradiť jednoznačnú odpoveď systému a získavame tak mnoho čiastkových signálov (odpovede na jednotlivé skoky, každý v~inom čase). Označme ich $H_1(t)$, $H_2(t)$, atď. Výsledná celková odpoveď $y(t)$ je potom súčet čiastkových odpovedí $y(t) = H_1(t) + H_2(t) + \ldots$
+
+To je možné (uvažovať) predovšetkým pre fakt, že odpoveď na skokovú zmenu na vstupe sa nemení v čase, teda je jedno, v ktorom čase nastane skok na vstupe. Kedykoľvek skok nastane, dynamická odpoveď systému je vždy rovnaká. Čiastkové odpovede $H_1(t)$, $H_2(t)$, atď. sa môžu líšiť, samozrejme, v závislosti od veľkosti skoku na vstupe. To však je prejavom statického zosilnenia systému (statických vlastností), nie dynamického deja, ktorý primárne udáva diferenciálna rovnica. Dynamiku teda možno vystihnúť napr. časovou funkciou $H(t)$, ktorá predstavuje normovanú odpoveď na skokovú zmenu vstupu (konkrétna odpoveď závisí od veľkosti skoku).
+
+Dá sa ukázať (pozri \cite{AsM08se}), že ak budeme uvažovať o počte skokových zmien (na ktoré sú odpoveďou $H_1(t)$, $H_2(t)$, atď.) limitne sa blížiacom k nekonečnu, potom platí
+\begin{align}
+	y(t) = \int_0^t H^\prime(t - \tau)u(\tau) \text{d}\tau
+\end{align}
+kde $H^\prime(t)$ je odpoveď systému na impulz (nekonečne krátky), teda je to v princípe časová funkcia, ktorá je časovou deriváciou funkcie $H(t)$ („normovanej“ odpovede na skok).
+
+
+
+\paragraph{Maticová exponenciálna funkcia}
+
+Hovoríme tu o lineárnom časovo-invariantnom dynamickom systéme. Pripomeňme, že pre homogénny dynamický systém prvého rádu, teda má len jednu stavovú veličinu -- vektor $x(t)\in\mathbb R$ má len jeden prvok, je v tvare
+\begin{align}
+	\dot x(t) = a x(t)
+\end{align}
+a riešenie je
+\begin{align}
+	x(t) = e^{at} x(0)
+\end{align}
+
+
+
+Pre vektorový prípad (predchádzajúce je skalárny prípad), teda keď $x(t)\in\mathbb R^n$ platí, že dynamický systém je
+\begin{align}
+	\dot x(t) = A x(t)
+\end{align}
+kde $A \in\mathbb R^{n\times n}$ je matica reálnych čísiel, a riešenie je v princípe
+\begin{align}
+	x(t) = e^{At} x(0)
+\end{align}
+kde sme využili objekt $e^{At}$ čo je tzv. maticová exponenciálna funkcia. Tu sa jej definícii nebudeme venovať podrobne, čitateľa odkazujeme napr. na \cite{AsM08se}. Ide zjavne o zovšeobecnenie skalárneho prípadu (systémy prvého rádu) pre vektorový prípad (systémy vyššieho rádu). Definícia a následné využívanie matice $e^{At}$ je základom pre pojmy ako fundamentálne riešenia systému (diferenciálnej rovnice). Samotná matica $e^{At}$ sa označuje napríklad aj ako matica fundamentálnych riešení. Takpovediac „účinok“ matice $e^{At}$ je daný maticou $A$, a tú možno charakterizovať jej vlastnými číslami (a vlastnými vektormi). Tieto sú následne zdrojom definície charakteristickej rovnice (a charakteristického polynómu) tak ako sa to využíva pri hľadaní analytického riešenia diferenciálnej rovnice (ako bolo načrtnuté v predchádzajúcich učebných textoch).
+
+
+
+
+\paragraph{Všeobecné riešenie homogénneho lineárneho systému}
+
+Len pre formalizáciu uvedeného, dynamický systém bez vstupného signálu je v tvare
+\begin{subequations}
+\begin{align}
+	\dot x(t) &= A x(t) \\
+	y(t) &= c^\naT x(t)
+\end{align}
+\end{subequations}
+a jeho riešenie, teda časová funkcia opisujúca výstup $y(t)$ je v tvare
+\begin{align}
+	y(t) = c^\naT e^{At} x(0)
+\end{align}
+
+
+
+
+\paragraph{Všeobecné riešenie nehomogénneho lineárneho systému}
+
+V prípade, ak systém má vstupný signál $u(t)$, teda
+\begin{subequations}
+\begin{align}
+	\dot x(t) &= A x(t) + b u(t) \\
+	y(t) &= c^\naT x(t)
+\end{align}
+\end{subequations}
+dá sa ukázať, že
+\begin{align} \label{xriesLTI}
+	x(t) = e^{At} x(0) + \int_0^t e^{A(t-\tau)} b u(\tau) \text{d}\tau
+\end{align}
+a teda samotné riešenie (výstupný signál $y(t)$) je
+\begin{align}
+	y(t) &= c^\naT x(t) \\
+	y(t) &= c^\naT e^{At} x(0) + \int_0^t c^\naT e^{A(t-\tau)} b u(\tau) \text{d}\tau \label{riesnhrov}
+\end{align}
+Prvý člen (na pravej strane rovnice \eqref{riesnhrov}) sa nazýva \emph{vlastná zložka riešenia} (je vyvolaná začiatočnými podmienkami) a druhý člen sa nazýva  \emph{vnútená zložka riešenia} (je vyvolaná vstupným signálom).
+
+\bigskip
+
+V prvom rade si všimnime, že či už ide o odpoveď systému na začiatočnú podmienku alebo ide o odpoveď systému na vstupný signál, v oboch prípadoch je riešenie určené maticou $A$ a teda maticovou exponenciálnou funkciou $e^{At}$ vo všeobecnosti.
+
+Druhý dôležitý moment je, že rovnica \eqref{riesnhrov} sa nazýva aj konvolučnou rovnicou, čo sa zvyčajne používa v súvislosti so špeciálnym vstupným signálom $u(t) = \delta(t)$. Signál $\delta(t)$ je známy Dirackov impulz, ide o nekonečne krátky impulz, ktorého plocha je jednotková. V týchto okolnostiach definujme
+\begin{equation}
+	\begin{aligned}
+		h(t) &= \int_0^t c^\naT e^{A(t-\tau)} b \delta(\tau) \text{d}\tau \\
+		&= c^\naT e^{At} b
+	\end{aligned}
+\end{equation}
+čo je odpoveď systému na Dirackov impulz. To potom znamená, že celkové riešenie \eqref{riesnhrov} môžeme písať v tvare
+\begin{align}
+	y(t) = c^\naT e^{At} x(0) + \int_0^t h(t - \tau) u(\tau) \text{d}\tau
+\end{align}
+
+\bigskip
+
+Za špeciálny prípad možno považovať situáciu, keď sú začiatočné podmienky nulové, vtedy
+\begin{align}
+	y(t) = \int_0^t h(t - \tau) u(\tau) \text{d}\tau
+\end{align}
+Interpretáciou uvedeného sa dostaneme k faktu, že odpoveď systému na akýkoľvek vstup $u(t)$ získame konvolúciou s časovou funkciou zodpovedajúcou impulznej odpovede systému (takzvanej impulznej charakteristiky systému).
+
+
+\subsection{Pojem \emph{prenosová funkcia}}
+
+\paragraph{Špeciálny signál $e^{st}$}
+
+
+Ako sme videli v predchádzajúcom, pri riešení lineárnych dynamických systémov hrajú exponenciálne funkcie významnú úlohu. Ako dôležité sa preto črtá skúmať odpoveď systému ak vstupom je istý špeciálny signál. Ide o exponenciálny signál v tvare $e^{(\sigma + j\omega)t}$. Teda chceme skúmať vplyv špeciálneho vstupu
+\begin{align}
+	u(t) = e^{st}
+\end{align}
+kde $s = \sigma + j\omega$ (vo všeobecnosti). To, že $s$ je komplexné číslo (komplexná premenná) umožňuje považovať tento špeciálny signál vlastne za triedu signálov (rôzneho typu). Reálna časť premennej $s$ určuje exponenciálny rast alebo pokles (dokonca ak $s = 0$ potom je špeciálny signál vlastne konštantným) a imaginárna časť určuje harmonické kmitanie signálu.
+
+Máme \eqref{xriesLTI}, a teda:
+\begin{align}
+	x(t) = e^{At} x(0) + \int_0^t \left( e^{A(t-\tau)} b e^{s\tau} \right) \text{d}\tau
+\end{align}
+kde pri manipulácii s výrazom $ \left( e^{A(t-\tau)} b e^{s\tau} \right)$ treba manipulovať s ohľadom na fakt, že ide o matice a vektory. V každom prípade, po integrácii sa získa
+\begin{align}
+	x(t) = e^{At} x(0) + e^{At} \left( sI - A \right)^{-1}  \left( e^{(sI-A)t} - I \right) b
+\end{align}
+kde $I$ je jednotková matica.
+
+Celkové riešenie je potom
+\begin{align}
+	\begin{aligned}
+		y(t) &= c^\naT e^{At} x(0) + c^\naT e^{At} \left( sI - A \right)^{-1}  \left( e^{(sI-A)t} - I \right) b \\
+		&= c^\naT e^{At} x(0) + c^\naT e^{At} \left( sI - A \right)^{-1}  \left( e^{st} e^{-At} - I \right) b \\
+		&= c^\naT e^{At} x(0) + c^\naT e^{At} \left( sI - A \right)^{-1}  \left( e^{st} e^{-At}b - b \right) \\
+		&= c^\naT e^{At} x(0) +   \left(c^\naT e^{At} \left( sI - A \right)^{-1} e^{st} e^{-At}b - c^\naT e^{At} \left( sI - A \right)^{-1} b \right) \\
+		&= c^\naT e^{At} x(0) +   \left(c^\naT \left( sI - A \right)^{-1} e^{st} b - c^\naT e^{At} \left( sI - A \right)^{-1} b \right)
+	\end{aligned}
+\end{align}
+V tomto bode je možné konštatovať:
+\begin{align}
+	\begin{aligned}
+		y(t)
+		&=
+		\underbrace{
+		c^\naT e^{At} x(0)
+		}_{\text{vlastná zložka}}
+		+
+		\underbrace{
+		\left(c^\naT \left( sI - A \right)^{-1} e^{st} b - c^\naT e^{At} \left( sI - A \right)^{-1} b \right)
+		}_{\text{vnútená zložka}}
+	\end{aligned}
+\end{align}
+a zároveň:
+\begin{align}
+	\begin{aligned}
+		y(t) &= c^\naT e^{At} \left( x(0) -  \left( sI - A \right)^{-1} b\right) +   \left(c^\naT  \left( sI - A \right)^{-1}  b e^{st} \right) \\
+		&= c^\naT e^{At} \left( x(0) -  \left( sI - A \right)^{-1} b\right) +   \left(c^\naT  \left( sI - A \right)^{-1}  b  \right) e^{st}
+	\end{aligned}
+\end{align}
+\begin{align}
+	\begin{aligned}
+		y(t)
+		&=
+		\underbrace{
+		c^\naT e^{At} \left( x(0) -  \left( sI - A \right)^{-1} b\right)
+		}_{\text{zložka opisujúca prechodné deje}}
+		+
+		\underbrace{
+		\left(c^\naT  \left( sI - A \right)^{-1}  b  \right) e^{st}
+		}_{\text{čisto exponenciálna zložka}}
+	\end{aligned}
+\end{align}
+
+
+\paragraph{Prenosová funkcia}
+
+O vplyve samotného špeciálneho signálu $e^{st}$ na celkové riešenie teda rozhoduje výraz $c^\naT  \left( sI - A \right)^{-1}  b$. Formálne sa
+\begin{align}
+	G(s) = c^\naT  \left( sI - A \right)^{-1}  b
+\end{align}
+nazýva prenosová funkcia systému.
+
+
+
+\bigskip
+
+Ak by sme sa na uvedené pozreli z hľadiska diferenciálnej rovnice opisujúcej lineárny dynamický systém, teda máme diferenciálnu rovnicu v tvare
+\begin{align} \label{vseobDifRov_nh2}
+	\frac{\text{d}^n y(t)}{\text{d}t^n} + a_{n-1} \frac{\text{d}^{(n-1)} y(t)}{\text{d}t^{(n-1)}} + \cdots + a_0 y(t) = b_m \frac{\text{d}^m u(t)}{\text{d}t^m} + b_{m-1} \frac{\text{d}^{m-1} u(t)}{\text{d}t^{m-1}} + \cdots + b_0 u(t)
+\end{align}
+potom ak na vstupe uvažujeme $u(t) = e^{st}$ a zároveň vieme, že riešenie systému je tiež nejaký exponenciálny signál, čo možno vo všeobecnosti vyjadriť ako $y(t) = y_0 e^{st}$ (kde $y_0$ najmä odlišuje $y(t)$ od $u(t)$). Ak $y(t)$ a $u(t)$ dosadíme do \eqref{vseobDifRov_nh2}, vidíme, že
+\begin{align}
+	\begin{aligned}
+			     \frac{\text{d}^n y_0 e^{st}}{\text{d}t^n}
+		+ a_{n-1} \frac{\text{d}^{(n-1)} y_0 e^{st}}{\text{d}t^{(n-1)}}
+		+ \cdots
+		+ a_0 y_0 e^{st}
+		&=
+		b_m \frac{\text{d}^m e^{st}}{\text{d}t^m}
+		+ b_{m-1} \frac{\text{d}^{m-1} e^{st}}{\text{d}t^{m-1}}
+		+ \cdots
+		+ b_0 e^{st}
+		\\
+		y_0 e^{st} s^n
+		+ a_{n-1}  y_0 e^{st} s^{(n-1)}
+		+ \cdots
+		+ a_0 y_0 e^{st}
+		&=
+		b_m  e^{st} s^m
+		+ b_{m-1}  e^{st} s^{m-1}
+		+ \cdots
+		+ b_0 e^{st}
+		\\
+		\left(
+			s^n
+			+ a_{n-1}   s^{(n-1)}
+			+ \cdots
+			+ a_0
+		\right)
+		y_0 e^{st}
+		&=
+		\left(
+		b_m   s^m
+		+ b_{m-1}   s^{m-1}
+		+ \cdots
+		+ b_0
+		\right)
+		e^{st}
+		\\
+		y_0 e^{st}
+		&=
+		\frac{
+		\left(
+		b_m   s^m
+		+ b_{m-1}   s^{m-1}
+		+ \cdots
+		+ b_0
+		\right)
+		}{
+		\left(
+			s^n
+			+ a_{n-1}   s^{(n-1)}
+			+ \cdots
+			+ a_0
+		\right)
+		}
+		e^{st}
+	\end{aligned}
+\end{align}
+a teda môžeme povedať, že riešenie systému závislé od špeciálneho signálu $e^{st}$ je
+\begin{align}
+	y(t)
+	&=
+	\frac{
+	\left(
+	b_m   s^m
+	+ b_{m-1}   s^{m-1}
+	+ \cdots
+	+ b_0
+	\right)
+	}{
+	\left(
+	s^n
+	+ a_{n-1}   s^{(n-1)}
+	+ \cdots
+	+ a_0
+	\right)
+	}
+	e^{st}
+\end{align}
+označme
+\begin{subequations}
+	\begin{align}
+		B(s) &= \left( b_m   s^m + b_{m-1}   s^{m-1} + \cdots + b_0 \right) \\
+		A(s) &=  \left( s^n + a_{n-1}   s^{(n-1)} + \cdots + a_0 \right)
+	\end{align}
+\end{subequations}
+a výraz
+\begin{align}
+	G(s) = \frac{B(s)}{A(s)}
+\end{align}
+Vyjadruje prenosovú funkciu systému.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\section{O Laplaceovej transformácii}
+
+Laplaceova transformácia umožnuje efektívne pracovať s lineárnymi dynamickými systémami. Transformuje a tým zjednodušuje operácie súvisiace s hľadaním riešenia lineárnych diferenciálnych rovníc (LDR). Predovšetkým zjednodušuje prácu s konvolučnou rovnicou (pozri predchádzajúcu časť~\ref{predchcasttato}).
+
+\subsection{Definícia (v hrubých črtoch)}
+
+Majme časovú funkciu $f(t)$ (s vhodnými vlastnosťami, ktoré tu nebudeme uvádzať). Laplaceova transformácia (LT) transformuje, či mapuje, túto funkciu na inú funkciu. Inú funkciu označme $F(s)$. LT je definovaná podľa vzťahu
+\begin{align}
+    F(s) = \int_0^\infty f(t) e^{-st}\text{d}t
+\end{align}
+kde $s$ je komplexná premenná (komplexné číslo).
+
+Hovoríme, že ide o transformáciu z časovej oblasti (domény) do domény komplexnej premennej $s$. Premenná $s$ sa často nazýva aj Laplaceov operátor (súvislosti sa ukážu neskôr). Keďže $s = \sigma + j\omega$ a teda $e^{-(\sigma + j\omega)t}$ je signál obsahujúci vo všeobecnosti aj harmonickú (kmitavú) zložku, v tejto súvislosti hovoríme tiež, že pri LT ide o~transformáciu z časovej oblasti do frekvenčnej oblasti.
+
+Výslednej transformovanej funkcii $F(s)$ sa hovorí tiež \emph{obraz} pôvodného signálu $f(t)$ (alebo Laplaceov obraz signálu).
+
+LT je lineárna transformácia, t.j. ak by sme chceli transformovať súčet dvoch signálov (dvoch časových funkcií) $f(t) + g(t)$ ako celok, tak je to možné urobiť transformáciou signálov jednotlivo a až následne sčítať transformované funkcie $F(s) + G(s)$.
+
+\subsection{Laplaceove obrazy signálov}
+
+Majme signál $f(t)$. Laplaceovym obrazom (L-obrazom) tohto signálu je $F(s)$ (samozrejme v zmysle definície LT) a samotnú operáciu transformácie značíme ako
+\begin{align}
+    F(s)  =  \mathcal L \left\{ f(t) \right\} = \int_0^\infty f(t) e^{-st}\text{d}t
+\end{align}
+
+
+
+
+\subsubsection{Derivácia}
+
+Nájdime L-obraz signálu $\frac{\text{d}f(t)}{dt}$ (alebo teda signálu $\dot f(t)$), teda
+\begin{align}
+    \mathcal L \left\{ \frac{\text{d}f(t)}{dt} \right\} = \int_0^\infty \frac{\text{d}f(t)}{\text{d}t} e^{-st}\text{d}t
+\end{align}
+Tento integrál je možné nájsť metódou per partes, pri ktorej vo všeobecnosti platí
+\begin{align}
+    \int_0^\infty u(t)v^\prime(t)\text{d}t = \left[ u(t)v(t) \right]_0^\infty - \int_0^\infty u^\prime(t) v(t) \text{d}t
+\end{align}
+Uvažujme tu $u(t) = e^{-st}$ a $v(t) = \dot f(t)$, potom
+\begin{equation}
+    \begin{aligned}
+        \int_0^\infty \frac{\text{d}f(t)}{\text{d}t} e^{-st}\text{d}t
+            &=  \left[ e^{-st} f(t) \right]_0^\infty - (-s)  \int_0^\infty f(t) e^{-st}\text{d}t \\
+            &= 0 - f(0) + s F(s) \\
+            &= s F(s) - f(0)
+    \end{aligned}
+\end{equation}
+je L-obraz signálu $\frac{\text{d}f(t)}{dt}$.
+
+
+
+\subsubsection{Integrál}
+
+Obdobne by sme mohli hľadať aj obraz signálu $\int_0^t f(\tau) \text{d}\tau$, teda
+\begin{align}
+    \mathcal L \left\{ \int_0^t f(\tau) \text{d}\tau \right\} = \int_0^\infty \left(\int_0^t f(\tau) \text{d}\tau \right) e^{-st}\text{d}t
+\end{align}
+Hľadajme L-obraz tak, že zavedieme signál $g(t) = \int_0^t f(\tau) \text{d}\tau$ čo potom znamená, že $\dot g(t) = f(t)$. Hľadáme $\mathcal L \left\{ g(t) \right\} = G(s)$. Najskôr si však všimnime, že
+\begin{equation}
+    \begin{aligned}
+        \mathcal L \left\{ \dot g(t) \right\} =& s G(s) - g(0) \\
+        & s G(s) - g(0) = F(s)
+    \end{aligned}
+\end{equation}
+a k tomu vidíme, že $g(0) = \int_0^0 f(\tau) \text{d}\tau = 0$. Teda
+\begin{subequations}
+    \begin{align}
+        sG(s) &= F(s) \\
+        G(s) &= \frac{1}{s} F(s)
+    \end{align}
+\end{subequations}
+čím sme našli
+\begin{align}
+    \mathcal L \left\{ \int_0^t f(\tau) \text{d}\tau \right\} = \frac{1}{s} F(s)
+\end{align}
+
+
+
+\subsubsection{Obraz Dirackovho impulzu}
+
+Dirackov impulz je signál taký, že (napríklad)
+\begin{align}
+    \delta(t) =
+    \left\{
+        \begin{aligned}
+            &0 & \text{ak $t \neq 0$} \\
+            &\infty & \text{ak $t = 0$}
+        \end{aligned}
+    \right.
+\end{align}
+pričom z princípu platí
+\begin{align}
+    \int_{-\infty}^\infty \delta(\tau) \text{d}\tau = 1
+\end{align}
+
+Totiž, v závislosti od toho ako by sme presnejšie matematicky špecifikovali Dirackov impulz $\delta(t)$ by sa konkrétne spôsoby aplikácie LT (výpočet integrálu) mohli formálne líšiť, avšak v každom prípade vždy platí
+\begin{align}
+    \mathcal L \left\{ \delta(t) \right\} = 1
+\end{align}
+
+
+\subsubsection{Obraz jednotkového skoku}
+Pri tzv. jednotkovom skoku sa uvažuje, že v čase $0$ sa hodnota signálu skokovo zmení z $0$ na $1$ (má hodnotu „jedna jednotka“). Keďže sa tu nachádzame len v čase väčšom ako nula, môžeme uvažovať, že tu hľadáme obraz signálu $f(t) = 1$, teda
+\begin{equation}
+    \begin{aligned}
+        \mathcal L \left\{ 1 \right\} &= \int_0^\infty 1 e^{-st}\text{d}t \\
+        &= \left[ - \frac{1}{s} e^{-st} \right]_0^\infty \\
+        &= 0 - \frac{1}{s} e^{-s0} \\
+        &= \frac{1}{s}
+    \end{aligned}
+\end{equation}
+
+
+
+
+\subsubsection{Obraz exponencialnej funkcie}
+\label{vyhlcast}
+
+Nájdime obraz $f(t) = e^{at}$.
+\begin{equation}
+    \begin{aligned}
+        F(s) &= \int_0^\infty e^{at} e^{-st}\text{d}t \\
+        &= \int_0^\infty e^{(a-s)t}\text{d}t \\
+        &= \left[ \frac{1}{a-s} e^{(a-s)t} \right]_0^\infty \\
+        &= 0 - \frac{1}{a-s} \\
+        &= \frac{1}{s - a}
+    \end{aligned}
+\end{equation}
+
+
+
+
+
+\subsection{Laplaceov obraz riešenia homogénnej diferenciálnej rovnice}
+
+\paragraph{Príklad}
+
+Majme diferenciálnu rovnicu
+\begin{align}  \label{prrov}
+    \dot y(t) - a y(t) = 0 \quad y(0) = y_0
+\end{align}
+Na jednotlivé signály v tejto rovnici aplikujme LT.
+\begin{align}
+    \left( s Y(s) - y(0)  \right) - a Y(s) = 0
+\end{align}
+kde $Y(s)$ je obrazom signálu $y(t)$. $Y(s)$ je teda obrazom riešenia rovnice. Vyjadrime $Y(s)$:
+\begin{align}
+    \begin{aligned}
+        (s-a)Y(s) - y(0) &= 0 \\
+        Y(s) &= \frac{1}{(s-a)} y(0)
+    \end{aligned}
+\end{align}
+
+Otázka je, ak poznáme signál v s-oblasti (v Laplaceovej doméne), vieme určiť pôvodný signál v časovej oblasti? Vieme nájsť pomocou obrazu riešenia $Y(s)$ samotné riešenie $y(t)$?
+
+V tomto prípade je vzhľadom na časť~\ref{vyhlcast} jasné, že
+\begin{align} \label{prries}
+    \mathcal L ^{-1} \left\{ Y(s) \right\} = y(t) = e^{at}y(0)
+\end{align}
+kde $\mathcal L ^{-1} \left\{  \right\}$ predstavuje  inverznú LT transformáciu.
+
+Tiež tu vieme, že \eqref{prries} je správne riešenie diferenciálnej rovnice \eqref{prrov}.
+
+\subsubsection{Inverzná Laplaceova transformácia}
+
+Značíme ju ako
+\begin{align}
+    \mathcal L ^{-1} \left\{ F(s) \right\} = f(t)
+\end{align}
+pričom formálne ide o operáciu definovanú vzťahom
+\begin{align}
+    f(t) = \frac{1}{2\pi j} \int_{\sigma-j\omega}^{\sigma + j\omega} F(s) e^{st} \text{d}s
+\end{align}
+
+Výpočet inverznej LT spravidla nie je jednoduchý. V praxi sa využíva tabuľka LT, ktorá uvádza L-obrazy a k nim prislúchajúce časové signály. Tabuľka obsahuje výber typických a dôležitých signálov využívaných pri analýze dynamických systémov.
+
+Zložitý obraz riešenia diferenciálnej rovnice je zväčša možné upraviť tak, že je v~ňom vidieť jednotlivé dielčie obrazy zodpovedajúce typickým signálom (uvedeným v tabuľke LT). Z typických časových signálov sa potom vyskladá časová funkcia zodpovedajúca celkovému riešeniu (v časovej oblasti).
+
+
+
+
+
+\subsection{Laplaceov obraz riešenia nehomogénnej diferenciálnej rovnice}
+
+\paragraph{Príklad}
+
+Majme rovnicu
+\begin{align}
+    \ddot y(t) +4 \dot y(t) + 3y(t) = u(t) \quad y(0) = 3, \dot y(0) = -2
+\end{align}
+kde vstupný signál $u(t) = 12$ (konštantný v čase). Aplikujme LT
+\begin{align}
+    \big( s \mathcal L \{\dot y\} - \dot y(0) \big) + 4 \left( sY(s) - y(0) \right) + 3 Y(s) &=  U(s) \\
+    \Big( s \big( sY(s) - y(0) \big) - \dot y(0) \Big) + 4sY(s) - 4y(0) + 3Y(s) &= U(s) \\
+    s^2Y(s) - sy(0) - \dot y(0)  + 4sY(s) - 4y(0) + 3Y(s) &= U(s) \\
+    s^2Y(s)   + 4sY(s)  + 3Y(s) - sy(0) - \dot y(0) - 4y(0) &= U(s)
+\end{align}
+a teda
+\begin{align}
+    \left( s^2   + 4s  + 3\right)Y(s) &= sy(0) +  \dot y(0) + 4y(0) + U(s) \\
+    Y(s) &= \frac{sy(0) +  \dot y(0) + 4y(0)}{\left( s^2   + 4s  + 3\right)} + \frac{1}{\left( s^2   + 4s  + 3\right)}U(s)
+\end{align}
+
+Poznáme aj konkrétny tvar obrazu $U(s)$, keďže $u(t) = 12$, tak $U(s) = 12 \frac{1}{s}$, teda
+\begin{align}
+    Y(s) &= \frac{sy(0) +  \dot y(0) + 4y(0)}{\left( s^2   + 4s  + 3\right)} + \frac{1}{\left( s^2   + 4s  + 3\right)} 12 \frac{1}{s}
+\end{align}
+a toto je obrazom riešenia diferenciálnej rovnice.
+
+Všimnime si, že sú tu prítomné dve zložky
+\begin{align} \label{vvzlozky}
+    Y(s)
+    &=
+    \underbrace{
+    \frac{3s + 10}{\left( s^2   + 4s  + 3\right)}
+    }_{\text{vlastná zložka}}
+    +
+    \underbrace{
+    \frac{12}{\left( s^2   + 4s  + 3\right) s}
+    }_{\text{vnútená zložka}}
+\end{align}
+kde sme aj číselne dosadili hodnoty začiatočných podmienok.
+
+Keď je obraz riešenia v tvare \eqref{vvzlozky} je prakticky nemožné priradiť k nemu originálny časový signál -- nie sú tam očividné typické obrazy typických signálov.
+
+Rozložme na parciálne zlomky
+\begin{align}
+    \frac{3s + 10}{\left( s^2   + 4s  + 3\right)} &= \frac{7}{2(s+1)} - \frac{1}{2(s+3)} \label{pz1} \\
+    \frac{12}{\left( s^2   + 4s  + 3\right) s} &= \frac{4}{s} - \frac{6}{(s+1)} + \frac{2}{(s+3)} \label{pz2}
+\end{align}
+a tým sa hneď stáva zrejmé, že \eqref{pz1} má originál
+\begin{align}
+    y_{vlast}(t) = \frac{7}{2} e^{-t} - \frac{1}{2} e^{-3t}
+\end{align}
+a \eqref{pz2} ma originál
+\begin{align}
+    y_{vnut}(t) = 4 - 6 e^{-t} + 2 e^{-3t}
+\end{align}
+Celkové riešenie je
+\begin{align}
+    \begin{aligned}
+        y(t) &= \frac{7}{2} e^{-t} - \frac{1}{2} e^{-3t} +  4 - 6 e^{-t} + 2 e^{-3t} \\
+        &= 4 - \frac{5}{2} e^{-t} + \frac{3}{2} e^{-3t}
+    \end{aligned}
+\end{align}
+
+
+
+\subsubsection{Prenosové funkcie}
+
+Ak by sme uvažovali diferenciálnu rovnicu (vo všeobecnosti, ale tu to uvedieme na konkrétnejšom prípade pre lepšie uchopenie)
+\begin{align}
+    \ddot y(t) + a_1 \dot y(t) + a_0 y(t) = b_1 \dot u(t) + b_0 u(t)
+\end{align}
+avšak pri nulových začiatočných podmienkach a to na oboch stranách, teda $\dot y(0) = 0$, $y(0) = 0$ a $u(0) = 0$, potom aplikovaním LT máme
+\begin{align}
+    s^2 Y(s)   + a_1 s Y(s)  + a_0 Y(s) &= b_1 s U(s) + b_0 U(s) \\
+    (s^2   + a_1 s   + a_0) Y(s) &= (b_1 s  + b_0) U(s)
+\end{align}
+Obraz riešenia samozrejme je
+\begin{align}
+    Y(s) &= \frac{(b_1 s  + b_0)}{(s^2   + a_1 s   + a_0)} U(s) \\
+    Y(s) &= \frac{B(s)}{A(s)} U(s)
+\end{align}
+kde sme pre všeobecnosť zaviedli označenie príslušných polynómov $A(s)$ a $B(s)$.
+
+Racionálna funkcia
+% $
+\begin{align}
+    \frac{B(s)}{A(s)}
+\end{align}
+% $
+dáva do vzťahu vstup systému $U(s)$ (jeho obraz) s~výstupom systému $Y(s)$. Táto racionálna funkcia sa nazýva prenosová funkcia.
+
+Inými slovami, prenosová funkcia je pomer obrazu výstupného signálu k obrazu vstupného signálu pri nulových začiatočných podmienkach.
+\begin{align}
+    \frac{Y(s)}{U(s)} = \frac{B(s)}{A(s)}
+\end{align}
+Formálne sa prenosová funkcia označuje aj ako celok:
+\begin{align}
+    G(s) = \frac{B(s)}{A(s)}
+\end{align}
+
+
+
+
+
+
+
+\bibliography{../misc_LaTeX/Bib_MRS}{}
+% \bibliographystyle{plain}
+\bibliographystyle{unsrtnat}
+
+
+
+\section*{Ďalšie zdroje}
+
+\paragraph{Video:}
+
+\begin{itemize}[leftmargin=0pt, labelsep=3mm, itemsep=0pt]
+
+	\item \url{https://www.youtube.com/watch?v=O85OWBJ2ayo&ab_channel=3Blue1Brown}
+
+	\item \url{https://www.youtube.com/watch?v=7UvtU75NXTg&ab_channel=SteveBrunton}
+	\item \url{https://www.youtube.com/watch?v=5hPD7CF0_54&ab_channel=SteveBrunton}
+	\item \url{https://www.youtube.com/watch?v=iBde8qOW0h0&ab_channel=SteveBrunton}
+
+\end{itemize}
+
+
+
+\end{document}
