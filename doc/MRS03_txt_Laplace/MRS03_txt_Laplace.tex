@@ -582,7 +582,7 @@ pričom formálne ide o operáciu definovanú vzťahom
     f(t) = \frac{1}{2\pi j} \int_{\sigma-j\omega}^{\sigma + j\omega} F(s) e^{st} \text{d}s
 \end{align}
 
-Výpočet inverznej LT spravidla nie je jednoduchý. V praxi sa využíva tabuľka LT, ktorá uvádza L-obrazy a k nim prislúchajúce časové signály. Tabuľka obsahuje výber typických a dôležitých signálov využívaných pri analýze dynamických systémov.
+Výpočet inverznej LT spravidla nie je jednoduchý. V praxi sa využíva tabuľka LT (pozri časť~\ref{Tabuľka Laplaceových obrazov}), ktorá uvádza L-obrazy a k nim prislúchajúce časové signály. Tabuľka obsahuje výber typických a dôležitých signálov využívaných pri analýze dynamických systémov.
 
 Zložitý obraz riešenia diferenciálnej rovnice je zväčša možné upraviť tak, že je v~ňom vidieť jednotlivé dielčie obrazy zodpovedajúce typickým signálom (uvedeným v tabuľke LT). Z typických časových signálov sa potom vyskladá časová funkcia zodpovedajúca celkovému riešeniu (v časovej oblasti).
 
@@ -696,6 +696,342 @@ Formálne sa prenosová funkcia označuje aj ako celok:
 
 
 
+\section{Tabuľka Laplaceových obrazov}
+\label{Tabuľka Laplaceových obrazov}
+
+
+
+% Pozri tabuľku~\ref{Laplaceove obrazy signálov}\footnote{Ak tabuľka obsahuje chyby, nie je to zámer, iba lenivosť.}
+
+
+
+
+\newcommand{\Laplace}[1]{\ensuremath{\mathcal{L}{\left\{#1\right\}}}}
+\newcommand{\InvLap}[1]{\ensuremath{\mathcal{L}^{-1}{\left\{#1\right\}}}}
+
+
+    \begin{longtable}{cc}
+
+        \toprule
+        $f(t)$                                  & $\Laplace{f(t)}=F(s)$ \\
+        \midrule
+        \endhead
+        \addlinespace[3mm]
+        $1$                                     &    			  $\dfrac{1}{s}$                        \\ \addlinespace[3mm]
+        $e^{at}f(t)$	                        & $F(s-a)$	                                            \\ \addlinespace[3mm]
+        % $\mathcal{U}(t-a)$                      & $\dfrac{e^{-as}}{s}$                                  \\ \addlinespace[3mm]
+        % $f(t-a)\mathcal{U}(t-a)$                & $e^{-as}F(s)$                                         \\ \addlinespace[3mm]
+        $\delta(t)$	                            & $1$                                                   \\ \addlinespace[3mm]
+        $\delta(t-t_0)$                         & $e^{-st_0}$                                           \\ \addlinespace[3mm]
+        $t^nf(t)$ 	                            & $(-1)^n\dfrac{d^nF(s)}{ds^n}$                          \\ \addlinespace[3mm]
+        $f'(t)$ 	                            & $sF(s) - f(0)$                                       \\ \addlinespace[3mm]
+        $f^{n}(t)$ 	                            & $s^nF(s) - s^{(n-1)} f(0) - \cdots - f^{(n-1)}(0)$    \\ \addlinespace[3mm]
+        $\displaystyle{\int_0^t f(x)g(t-x)dx}$  & $F(s)G(s)$                                            \\ \addlinespace[3mm]
+        $t^n$ ($n=0,1,2,\dots$)                 & $\dfrac{n!}{s^{n+1}}$                                 \\ \addlinespace[3mm]
+        $\sin kt$ 	                            & $\dfrac{k}{s^2+k^2}$                                   \\ \addlinespace[3mm]
+        $\cos kt$ 	                            & $\dfrac{s}{s^2+k^2}$                                   \\ \addlinespace[3mm]
+        $e^{at}$ 	                            & $\dfrac{1}{s-a}$ 	                                      \\ \addlinespace[3mm]
+        $\sinh kt$	                            & $\dfrac{k}{s^2-k^2}$                                   \\ \addlinespace[3mm]
+        $\cosh kt$	                            & $\dfrac{s}{s^2-k^2}$                                   \\ \addlinespace[3mm]
+        $\dfrac{e^{at}-e^{bt}}{a-b}$	        & $\dfrac{1}{(s-a)(s-b)}$                                  \\ \addlinespace[3mm]
+        $\dfrac{ae^{at}-be^{bt}}{a-b}$	        & $\dfrac{s}{(s-a)(s-b)}$                                \\ \addlinespace[3mm]
+        $te^{at}$	                            & $\dfrac{1}{(s-a)^2}$	                                   \\ \addlinespace[3mm]
+        $t^ne^{at}$	                            & $\dfrac{n!}{(s-a)^{n+1}}$	                                \\ \addlinespace[3mm]
+        $e^{at}\sin kt$	                        & $\dfrac{k}{(s-a)^2+k^2}$                                  \\ \addlinespace[3mm]
+        $e^{at}\cos kt$	                        & $\dfrac{s-a}{(s-a)^2+k^2}$                                \\ \addlinespace[3mm]
+        $e^{at}\sinh kt$	                    & $\dfrac{k}{(s-a)^2-k^2}$                                 \\ \addlinespace[3mm]
+        $e^{at}\cosh kt$	                    & $\dfrac{s-a}{(s-a)^2-k^2}$                               \\ \addlinespace[3mm]
+        $t\sin kt$  	                        & $\dfrac{2ks}{(s^2+k^2)^2}$                               \\ \addlinespace[3mm]
+        $t\cos kt$  	                        & $\dfrac{s^2-k^2}{(s^2+k^2)^2}$                           \\ \addlinespace[3mm]
+        $t\sinh kt$  	                        & $\dfrac{2ks}{(s^2-k^2)^2}$                              \\ \addlinespace[3mm]
+        $t\cosh kt$  	                        & $\dfrac{s^2+k^2}{(s^2-k^2)^2}$                          \\ \addlinespace[3mm]
+        $\dfrac{\sin at}{t}$	                & $\arctan \dfrac{a}{s}$                                   \\ \addlinespace[3mm]
+        $\dfrac{1}{\sqrt{\pi t}}e^{-a^2/4t}$	& $\dfrac{e^{-a\sqrt{s}}}{\sqrt{s}}$                           \\ \addlinespace[3mm]
+        $\dfrac{a}{2\sqrt{\pi t^3}}e^{-a^2/4t}$	& $e^{-a\sqrt{s}}$                                      \\ \addlinespace[3mm]
+        $\text{erfc}\left(\dfrac{a}{2\sqrt{t}}\right)$ &  $\dfrac{e^{-a\sqrt{s}}}{s}$                       \\ \addlinespace[3mm]
+
+        % \bottomrule
+
+    \end{longtable}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\section{Príklady}
+
+
+
+\paragraph{Príklad 1}
+
+Majme diferenciálnu rovnicu
+\begin{align}
+    \dot y(t) - a y(t) = u(t) \quad y(0) = 0
+\end{align}
+kde $a \in \mathbb R$ je parameter a $u(t) = \delta(t)$, čo je Dirackov impulz v čase $0$. Uplatnením Laplaceovej transformácie
+\begin{align}
+    sY(s) - y(0) - a Y(s) = U(s)
+\end{align}
+kde $U(s) = 1$, teda
+\begin{align}
+    Y(s) = \frac{1}{s - a}
+\end{align}
+
+Spätná Laplaceova transformácia potom vedie na
+\begin{align}
+    y(t) = e^{at}
+\end{align}
+čo je riešenie pôvodnej diferenciálnej rovnice.
+
+
+
+\paragraph{Príklad 2}
+
+Majme diferenciálnu rovnicu
+\begin{align}
+    \dot y(t) - a y(t) = 0 \quad y(0) = 0
+\end{align}
+kde $a \in \mathbb R$ je parameter. Uplatnením Laplaceovej transformácie
+\begin{align}
+    sY(s) - y(0) - a Y(s) = 0
+\end{align}
+teda
+\begin{align}
+    Y(s) = \frac{1}{s - a} y(0)
+\end{align}
+
+Spätná Laplaceova transformácia potom vedie na
+\begin{align}
+    y(t) = e^{at} y(0)
+\end{align}
+čo je riešenie pôvodnej diferenciálnej rovnice.
+
+
+\paragraph{Postreh k príkladu 1 a 2}
+Riešenie systému prvého rádu (čo je len „slang“ pre riešenie diferenciálnej rovnice prvého rádu opisujúcej dynamický systém), ktorý má nulový (žiadny) vstup ale má nenulovú začiatočnú podmienku je $y(t) = e^{at} y(0)$. Riešenie systému prvého rádu, ktorý má nulovú začiatočnú podmienku ale na vstupe má Dirackov impulz (signál $\delta(t)$) je $y(t) = e^{at}$ pričom ak by sme zovšeobecnili vstup spôsobom $u(t) = y_0 \delta(t)$, teda zaviedli sme faktor $y_0$, potom riešenie je zjavne $y(t) = e^{at} y_0 $. Začiatočná podmienka $y(0)$ a faktor $y_0$ plnia tú istú úlohu. Čo znamená, že pomocou Dirackovho impulzu je možné nahradiť vplyv začiatočnej podmienky systému. Nevýhodou je, že v praxi nie je možné realizovať Dirackov impulz, keďže má nekonečne malú šírku, len jeho aproximáciu, ktorou je impulz s relatívne malou šírkou.
+
+
+
+
+
+\paragraph{Príklad 3}
+
+Majme diferenciálnu rovnicu
+\begin{align}
+    \dot y(t) - a y(t) = u(t) \quad y(0) = 0
+\end{align}
+kde $a \in \mathbb R$ je parameter a $u(t) = 1$. Potom
+\begin{align}
+    Y(s) - y(0) - aY(s) = U(s)
+\end{align}
+kde $U(s) = \frac{1}{s}$, teda
+\begin{align}
+    (s - a)Y(s) &= \frac{1}{s} \\
+    Y(s) &= \frac{1}{(s-a)s}
+\end{align}
+
+Rozložme pravú stranu na parciálne zlomky, teda
+\begin{align} \label{tmppredrozkladom}
+    \frac{1}{(s-a)s} = \frac{K_1}{s-a} + \frac{K_2}{s}
+\end{align}
+kde $K_1 \in \mathbb R$ a $K_2 \in \mathbb R$ sú konštanty (reálne čísla), ktoré je potrebné nájsť. Upravme~\eqref{tmppredrozkladom}
+\begin{align}
+    1 = K_1 s + K_2 (s - a)
+\end{align}
+Vidíme, že v tomto prípade sú dve možnosti, keď $s = 0$, vtedy $K_2 = - \frac{1}{a}$, a keď $s = a$, vtedy $K_1 = \frac{1}{a}$, takže
+\begin{align}
+    Y(s) = \frac{\frac{1}{a}}{s-a} - \frac{\frac{1}{a}}{s}
+\end{align}
+
+Využitím tabuľky obrazov LT (v časti~\ref{Tabuľka Laplaceových obrazov}) máme
+\begin{align}
+    y(t) = \frac{1}{a} e^{at} - \frac{1}{a}
+\end{align}
+čo je riešenie pôvodnej diferenciálnej rovnice.
+
+
+
+
+
+
+
+
+
+
+
+
+
+\paragraph{Príklad pre širší rozhľad}
+
+Majme diferenciálnu rovnicu:
+\begin{equation} \label{Zadaná rovnica}
+	\dddot{y} + 5,4 \ddot{y} + 9,7 \dot{y} + 5,592 y = 2 e^{-1,2t}
+\end{equation}
+Zvoľme nenulové začiatočné podmienky nasledovne:
+\begin{equation*}
+		y(0) = 1 \qquad \dot{y}(0)  = 1 \qquad 	\ddot{y}(0) = 1
+\end{equation*}
+
+Rovnica \eqref{Zadaná rovnica} má po Laplaceovej transformácii tvar
+\begin{equation}
+	s^3Y - s^2 - s - 1 + 5,4 \left( s^2Y - s - 1 \right) + 9,7 \left( sY - 1 \right) + 5,592 Y = \frac{2}{\left( s+1,2 \right)}
+\end{equation}
+Po úprave
+\begin{subequations}
+	\begin{align}
+		& s^3Y - s^2 - s - 1 + 5,4s^2Y - 5,4s - 5,4 + 9,7sY - 9,7 + 5,592 Y = \frac{2}{\left( s+1,2 \right)} \\
+		& Y \left( s^3 + 5,4s^2 + 9,7s + 5,592 \right) + \left( - s^2 - s - 1 - 5,4s - 5,4 - 9,7  \right) = \frac{2}{\left( s+1,2 \right)} \\
+		& Y \left( s^3 + 5,4s^2 + 9,7s + 5,592 \right) + \left( - s^2 - 6,4s - 16,1 \right) = \frac{2}{\left( s+1,2 \right)} \\
+		& Y = \frac{2}{\left( s+1,2 \right) \left( s^3 + 5,4s^2 + 9,7s + 5,592 \right)} + \frac{\left(  s^2 + 6,4s + 16,1 \right)}{ \left( s^3 + 5,4s^2 + 9,7s + 5,592 \right)} \label{ZlaplasovaneNeupravene}
+	\end{align}
+\end{subequations}
+Korene polynómu $s^3 + 5,4s^2 + 9,7s + 5,592$ sú \eqref{Korene CHR}
+\begin{equation} \label{Korene CHR}
+		s_1 = -2,1 + 0,5i \qquad
+		s_2 = -2,1 - 0,5i \qquad
+		s_3 = -1,2
+\end{equation}
+a korene polynómu $s^2 + 6,4s + 16,1$ sú
+\begin{equation} \label{Korene citatela vlastnejZ}
+		s_4 = -3,2 + 2,4207i \qquad
+		s_5 = -3,2 - 2,4207i
+\end{equation}
+a teda \eqref{ZlaplasovaneNeupravene} je možné napísať v tvare
+\begin{equation}
+	\begin{split}
+		Y &= \frac{2}{\left( s+2,1-0,5i \right)\left( s+2,1+0,5i \right)\left( s+1,2 \right)^2 } \\&+ \frac{\left(  s +3,2 - 2,4207i \right)\left(  s +3,2 + 2,4207i \right)}{ \left( s+2,1-0,5i \right)\left( s+2,1+0,5i \right)\left( s+1,2 \right)} \\
+		 & = Y_1 + Y_2
+	\end{split}
+\end{equation}
+
+
+
+
+Na spätnú Laplaceovu transformáciu využijeme Heavisideov rozvojový vzorec
+\begin{equation} \label{Heavisideov rozvojový vzorec}
+	y(t) = \sum_{i=1}^k e^{s_i t} \sum_{j=1}^{r_i} \frac{\left[ G_i^{(r_i-j)} (s) \right]_{s = s_i}}{(r_i - j)!(j - 1)!}t^{j-1}
+\end{equation}
+kde $G_i = Y(s) \left( s - s_i \right)^{r_i}$, $s_i \  (i = 1, \ldots, j)$ sú póly prenosovej funkcie $Y(s)$ a $r_i \  (i = 1, \ldots, j)$ je ich násobnosť.
+
+
+
+\subparagraph{Spätná transformácia $Y_1(s)$:}
+Najprv je potrebné určiť hodnoty $\left[ G_i^{(r_i-j)} (s) \right]_{s = s_i}$:
+\begin{subequations}
+	\begin{align}
+		G_1(s_1) &= \frac{2}{\left( -2,1 + 0,5i+2,1+0,5i \right)\left( -2,1 + 0,5i+1,2 \right)^2 } = 1,602 - 0,9968i \\
+		G_2(s_2) &= \frac{2}{\left( -2,1 + 0,5i+2,1-0,5i \right)\left( -2,1 + 0,5i+1,2 \right)^2 } = 1,602 + 0,9968i \\
+		G_3(s_3) &= \frac{2}{\left( -1,2+2,1-0,5i \right)\left( -1,2+2,1+0,5i \right)} = 1.8868 \\
+		\dot{G}_3(s_3) &= - \frac{2\left( 2s_3 + 4,2 \right)}{\left( s_3^2 +4,2s_3 +4.66 \right)^2} = - \frac{2\left( 2(-1,2) + 4,2 \right)}{\left( (-1,2)^2 +4,2(-1,2) +4.66 \right)^2} = -3.204
+	\end{align}
+\end{subequations}
+Tieto hodnoty sa potom dosadia do \eqref{Heavisideov rozvojový vzorec} a po úprave:
+\begin{subequations}
+	\begin{align}
+		\begin{split}
+			y_1(t) &= e^{(-2,1 + 0,5i)t}\left( 1,602 - 0,9968i \right) + e^{(-2,1 - 0,5i)t}\left( 1,602 + 0,9968i \right) \\
+			       &+ e^{-1,2t}\left( \frac{-3,204}{(2-1)!(1-1)!}t^0 + \frac{1,8868}{(2-2)!(2-1)!}t^1\right)
+		\end{split}	\\
+		\begin{split}
+			y_1(t) &= e^{-2,1t} \left( 3,204 \cos(0,5t) +1,9936 \sin(0,5t) \right) -3,204 e^{-1,2t} + 1,8868te^{-1,2t}
+		\end{split}
+	\end{align}
+\end{subequations}
+
+
+
+\subparagraph{Spätná transformácia $Y_2(s)$:}
+Určenie hodnôt $\left[ G_i^{(r_i-j)} (s) \right]_{s = s_i}$ pre prípad $Y_2(s)$:
+\begin{subequations}
+	\begin{align}
+        \begin{split}
+		G_1(s_1) &= \frac{\left( -2,1 + 0,5i + 3,2 - 2,4207i \right)\left( -2,1 + 0,5i + 3,2 + 2,4207i \right)}
+		                 {\left( -2,1 + 0,5i + 2,1 + 0,5i \right)\left( -2,1 + 0,5i + 1,2 \right) }
+		                 \\&= -4,1508 + 5,2715i
+        \end{split}\\
+        \begin{split}
+		G_2(s_2) &= \frac{\left( -2,1 - 0,5i + 3,2 - 2,4207i \right)\left( -2,1 - 0,5i + 3,2 + 2,4207i \right)}
+		                 {\left( -2,1 - 0,5i + 2,1 - 0,5i \right)\left( -2,1 - 0,5i + 1,2 \right) }
+		                 \\&= -4,1508 - 5,2715i
+        \end{split}\\
+		G_3(s_3) &= \frac{\left( -1,2 + 3,2 - 2,4207i \right)\left( -1,2 + 3,2 + 2,4207i \right)}
+		                 {\left( -1,2 + 2,1 - 0,5i \right)\left( -1,2 + 2,1 + 0,5i \right) }
+		                 = 9,3017
+	\end{align}
+\end{subequations}
+A potom:
+\begin{subequations}
+	\begin{align}
+		\begin{split}
+			y_2(t) &= e^{(-2,1 + 0,5i)t}\left( -4,1508 + 5,2715i \right) \\&+ e^{(-2,1 - 0,5i)t}\left( -4,1508 - 5,2715i \right) + 9,3017 e^{-1,2t}
+		\end{split}	\\
+		\begin{split}
+			y_2(t) &= e^{-2,1t} \left( -8,3016 \cos(0,5t) -10,543 \sin(0,5t) \right) + 9,3017 e^{-1,2t}
+		\end{split}
+	\end{align}
+\end{subequations}
+
+
+
+
+Výsledné riešenie je súčtom $y_1(t)$ s $y_2(t)$
+\begin{equation}
+	\begin{split}
+		y(t) &= y_1(t) + y_2(t) = e^{-2,1t} \left( -5,0976 \cos(0,5t) -8,5494 \sin(0,5t) \right) \\&+6,0977 e^{-1,2t} + 1,8868te^{-1,2t}
+	\end{split}
+\end{equation}
+Grafické znázornenie riešenia je na Obr. \ref{Grafické znázornenie riešenia získaného pomocou Laplaceovej transformácie}.
+
+\begin{figure}[!ht]
+	\centering
+
+    \makebox[\textwidth][c]{%
+	\includegraphics{Obr_Laplaceovou.pdf}
+    }
+
+	\caption{Grafické znázornenie riešenia získaného pomocou Laplaceovej transformácie}
+	\label{Grafické znázornenie riešenia získaného pomocou Laplaceovej transformácie}
+\end{figure}
+
+
+
+
+
+
+
+
+\section{Otázky a úlohy}
+
+\begin{enumerate}[leftmargin=0pt, labelsep=3mm, itemsep=0pt]
+    \item Nájdite Laplaceov obraz zadanej časovej funkcie (nejaká bude zadaná).
+	\item Nájdite analytické riešenie diferenciálnej rovnice (nejaká bude zadaná) s využitím Laplaceovej transformácie.
+
+\end{enumerate}
+
+
+
+
+
+
+
+
+
+
 
 \bibliography{../misc_LaTeX/Bib_MRS}{}
 % \bibliographystyle{plain}
@@ -705,11 +1041,16 @@ Formálne sa prenosová funkcia označuje aj ako celok:
 
 \section*{Ďalšie zdroje}
 
-\paragraph{Video:}
+\paragraph{O $e^{At}$:}
 
 \begin{itemize}[leftmargin=0pt, labelsep=3mm, itemsep=0pt]
-
 	\item \url{https://www.youtube.com/watch?v=O85OWBJ2ayo&ab_channel=3Blue1Brown}
+\end{itemize}
+
+
+\paragraph{O Laplaceovej transdormácii:}
+
+\begin{itemize}[leftmargin=0pt, labelsep=3mm, itemsep=0pt]
 
 	\item \url{https://www.youtube.com/watch?v=7UvtU75NXTg&ab_channel=SteveBrunton}
 	\item \url{https://www.youtube.com/watch?v=5hPD7CF0_54&ab_channel=SteveBrunton}
@@ -717,6 +1058,19 @@ Formálne sa prenosová funkcia označuje aj ako celok:
 
 \end{itemize}
 
+\paragraph{Riešenie diferenciálnych rovníc:}
+
+\begin{itemize}[leftmargin=0pt, labelsep=3mm, itemsep=0pt]
+
+    \sloppy
+
+	\item \url{https://ocw.mit.edu/resources/res-18-008-calculus-revisited-complex-variables-differential-equations-and-linear-algebra-fall-2011/}
+
+    \item \url{https://ocw.mit.edu/courses/mathematics/18-03sc-differential-equations-fall-2011/index.htm}
+
+\end{itemize}
+
+\fussy
 
 
 \end{document}
