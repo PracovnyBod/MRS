@@ -382,7 +382,7 @@ a výraz
 \begin{align}
 	G(s) = \frac{B(s)}{A(s)}
 \end{align}
-Vyjadruje prenosovú funkciu systému.
+vyjadruje prenosovú funkciu systému.
 
 
 
@@ -723,10 +723,10 @@ Formálne sa prenosová funkcia označuje aj ako celok:
         % $f(t-a)\mathcal{U}(t-a)$                & $e^{-as}F(s)$                                         \\ \addlinespace[3mm]
         $\delta(t)$	                            & $1$                                                   \\ \addlinespace[3mm]
         $\delta(t-t_0)$                         & $e^{-st_0}$                                           \\ \addlinespace[3mm]
-        $t^nf(t)$ 	                            & $(-1)^n\dfrac{d^nF(s)}{ds^n}$                          \\ \addlinespace[3mm]
-        $f'(t)$ 	                            & $sF(s) - f(0)$                                       \\ \addlinespace[3mm]
-        $f^{n}(t)$ 	                            & $s^nF(s) - s^{(n-1)} f(0) - \cdots - f^{(n-1)}(0)$    \\ \addlinespace[3mm]
-        $\displaystyle{\int_0^t f(x)g(t-x)dx}$  & $F(s)G(s)$                                            \\ \addlinespace[3mm]
+        $t^nf(t)$ 	                            & $(-1)^n\dfrac{\text{d}^n F(s)}{\text{d} s^n}$                          \\ \addlinespace[3mm]
+        $\dot f(t)$ 	                            & $sF(s) - f(0)$                                       \\ \addlinespace[3mm]
+        $\displaystyle \frac{\text{d}^n f(t)}{\text{d}t^n}$ 	                            & $s^nF(s) - s^{(n-1)} f(0) - \cdots - f^{(n-1)}(0)$    \\ \addlinespace[3mm]
+        $\displaystyle{\int_0^t f(x)g(t-x) \text{d}x}$  & $F(s)G(s)$                                            \\ \addlinespace[3mm]
         $t^n$ ($n=0,1,2,\dots$)                 & $\dfrac{n!}{s^{n+1}}$                                 \\ \addlinespace[3mm]
         $\sin kt$ 	                            & $\dfrac{k}{s^2+k^2}$                                   \\ \addlinespace[3mm]
         $\cos kt$ 	                            & $\dfrac{s}{s^2+k^2}$                                   \\ \addlinespace[3mm]
@@ -748,7 +748,7 @@ Formálne sa prenosová funkcia označuje aj ako celok:
         $\dfrac{\sin at}{t}$	                & $\arctan \dfrac{a}{s}$                                   \\ \addlinespace[3mm]
         $\dfrac{1}{\sqrt{\pi t}}e^{-a^2/4t}$	& $\dfrac{e^{-a\sqrt{s}}}{\sqrt{s}}$                           \\ \addlinespace[3mm]
         $\dfrac{a}{2\sqrt{\pi t^3}}e^{-a^2/4t}$	& $e^{-a\sqrt{s}}$                                      \\ \addlinespace[3mm]
-        $\text{erfc}\left(\dfrac{a}{2\sqrt{t}}\right)$ &  $\dfrac{e^{-a\sqrt{s}}}{s}$                       \\ \addlinespace[3mm]
+        % $\text{erfc}\left(\dfrac{a}{2\sqrt{t}}\right)$ &  $\dfrac{e^{-a\sqrt{s}}}{s}$                       \\ \addlinespace[3mm]
 
         % \bottomrule
 
@@ -804,9 +804,9 @@ Spätná Laplaceova transformácia potom vedie na
 
 Majme diferenciálnu rovnicu
 \begin{align}
-    \dot y(t) - a y(t) = 0 \quad y(0) = 0
+    \dot y(t) - a y(t) = 0 \quad y(0) = y_0
 \end{align}
-kde $a \in \mathbb R$ je parameter. Uplatnením Laplaceovej transformácie
+kde $a \in \mathbb R$ je parameter a $y_0$ je hodnota začiatočnej podmienky. Uplatnením Laplaceovej transformácie
 \begin{align}
     sY(s) - y(0) - a Y(s) = 0
 \end{align}
