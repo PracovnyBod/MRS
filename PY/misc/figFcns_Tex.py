@@ -21,8 +21,8 @@ mpl.rcParams['mathtext.fontset'] = 'cm'
 
 mpl.rcParams['font.size'] = 10
 # mpl.rcParams['font.size'] = 9
-# mpl.rcParams['font.family'] = 'Latin Modern Roman tento'
-mpl.rcParams['font.family'] = 'lmsans10-regular'
+mpl.rcParams['font.family'] = 'lmroman10-regular'
+# mpl.rcParams['font.family'] = 'lmsans10-regular'
 # mpl.rcParams['font.family'] = 'Calibri'
 
 # mpl.rcParams['font.style'] ='normal'
@@ -33,8 +33,8 @@ mpl.rcParams['font.family'] = 'lmsans10-regular'
 
 
 
-mpl.rcParams['text.usetex'] = False
-# mpl.rcParams['text.usetex'] = True
+# mpl.rcParams['text.usetex'] = False
+mpl.rcParams['text.usetex'] = True
 # mpl.rcParams['text.latex.unicode'] = True
 mpl.rcParams['text.latex.preamble'] = r'\usepackage[T1]{fontenc} \usepackage{lmodern}'
 # mpl.rcParams['text.latex.preamble'] = r'\usepackage[T1]{fontenc} \usepackage{txfonts}'
