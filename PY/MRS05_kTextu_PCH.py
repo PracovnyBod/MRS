@@ -731,7 +731,248 @@ exec(open('misc/' + figName + '.py', encoding='utf-8').read())
 
 
 
+# %% ---------------------------------------------------------------------------
 
+
+
+
+
+#------------------------
+# Parametre systemu
+
+p_1 = -1
+p_2 = -2
+
+A_poly = np.polymul([1, -p_1], [1, -p_2])
+B_poly = [3, 0]
+
+A = np.array([[0, 1], [-A_poly[-1], -A_poly[-2]]])
+b = np.array([[0], [1]])
+c = np.array([[B_poly[-1]], [B_poly[-2]]])
+
+
+print(np.roots(B_poly))
+print(A_poly)
+
+
+
+#------------------------
+# Simulacia
+
+sig_u = np.ones([sim_finalIndex, 1])
+
+t_log, x_log, y_log, u_log = fcn_simSch(sim_t_start, sim_T_s, sim_finalIndex, sig_u)
+
+#------------------------
+# Obrazok
+
+figName = 'MRS05_PCH_len_y'
+
+figNameNum = 51
+exec(open('misc/' + figName + '.py', encoding='utf-8').read())
+
+
+#------------------------
+# Simulacia
+
+sig_u = np.zeros([sim_finalIndex, 1])
+sig_u[0,:] = 1/sim_T_s
+
+t_log, x_log, y_log, u_log = fcn_simSch(sim_t_start, sim_T_s, sim_finalIndex, sig_u)
+
+#------------------------
+# Obrazok
+
+figName = 'MRS05_PCH_len_y'
+
+figNameNum = 511
+exec(open('misc/' + figName + '.py', encoding='utf-8').read())
+
+
+
+
+# %% ---------------------------------------------------------------------------
+
+
+
+
+
+#------------------------
+# Parametre systemu
+
+p_1 = -1
+p_2 = 0
+
+A_poly = np.polymul([1, -p_1], [1, -p_2])
+B_poly = [0, 1]
+
+A = np.array([[0, 1], [-A_poly[-1], -A_poly[-2]]])
+b = np.array([[0], [1]])
+c = np.array([[B_poly[-1]], [B_poly[-2]]])
+
+
+print(B_poly)
+print(A_poly)
+
+
+
+#------------------------
+# Simulacia
+
+sig_u = np.ones([sim_finalIndex, 1])
+
+t_log, x_log, y_log, u_log = fcn_simSch(sim_t_start, sim_T_s, sim_finalIndex, sig_u)
+
+#------------------------
+# Obrazok
+
+figName = 'MRS05_PCH_len_y'
+
+figNameNum = 61
+exec(open('misc/' + figName + '.py', encoding='utf-8').read())
+
+
+#------------------------
+# Simulacia
+
+sig_u = np.zeros([sim_finalIndex, 1])
+sig_u[0,:] = 1/sim_T_s
+
+t_log, x_log, y_log, u_log = fcn_simSch(sim_t_start, sim_T_s, sim_finalIndex, sig_u)
+
+#------------------------
+# Obrazok
+
+figName = 'MRS05_PCH_len_y'
+
+figNameNum = 611
+exec(open('misc/' + figName + '.py', encoding='utf-8').read())
+
+
+
+
+
+
+
+# %% ---------------------------------------------------------------------------
+
+
+
+
+
+#------------------------
+# Parametre systemu
+
+p_1 = 0
+p_2 = 0
+
+A_poly = np.polymul([1, -p_1], [1, -p_2])
+B_poly = [0, 1]
+
+A = np.array([[0, 1], [-A_poly[-1], -A_poly[-2]]])
+b = np.array([[0], [1]])
+c = np.array([[B_poly[-1]], [B_poly[-2]]])
+
+
+print(B_poly)
+print(A_poly)
+
+
+
+#------------------------
+# Simulacia
+
+sig_u = np.ones([sim_finalIndex, 1])
+
+t_log, x_log, y_log, u_log = fcn_simSch(sim_t_start, sim_T_s, sim_finalIndex, sig_u)
+
+#------------------------
+# Obrazok
+
+figName = 'MRS05_PCH_len_y'
+
+figNameNum = 71
+exec(open('misc/' + figName + '.py', encoding='utf-8').read())
+
+
+#------------------------
+# Simulacia
+
+sig_u = np.zeros([sim_finalIndex, 1])
+sig_u[0,:] = 1/sim_T_s
+
+t_log, x_log, y_log, u_log = fcn_simSch(sim_t_start, sim_T_s, sim_finalIndex, sig_u)
+
+#------------------------
+# Obrazok
+
+figName = 'MRS05_PCH_len_y'
+
+figNameNum = 711
+exec(open('misc/' + figName + '.py', encoding='utf-8').read())
+
+
+
+
+
+
+
+# %% ---------------------------------------------------------------------------
+
+
+
+
+
+#------------------------
+# Parametre systemu
+
+p_1 = 0
+p_2 = 0
+
+A_poly = np.polymul([1, -p_1], [1, -p_2])
+B_poly = [1, 1]
+
+A = np.array([[0, 1], [-A_poly[-1], -A_poly[-2]]])
+b = np.array([[0], [1]])
+c = np.array([[B_poly[-1]], [B_poly[-2]]])
+
+
+print(B_poly)
+print(A_poly)
+
+
+
+#------------------------
+# Simulacia
+
+sig_u = np.ones([sim_finalIndex, 1])
+
+t_log, x_log, y_log, u_log = fcn_simSch(sim_t_start, sim_T_s, sim_finalIndex, sig_u)
+
+#------------------------
+# Obrazok
+
+figName = 'MRS05_PCH_len_y'
+
+figNameNum = 81
+exec(open('misc/' + figName + '.py', encoding='utf-8').read())
+
+
+#------------------------
+# Simulacia
+
+sig_u = np.zeros([sim_finalIndex, 1])
+sig_u[0,:] = 1/sim_T_s
+
+t_log, x_log, y_log, u_log = fcn_simSch(sim_t_start, sim_T_s, sim_finalIndex, sig_u)
+
+#------------------------
+# Obrazok
+
+figName = 'MRS05_PCH_len_y'
+
+figNameNum = 811
+exec(open('misc/' + figName + '.py', encoding='utf-8').read())
 
 
 

@@ -1027,7 +1027,7 @@ Zvoľme prípad, keď sú jeden viacnásobný koreň, teda napr. $p_1 = -1$ a $p
 \end{center}
 
 
-Ak by sme cheli póly systému, ktoré sú navzájom komplexne združenými číslami, potom je v prípade systému druhého rádu výhodné uvažovať charakteristický polynóm v tvare
+Ak by sme chceli póly systému, ktoré sú navzájom komplexne združenými číslami, potom je v prípade systému druhého rádu výhodné uvažovať charakteristický polynóm v tvare
 \begin{align}
     A(s) = s^2 + 2 \beta \omega_0 s + \omega_0^2
 \end{align}
@@ -1069,7 +1069,7 @@ Výsledná prechodová charakteristika je na obr.~\ref{PCHSS2R_b0_kmit} a impulz
 
 \end{center}
 
-Ako bolo uvedené, $\beta$ sa nazýva koeficient tlmenia. Ponechajme voľbu $\omega_0 = 3$ a skúmajme vlyv parametra $\beta$ na prechodovú (obr.~\ref{PCHSS2R_b0_kmit_x3}) a impilznú (obr.~\ref{ICHSS2R_b0_kmit_x3}) charakteristiku.
+Ako bolo uvedené, $\beta$ sa nazýva koeficient tlmenia. Ponechajme voľbu $\omega_0 = 3$ a skúmajme vplyv parametra $\beta$ na prechodovú (obr.~\ref{PCHSS2R_b0_kmit_x3}) a impulznú (obr.~\ref{ICHSS2R_b0_kmit_x3}) charakteristiku.
 
 \begin{center}
 
@@ -1130,6 +1130,111 @@ Napríklad, pre polynóm $A(s)$ uvažujme situáciu rovnakú ako na obr.~\ref{PC
 
 Ak by sa nula zhodovala s pólom, teda napr bola by to $z_1 = -1$, potom by sme mali $G(s) =  \frac{s + 1}{s^2 + 3 s + 2}$, čo je možné zapísať aj ako $G(s) =  \frac{(s + 1)}{(s+1)(s+2)} =  \frac{1}{(s+2)}$, čo je systém prvého rádu.
 
+Pre úplnosť uvažujme tu aj prípad keď $B(s) = b_1 s$. Zvoľme napríklad $b_1 = 3$. Zachovávame $A(s) = s^2 + 3 s + 2$. Všimnime si, že teraz máme $b_0 = 0$. To znamená, že zosilnenie systému, teda hodnota $b_0/a_0$ bude v tomto prípade nulové. Pre PCH to znamená, že sa ustáli na nule. Prechodová charakteristika pre tento prípad je na obr.~\ref{PCHSS2R_Bs} a impulzná charakteristika je na obr.~\ref{ICHSS2R_Bs}.
+
+\begin{center}
+
+    \makebox[\textwidth][c]{%
+	\includegraphics{MRS05_PCH_len_y_51.pdf}
+	}
+
+	\figcaption{PCH statického systému druhého rádu (SS2R), $G(s) =  \frac{3s}{s^2 + 3 s + 2}$}
+	\label{PCHSS2R_Bs}
+
+\end{center}
+
+\begin{center}
+
+    \makebox[\textwidth][c]{%
+	\includegraphics{MRS05_PCH_len_y_511.pdf}
+	}
+
+	\figcaption{ICH statického systému druhého rádu (SS2R), $G(s) =  \frac{3s}{s^2 + 3 s + 2}$}
+	\label{ICHSS2R_Bs}
+
+\end{center}
+
+
+
+
+\paragraph{Astatický systém druhého rádu (SS2R), prípad $B(s) = b_0$}
+
+Ak je jeden z pólov systému nulový, hovoríme, že systém je astatický („obsahuje astatizmus“). Ak práve jeden pól je nulový, hovoríme o astatizme prvého rádu. Zvoľme tu $B(s) = 1$ a póly $p_1 = -1$ a $p_2 = 0$. Teda $A(s) = s^2 + s$.
+
+Prechodová charakteristika pre tento prípad je na obr.~\ref{PCHAS2R_B} a impulzná charakteristika je na obr.~\ref{ICHAS2R_B}.
+
+\begin{center}
+
+    \makebox[\textwidth][c]{%
+	\includegraphics{MRS05_PCH_len_y_61.pdf}
+	}
+
+	\figcaption{PCH astatického systému druhého rádu (AS2R), $G(s) = \frac{1}{s^2 + s}$}
+	\label{PCHAS2R_B}
+
+\end{center}
+
+\begin{center}
+
+    \makebox[\textwidth][c]{%
+	\includegraphics{MRS05_PCH_len_y_611.pdf}
+	}
+
+	\figcaption{ICH astatického systému druhého rádu (AS2R), $G(s) = \frac{1}{s^2 + s}$}
+	\label{ICHAS2R_B}
+
+\end{center}
+
+Prípadne by sme mohli mať póly $p_1 = 0$ a $p_2 = 0$. Teda $A(s) = s^2$. Prechodová charakteristika pre tento prípad je na obr.~\ref{PCHAS2R_B2} a impulzná charakteristika je na obr.~\ref{ICHAS2R_B2}.
+
+\begin{center}
+
+    \makebox[\textwidth][c]{%
+	\includegraphics{MRS05_PCH_len_y_71.pdf}
+	}
+
+	\figcaption{PCH astatického systému druhého rádu (AS2R), $G(s) = \frac{1}{s^2}$}
+	\label{PCHAS2R_B2}
+
+\end{center}
+
+\begin{center}
+
+    \makebox[\textwidth][c]{%
+	\includegraphics{MRS05_PCH_len_y_711.pdf}
+	}
+
+	\figcaption{ICH astatického systému druhého rádu (AS2R), $G(s) = \frac{1}{s^2}$}
+	\label{ICHAS2R_B2}
+
+\end{center}
+
+
+\paragraph{Astatický systém druhého rádu (AS2R), prípad systému s nulou ($B(s) = b_1 s + b_0$)}
+
+Azda len pre zaujímavosť tu zvoľme $B(s) =  s + 1$, pritom ponechajme póly $p_1 = 0$ a~$p_2 = 0$, teda $A(s) = s^2$.  Prechodová charakteristika pre tento prípad je na obr.~\ref{PCHAS2R_B3} a~impulzná charakteristika je na obr.~\ref{ICHAS2R_B3}.
+
+\begin{center}
+
+    \makebox[\textwidth][c]{%
+	\includegraphics{MRS05_PCH_len_y_81.pdf}
+	}
+
+	\figcaption{PCH astatického systému druhého rádu (AS2R), $G(s) = \frac{s + 1}{s^2}$}
+	\label{PCHAS2R_B3}
+
+\end{center}
+
+\begin{center}
+
+    \makebox[\textwidth][c]{%
+	\includegraphics{MRS05_PCH_len_y_811.pdf}
+	}
+
+	\figcaption{ICH astatického systému druhého rádu (AS2R), $G(s) = \frac{s + 1}{s^2}$}
+	\label{ICHAS2R_B3}
+
+\end{center}
 
 
 
@@ -1139,9 +1244,12 @@ Ak by sa nula zhodovala s pólom, teda napr bola by to $z_1 = -1$, potom by sme 
 
 
 
-\pagebreak
 
-\section{Algebra prenosových funkcií}
+
+
+% \pagebreak
+
+\section{Algebra prenosových funkcií {\color{Gray} \small (pripravuje sa)}}
 
 TODO\ldots
 
@@ -1149,6 +1257,21 @@ TODO\ldots
 
 \noindent
 Pozri časť 9.4 v~\cite{AsM08se}.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 \section{Cvičenie šieste}
 
