@@ -1249,23 +1249,102 @@ Azda len pre zaujímavosť tu zvoľme $B(s) =  s + 1$, pritom ponechajme póly $
 
 % \pagebreak
 
-\section{Algebra prenosových funkcií {\color{Gray} \small (pripravuje sa)}}
+\section{Algebra prenosových funkcií}
 
-TODO\ldots
-
-\medskip
-
-\noindent
-Pozri časť 9.4 v~\cite{AsM08se}.
+Prenossovú funkciu je možné vidieť aj ako jeden blok v blokovej schéme, teda:
 
 
+\begin{center}
+
+    \makebox[\textwidth][c]{%
+    \input{../fig_standalone/TFalgebra_lenG.pdf_tex}
+    }
+
+	\figcaption{Prenosová funkcia ako jeden blok v blokovej schéme}
+	\label{TFalgebra_lenG}
+
+\end{center}
+
+Manipulácia s takýmito blokmi je jodnou z aplikácií algebry prenosových funkcií. Pozri časť 9.4 v~\cite{AsM08se}.
+
+V tomto zmysle je potrebné uvažovať tri základné situácie. Sériové zapojenie blokov, paralelné zapojenie blokov a spätnoväzbové zapojenie blokov.
+
+\paragraph{Sériové zapojenie blokov}
+
+Uvažujme systém, ktorý je tovrený kaskádnou kombináciou dvoch podsystémov. Prenosové funkcie podsystémov sú $G_1(s)$ a $G_2(s)$. Vstup prvého podsystému je zároveň vstupom celkového systému. Výstup prvého podsystému je vstupom druhého podsystému. Výstup druhého podsystému je zároveň výstupom celkového systému. Ide o sériové zapojenie podsystémov.
+
+\begin{center}
+
+    \makebox[\textwidth][c]{%
+    \input{../fig_standalone/TFalgebra_seriove.pdf_tex}
+    }
+
+	\figcaption{Sériové zapojenie blokov}
+	\label{TFalgebra_seriove}
+
+\end{center}
+
+Hľadáme prenosovú funkciu celkového systému, označme ju $G(s)$. Pre sériové zapojenie podsystémov platí
+\begin{align}
+    G(s) = G_1(s)\ G_2(s)
+\end{align}
+Výslednú prenosovú funkciu teda získame súčinom prenosových funkcií podsystémov.
 
 
 
 
+\paragraph{Paralelné zapojenie blokov}
+
+\begin{center}
+
+    \makebox[\textwidth][c]{%
+    \input{../fig_standalone/TFalgebra_paralelne.pdf_tex}
+    }
+
+	\figcaption{Paralelné zapojenie blokov}
+	\label{TFalgebra_paralelne}
+
+\end{center}
+
+Pri paralelnom zapojení podsystémov s prenosovými funkciami $G_1(s)$ a $G_2(s)$ je výstupom celkového systému jednoducho súčet výstupov podsystémov. Pre prenosovú funkciu celkového systému $G(s)$ platí
+\begin{align}
+    G(s) = G_1(s) + G_2(s)
+\end{align}
 
 
+\paragraph{Spätnoväzbové zapojenie blokov}
 
+Spätnoväzbové zapojenie blokov je znázornené na obr.~\ref{TFalgebra_spatnovazbove}. Pre lepšiu orientáciu je vstup celkového systému označený ako $u$ a výstup celkového systému ako $y$. Signál $y$ je vstupom spätnoväzbového podsystému $G_2(s)$. Takáto spätná väzba je odčítavaná (ide o zápornú spätnú väzbu) od vstupného signálu $u$. Vzniká odchýlkový signál $e$, ktorý je vstupom podsystému $G_1(s)$.
+
+
+\begin{center}
+
+    \makebox[\textwidth][c]{%
+    \input{../fig_standalone/TFalgebra_spatnovazbove.pdf_tex}
+    }
+
+	\figcaption{Spätnoväzbové zapojenie blokov}
+	\label{TFalgebra_spatnovazbove}
+
+\end{center}
+
+Bez uvádzania podrobností a predpokladov môžeme písať o odchýlkovom signále:
+\begin{align}
+    e = u - G_2(s) y
+\end{align}
+a potom
+\begin{subequations}
+    \begin{align}
+        y &= G_1(s) e \\
+        y &= G_1(s) \left( u - G_2(s) y \right) \\
+        \left( 1 + G_1(s)G_2(s) \right) y &= G_1(s) u  \\
+        y &= \frac{G_1(s)}{\left( 1 + G_1(s)G_2(s) \right)} u
+    \end{align}
+\end{subequations}
+Pre prenosovú funkciu celkového systému $G(s)$ platí
+\begin{align}
+   G(s) = \frac{G_1(s)}{\left( 1 + G_1(s)G_2(s) \right)}
+\end{align}
 
 
 
