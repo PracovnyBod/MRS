@@ -539,6 +539,24 @@ Nájdime obraz $f(t) = e^{at}$.
 
 
 
+\subsubsection{Obraz čaového posunutia}
+
+Majme signál $f(t)$. Signál posunutý v čase je $f(t-D)$ (v zmysle vstupno-výstupného oneskorenia, alebo dopravného oneskorenia). Obrazom $f(t)$ je $F(s)$. Obrazom $f(t-D)$ je
+\begin{align}
+    \int_0^\infty f(t-D) e^{-st} \text{d}t
+\end{align}
+Zaveďme substitúciu $\tau  = t-D$, teda $t=\tau+D$ a tiež $\text{d}t = \text{d}\tau$ keďže $D$ je v čase konštantné. Potom
+\begin{align}
+    \int_0^\infty f(\tau) e^{-s(\tau+D)} \text{d}\tau = e^{-sD} \int_0^\infty f(\tau) e^{-s\tau} \text{d}\tau
+\end{align}
+a je zrejmé, že
+\begin{align}
+    e^{-sD} F(s)
+\end{align}
+je obrazom posunutého signálu $f(t-D)$.
+
+
+
 
 
 \subsection{Laplaceov obraz riešenia homogénnej diferenciálnej rovnice}
@@ -694,7 +712,7 @@ Formálne sa prenosová funkcia označuje aj ako celok:
 
 
 
-
+\newpage
 
 \section{Tabuľka Laplaceových obrazov}
 \label{Tabuľka Laplaceových obrazov}
