@@ -1285,7 +1285,7 @@ Elektromagnetický podsystém motora (čo v tomto prípade je v podstate len rot
 \begin{align} \label{dfsv}
 	u(t) = R i(t) + L \frac{\text{d}i(t)}{\text{d}t} + u_i(t)
 \end{align}
-kde $R$ [$\Omega$] je elektrický odpor vinutia, $L$ [H] je indukčnosť vinutia a $u_i$ je spätné indukované napätie, ktoré je v podstate následkom meniaceho sa magnetického poľa vzhľadom na vinutie. Práve tu sa využije napäťová konštanta motora keď platí $u_i(t) = C_{u\omega} \omega(t)$, kde $\omega(t)$ [rad/s] je uhlová rýchlosť motora. A teda rovnicu \eqref{dfsv} je možné zapísať v tvare
+kde $u(t)$ [V] je napätie na rotorovom vinutí motora, $i(t)$ [A] je prú rotorovým vinutím, $R$ [$\Omega$] je elektrický odpor vinutia, $L$ [H] je indukčnosť vinutia a $u_i$ je spätné indukované napätie, ktoré je v podstate následkom meniaceho sa magnetického poľa vzhľadom na vinutie. Práve tu sa využije napäťová konštanta motora keď platí $u_i(t) = C_{u\omega} \omega(t)$, kde $\omega(t)$ [rad/s] je uhlová rýchlosť motora. A teda rovnicu \eqref{dfsv} je možné zapísať v~tvare
 \begin{align} \label{dfsv2}
 	u(t) = R i(t) + L \frac{\text{d}i(t)}{\text{d}t} + C_{u\omega} \omega(t)
 \end{align}
@@ -1494,7 +1494,6 @@ Predpokladajme rozpad rádioaktívneho materiálu, ktorého rýchlosť rozpadu j
 \begin{equation}\label{eq:rozpad_Q}
     \Dot{Q} = -k \  Q
 \end{equation}
-
 pričom $Q$ je hmotnosť rádioaktívneho materiálu v čase $t$ a $k$ je konštanta charakterizujúca rýchlosť rozpadu konkrétneho prvku, ktorú vypočítame ako
 \begin{equation}
     k = \frac{\ln{2}}{\tau}
@@ -1570,7 +1569,7 @@ Keďže máme dvojicu komplexne združených koreňov, zapíšeme fundamentálne
 \begin{equation}\label{eq:fund_y}
     y_f(t) = c_{1}e^{-0.125}\cos{(1.867t)} + c_{2}e^{-0.125}\sin{(1.867t)}
 \end{equation}
-Potrebujeme ešte dopočítať koeficienty $c_1$ a $c_2$. Keďže máme 2 neznáme, potrebujeme 2 rovnice aby sme ich vypočítali. Tu znova využijeme hodnoty začiatočných podmienok (stavov), avšak do výrazu (\ref{eq:fund_y}) môžeme dosadiť len začiatočnú polohu. Aby sme vedeli zakomponovať aj začiatočnú rýchlosť, musíme výraz tento výraz zderivovať podľa času (keďže vieme, že rýchlosť je derivácia dráhy podľa času).
+Potrebujeme ešte dopočítať koeficienty $c_1$ a $c_2$. Keďže máme 2 neznáme, potrebujeme 2 rovnice aby sme ich vypočítali. Tu znova využijeme hodnoty začiatočných podmienok (stavov), avšak do výrazu (\ref{eq:fund_y}) môžeme dosadiť len začiatočnú polohu. Aby sme vedeli zakomponovať aj začiatočnú rýchlosť, musíme tento výraz zderivovať podľa času (keďže vieme, že rýchlosť je derivácia dráhy podľa času).
 
 \begin{lstlisting}[language=python,float=htpb,label=lst:diff_y,caption={Príklad derivácie výrazu (symbolického) v jazyku Python}]
 from sympy import symbols, diff, exp, sin, cos
