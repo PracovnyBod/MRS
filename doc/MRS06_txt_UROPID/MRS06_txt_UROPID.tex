@@ -1,0 +1,1048 @@
+\documentclass[a4paper, 10pt, ]{article}
+
+\input{../misc_LaTeX/preamble.tex}
+
+\def\oznacenieCasti{MRS06 - ZS2022}
+
+
+
+\usepackage{pdflscape}
+\usepackage{longtable}
+
+
+
+\begin{document}
+
+
+\lstset{%
+style=mystyle,
+rangebeginprefix=\#\#\#\ cellB\ ,%
+rangebeginsuffix=\ \#\#\#,%
+rangeendprefix=\#\#\#\ cellE\ ,%
+rangeendsuffix=\ \#\#\#,%
+includerangemarker=false,
+}
+
+
+
+
+\fontsize{12pt}{22pt}\selectfont
+
+\centerline{\textsf{Modelovanie a riadenie systémov} \hfill \textsf{\oznacenieCasti}}
+
+\fontsize{18pt}{22pt}\selectfont
+
+
+
+
+
+\begin{flushleft}
+	\textbf{\textsf{Uzavretý regulačný obvod\\a~PID regulátor}}
+\end{flushleft}
+
+
+
+
+
+\normalsize
+
+\bigskip
+
+{\hypersetup{hidelinks}
+
+\tableofcontents
+
+}
+
+\bigskip
+
+\vspace{18pt}
+
+
+
+\section{O regulačnom obvode}
+
+\lettrine[lines=3, nindent=0pt]{R}{egulačný}
+obvod sa vo všeobecnosti skladá z riadiaceho systému a z riadeného systému. Zahŕňa tri základné signály. Výstupnú veličinu $y(t)$, akčný zásah $u(t)$ a referenčný signál $r(t)$. Schematicky sa znázorňuje nasledovne:
+
+\begin{center}
+
+    \makebox[\textwidth][c]{%
+	\includegraphics{schURO_vseob.pdf}
+	}
+
+	\figcaption{Všeobecný uzavretý regulačný obvod.}
+	\label{schURO_vseob.pdf}
+
+\end{center}
+
+
+Výstupom riadeného systému je veličina, ktorá, okrem iného, hovorí o splnení cieľa riadenia. Cieľom riadenia napríklad je, aby táto veličina dosiahla istú hodnotu, prípadne aby priebeh tejto veličiny v~čase vykazoval isté dynamické vlastnosti, a~podobne. Pre skrátenie sa práve táto veličina nazýva ako výstupná veličina (celého obvodu). Označuje sa $y(t)$.
+
+Úlohou riadiaceho systému je splniť cieľ riadenia. Výstupom riadiaceho systému je tzv. akčný zásah (označuje sa $u(t)$). Je to signál (veličina), pomocou ktorého riadiaci systém ovplyvňuje riadený systém. Akčný zásah je teda na vstupe riadeného systému.
+
+Pre splnenie cieľa riadenia potrebuje riadiaci systém dostať príkaz typicky vo forme signálu, ktorý je referenčným signálom (označuje sa $r(t)$) alebo žiadanou hodnotou (označuje sa $w(t)$, v angličtine \emph{setpoint}). Druhou informáciou, ktorú riadiaci systém potrebuje pre splnenie cieľa, je spätná väzba z výstupu riadeného systému.
+
+S využitím uvedeného, teda spätnej väzby a referenčného signálu (alebo žiadanej hodnoty), riadiaci systém akčným zásahom ovplyvňuje riadiaci systém tak, aby bol splnený cieľ riadenia. Pre zvýraznenie princípu spätnej väzby sa výsledný principiálny regulačný obvod nazýva \emph{Uzavretý regulačný obvod} (URO).
+
+
+
+
+\subsection{Regulačná odchýlka}
+
+Značne typickým uzavretým regulačným obvodom je taký, v ktorom sa využíva regulačná odchýlka.
+
+Regulačná odchýlka $e(t)$ je rozdiel žiadanej hodnoty $w(t)$ (setpoint) a výstupnej veličiny riadeného systému $y(t)$, teda
+\begin{align} \label{regodch}
+    e(t) = w(t) - y(t)
+\end{align}
+Je zrejmé, že ak je regulačná odchýlka nulová, tak cieľ riadenia je splnený.
+
+V tomto prípade je URO možné schematicky znázorniť nasledovne:
+
+\begin{center}
+
+    \makebox[\textwidth][c]{%
+	\includegraphics{schURO_regodch.pdf}
+	}
+
+	\figcaption{Uzavretý regulačný obvod s regulačnou odchýlkou a regulátorom.}
+	\label{schURO_regodch.pdf}
+
+\end{center}
+
+Je možné konštatovať, že na obr.~\ref{schURO_regodch.pdf} je celkový riadiaci systém tvorený dvomi prvkami: výpočtom regulačnej odchýlky a regulátorom. Typicky, vstupom regulátora je regulačná odchýlka.
+
+Pre zdôraznenie faktu, že v uvedenom prípade ide jednoznačne (už z princípu informácie o odchýlke \eqref{regodch}) o zápornú spätnú väzbu môžeme kresliť schému nasledovne:
+
+\begin{center}
+
+    \makebox[\textwidth][c]{%
+	\includegraphics{schURO_regodchminus.pdf}
+	}
+
+	\figcaption{Uzavretý regulačný obvod s blokom vyjadrujúcim zápornú spätnú väzbu.}
+	\label{schURO_regodchminus.pdf}
+
+\end{center}
+
+
+
+
+\subsection{Lineárny uzavretý regulačný obvod}
+
+V prípade, že riadiaci a riadený systém je možné opísať ako lineárne dynamické systémy, hovoríme o lineárnom uzavretom regulačnom obvode.
+
+Typicky hovoríme, že regulátor, ktorého vstupom je regulačná odchýlka, a riadený systém je vtedy možné reprezentovať prenosovými funkciami. Klasický lineárny uzavretý regulačný obvod je potom možné schematicky znázorniť nasledovne:
+
+\begin{center}
+
+    \makebox[\textwidth][c]{%
+	\includegraphics{schLinURO_basic.pdf}
+	}
+
+	\figcaption{Lineárny uzavretý regulačný obvod.}
+	\label{schLinURO_basic.pdf}
+
+\end{center}
+
+V tomto prípade všetky bloky v schéme sú tvorené prenosovými funkciami (aj $-1$ je v princípe prenosová funkcia) pričom $G_R(s)$ je prenosová funkcia regulátora a  $G_S(s)$ je prenosová funkcia riadeného systému (hovorí sa tiež prenosová funkcia riadenej sústavy).
+
+Avšak, ak sú blokmi URO prenosové funkcie, potom namiesto časových signálov je možné uvažovať ich Laplaceove obrazy (L-obrazy), teda $W(s)$, $E(s)$, $U(s)$ a $Y(s)$.
+
+
+\subsubsection{Otvorený regulačný obvod}
+
+S využitím algebry prenosových funkcií vidíme, že $G_R(s)$ a $G_S(s)$ sú v sérii a teda máme
+\begin{align}
+    G_{ORO}(s) = G_R(s) G_S(s)
+\end{align}
+pričom $G_{ORO}(s)$ je prenosová funkcia súvisiaca s pojmom \emph{otvorený regulačný obvod} -- je to situácia keď sa neuvažuje spätná väzba (obvod nie je uzavretý).
+
+\begin{center}
+
+    \makebox[\textwidth][c]{%
+	\includegraphics{schLinORO_basic.pdf}
+	}
+
+	\figcaption{Otvorený regulačný obvod.}
+	\label{schLinORO_basic.pdf}
+
+\end{center}
+
+
+
+
+
+\subsubsection{Prenosová funkcia URO}
+
+Zároveň, na URO je potom jednoduché pozrieť sa ako na jeden celok. Celkovým výstupom URO je výstupná veličina $y(t)$, ktorej L-obraz je $Y(s)$, a celkovým vstupom URO je žiadaná hodnota $w(t)$ s obrazom $W(s)$. Pomer obrazov $W(s)$ a $Y(s)$ je prenosovou funkciou URO.
+\begin{align}
+    \frac{Y(s)}{W(s)} = G_{URO}(s)
+\end{align}
+
+Prenosovú funkciu URO je ďalej možné konkretizovať s využitím algebry prenosových funkcií. S využitím $G_{ORO}(s)$ máme situáciu:
+
+\begin{center}
+
+    \makebox[\textwidth][c]{%
+	\includegraphics{schLinURO_basic_soro.pdf}
+	}
+
+	\figcaption{}
+	\label{schLinURO_basic_soro.pdf}
+
+\end{center}
+
+\noindent
+a teda
+\begin{align}
+    G_{URO}(s) = \frac{G_{ORO}(s)}{1+G_{ORO}(s)} = \frac{G_R(s) G_S(s)}{1 + G_R(s) G_S(s)}
+\end{align}
+Tejto prenosovej funkcii sa tiež hovorí prenosová funkcia riadenia.
+
+
+
+\subsubsection{Iné prenosové funkcie v URO}
+
+Obdobne je možné skúmať aj iné pomery L-obrazov signálov v uzavretom regulačnom obvode. Napríklad tzv. prenosová funkcia regulačnej odchýlky
+\begin{align}
+    \frac{E(s)}{W(s)} = G_E(s)
+\end{align}
+V tomto prípade teda:
+
+\begin{center}
+
+    \makebox[\textwidth][c]{%
+	\includegraphics{schLinURO_GE.pdf}
+	}
+
+	\figcaption{}
+	\label{schLinURO_GE.pdf}
+
+\end{center}
+
+\noindent
+a
+\begin{align}
+    G_E(s) = \frac{1}{1+G_{ORO}(s)} = \frac{1}{1 + G_R(s) G_S(s)}
+\end{align}
+
+Túto skutočnosť je možné využiť pri skúmaní dynamiky a ustáleného stavu regulačnej odchýlky. Regulačná odchýlka totiž priamo hovorí o splnení či nesplnení cieľa riadenia.
+
+Typickým je tiež uvažovať tzv. poruchu akčného zásahu a skúmať jej vplyv na výstup URO. Situácia vyzerá nasledovne:
+
+\begin{center}
+
+    \makebox[\textwidth][c]{%
+	\includegraphics{schLinURO_basic_porucha.pdf}
+	}
+
+	\figcaption{Lineárny uzavretý regulačný obvod s uvažovaním poruchy akčného zásahu.}
+	\label{schLinURO_basic_porucha.pdf}
+
+\end{center}
+
+Pre izolovanie vplyvu poruchy na výstupnú veličinu je v prvom rade potrebné neuvažovať vplyv samotnej žiadanej hodnoty, teda $W(s) = 0$. Potom hovoríme o prenosovej funkcii poruchy ak
+\begin{align}
+    \frac{Y(s)}{D(s)} = G_D(s)
+\end{align}
+teda:
+
+\begin{center}
+
+    \makebox[\textwidth][c]{%
+	\includegraphics{schLinURO_GD.pdf}
+	}
+
+	\figcaption{}
+	\label{schLinURO_GD.pdf}
+
+\end{center}
+
+\noindent
+a
+\begin{align}
+    G_D(s) = \frac{G_S(s)}{1 + G_R(s)}
+\end{align}
+
+
+
+
+\subsubsection{Stabilita URO}
+
+Uvažuje sa tu o lineárnom URO a teda existuje prenosová funkcia URO. Akékoľvek otázky súvisiace so stabilitou URO sú preto totožné ako v prípade prenosovej funkcie vo všeobecnosti. Stabilita URO je daná charakteristickým polynómom prenosovej funkcie URO a teda polohou pólov URO v komplexnej rovine.
+
+
+\subsubsection{Kvalita URO}
+
+Pod kvalitou URO sa typicky rozumie presnosť sledovania zmien signálu $w(t)$ (žiadanej hodnoty) výstupnou veličinou $y(t)$. Ideálnym URO by bol taký, kde $y(t) = w(t) \  \forall t$, alebo teda $e(t) = w(t) - y(t) = 0  \  \forall t$.
+Pre reálne systémy so zotrvačnosťou je to však nereálna požiadavka.
+
+Je účelné vyšetrovať kvalitu URO (kvalitu riadenia) separátne v ustálenom stave a v prechodných stavoch (prechodných dejoch).
+
+\paragraph{Kvalita v ustálenom stave}
+
+Kritériom kvality v ustálenom stave je v princípe
+\begin{align}
+    \left| \lim_{t \to \infty} e(t) \right| = \left| e(\infty) \right| \to \min
+\end{align}
+kde
+\begin{align}
+    e(\infty) = w(\infty) - y(\infty)
+\end{align}
+sa nazýva trvalá regulačná odchýlka. V ideálnom prípade samozrejme $\left| e(\infty) \right| = 0$, t.j. $y(\infty) = w(\infty)$.
+
+
+Typickými časovými priebehmi signálu $w(t)$ sú, zovšeobecnene povedané, skok polohy, skok rýchlosti a skok zrýchlenia. Všetky tieto prípady možno vyjadriť ako
+\begin{align}
+    w(t) = w_p \ t^q
+\end{align}
+kde $w_p$ je konštanta a $q$ nadobúda hodnoty $0$, $1$ alebo $2$. L-obrazom takéhoto signálu je
+\begin{align}
+    W(s) = \frac{q!}{s^{q+1}}w_p
+\end{align}
+
+
+
+
+Uvažujme všeobecne zapísanú prenosovú funkciu otvoreného regulačného obvodu:
+\begin{align}
+    G_{ORO}(s) = \frac{K}{s^\nu} \frac{b_m s^m + \ldots b_1 s + 1}{a_{n-\nu}s^{n-\nu} + \ldots + a_1s + 1}
+\end{align}
+kde $\nu$ rád astatizmu a $K$ je zosilnenie predmetnej prenosovej funkcie. Z prenosovej funkcie  regulačnej odchýlky potom máme
+\begin{align}
+\begin{aligned}
+    E(s) &= \frac{W(s)}{1 + G_{ORO}(s)}
+    \\&= \frac{s^\nu \left( a_{n-\nu}s^{n-\nu} + \ldots + a_1s + 1 \right)}{s^\nu \left( a_{n-\nu}s^{n-\nu} + \ldots + a_1s + 1 \right) + K \left( b_m s^m + \ldots b_1 s + 1 \right)}
+    \frac{q!}{s^{q+1}}w_p
+\end{aligned}
+\end{align}
+Na základe vety o konečnej hodnote platí
+\begin{align}
+    e(\infty) = \lim_{s\to 0} s E(s) =  \lim_{s\to 0} \left( q! w_p \frac{s^{\nu-q}}{s^\nu + K} \right)
+\end{align}
+Potom je zrejmé, že ak $\nu > q$ potom $e(\infty) = 0$. Ďalej ak $\nu < q$ potom $e(\infty) = \infty$ (a~teda URO je v~princípe nestabilný). Nakoniec ak $\nu = q$ potom $ 0 < e(\infty) < \infty$ a~teda vzniká nenulová trvalá regulačná odchýlka. Hodnotu trvalej regulačnej odchýlky je tiež možné aj vyjadriť, napríklad pre $\nu = q = 0$ je $e(\infty) = \frac{w_p}{1 + K}$.
+
+
+
+
+
+
+
+
+\subsection{Návrh (lineárneho) URO vo všeobecnosti}
+
+V princípe sa dajú klasifikovať tri typické východiskové situácie.
+
+\begin{enumerate}[leftmargin=0pt, labelsep=4mm, itemsep=0pt]
+    \item Je daná štruktúra riadiaceho systému a~navrhujú sa jeho parametre. \newline V tomto prípade to znamená, že poznáme stupne polynómov v~prenosovej funkcii $G_R(s)$ ale nepoznáme hodnoty koeficientov v~polynómoch, ktoré sú v~princípe parametrami riadiaceho systému ako celku.
+
+    \item Navrhuje sa aj štruktúra (nie je presne daná) aj parametre. \newline Teda pri $G_R(s)$ aj stupne aj koeficienty polynómov.
+
+    \item Štruktúra je čiastočne známa (napríklad relatívny stupeň $G_R(s)$) a pri týchto podmienkach sa následne navrhujú parametre.
+
+\end{enumerate}
+
+\noindent
+Nástrojmi a informáciami využívanými pri návrhu sú:
+
+\begin{itemize}[leftmargin=0pt, labelsep=4mm, itemsep=0pt]
+
+    \item Požiadavky na kvalitu prechodného deja a ustáleného stavu regulačného obvodu.
+
+    \item Vlastnosti a matematický model riadeného systému
+
+    \item Časové priebehy výstupnej veličiny riadeného systému, typicky prechodové charakteristiky a podobne.
+
+    \item Znalosť/odhad poruchových veličín, obmedzenia akčného zásahu a podobne\ldots
+\end{itemize}
+
+
+
+
+
+
+
+
+
+
+\section{O PID regulátore}
+
+PID regulátor patrí medzi najviac rozšírené súčasti riadiacich systémov vo všeobecnosti.
+
+V princípe využíva regulačnú odchýlku a tiež je ho možné opísať pomocou lineárneho dynamického systému a teda pomocou prenosovej funkcie.
+
+Názov \emph{PID} regulátor vystihuje skutočnosť, že tento regulátor má tri principiálne zložky. Proporcionálnu, Integračnú a derivačnú. Ide pri tom o tri spôsoby ako sa tu využíva informácia o regulačnej odchýlke.
+
+Regulátor v skutočnosti pracuje s tromi signálmi. Prvým je samotná regulačná odchýlka $e(t) = w(t) - y(t)$. Z regulačnej odchýlky sa získavajú ďalšie dva signály. Časový integrál regulačnej odchýlky a časová derivácia regulačnej odchýlky. Formálnejšie
+\begin{align}
+    e_i(t) = \int e(t) \text{d}t
+\end{align}
+je časový integrál regulačnej odchýlky a
+\begin{align}
+    e_d(t) = \frac{\text{d}e(t)}{\text{d}t}
+\end{align}
+je časová derivácia regulačnej odchýlky.
+
+Každý z týchto signálov je násobený (zosilnený) nejakou nastaviteľnou konštantou (parametrom regulátora) a výsledný akčný zásah $u(t)$ je súčet týchto troch členov, teda
+\begin{align}
+    u(t) = P e(t) + I  \int e(t) \text{d}t + D  \frac{\text{d}e(t)}{\text{d}t}
+\end{align}
+kde $P$, $I$ a $D$ sú parametre (konštanty, čísla, zosilnenia) regulátora.
+
+
+
+
+
+\subsection{Prenosová funkcia PID regulátora}
+
+Zo všeobecného hľadiska je vstupom regulátora regulačná odchýlka -- signál $e(t)$. Jeho L-obrazom je $E(s)$. Výstupom regulátora je akčný zásah, ktorého L-obrazom je $U(s)$. Prenosová funkcia PID regulátora potom formálne je
+\begin{align}
+    G_R(s) = \frac{U(s)}{E(s)}
+\end{align}
+alebo teda akčný zásah je
+\begin{align}
+    U(s) = G_R(s) E(s)
+\end{align}
+
+L-obrazom integrálu regulačnej odchýlky je $\frac{1}{s} E(s)$ a L-obrazom derivácie regulačnej odchýlky je $sE(s)$. Potom akčný zásah je
+\begin{align}
+    U(s) = P E(s) + I  \frac{1}{s} E(s) + D  sE(s)
+\end{align}
+konvenčne sa v~tejto súvislosti pre označenie parametrov PID používajú $r_0$, $r_{-1}$ a~$r_1$, kde číselný index má vyjadrovať mocninu premennej $s$, pri ktorej sa parameter nachádza. Teda
+\begin{align}
+    U(s) = r_0 E(s) + r_{-1}  \frac{1}{s} E(s) + r_1  sE(s)
+\end{align}
+
+Prenosová funkcia PID regulátora je potom v tvare
+\begin{align} \label{tfPID}
+    G_R(s) = r_0  + r_{-1}  \frac{1}{s}  + r_1  s
+\end{align}
+Tento tvar sa nazýva zložkový tvar, totiž, túto prenosovú funkciu je možné vyjadriť aj v tvare
+\begin{align}
+    G_R(s) = P \left( 1 +  \frac{1}{T_I s}  +  T_D  s \right)
+\end{align}
+kde zmyslom je zavedenie časových konštánt $T_I$ a $T_D$ (tieto parametre majú rozmer času) a pri tom platí $P = r_0$, $T_I = \frac{r_0}{r_{-1}}$ a $T_I = \frac{r_1}{r_0}$.
+
+Len pre názornosť, ak by sme chceli vyjadriť prenosovú funkciu \eqref{tfPID} ako jediný zlomok, potom
+\begin{align} \label{tfPID2}
+    G_R(s) =  \frac{ r_1 s^2 + r_0 s + r_{-1} }{s}
+\end{align}
+kde je zrejmé, že stupeň čitateľa je vyšší ako stupeň menovateľa a teda ide o~nekauzálny systém. To súvisí so skutočnosťou, že realizovať časovú deriváciu, takú, pri ktorej by bola veľkosť časového úseku $\text{d}t$ nekonečne malá, je nereálne. V praxi je možné realizovať kvalitnú aproximáciu ideálnej časovej derivácie, čo sa v týchto súvislostiach prejaví tak, že obrazom signálu v derivačnej zložke nie je $sE(s)$, ale iný výraz, taký, že to má za následok splnenie podmienky kauzality v celkovej prenosovej funkcii PID regulátora.
+
+
+
+
+\subsection{Bloková schéma PID regulátora}
+
+Schematicky, pomocou základných funkčných prvkov, vzhľadom na jeho prenosovú funkciu, je možné PID regulátor znázorniť nasledovne:
+
+\begin{center}
+
+    \vspace{-1mm}
+
+    \makebox[\textwidth][c]{%
+	\includegraphics{PID_blokSch.pdf}
+	}
+
+    \vspace{-3mm}
+
+	\figcaption{Bloková schéma PID regulátora}
+	\label{PID_blokSch.pdf}
+
+    \vspace{-1mm}
+
+\end{center}
+
+
+
+
+
+
+\section{O výbere štruktúry PID regulátora}
+
+PID regulátor vo všeobecnosti pozostáva z troch zložiek. Často však nie je potrebné použiť všetky tri zložky. Niekedy to môže byť až výslovne nežiadúce.
+
+V princípe je možné uvažovať tri samostatné regulátory (zložky PID regulátora). Hovoríme o P-regulátore (využíva sa len proporcionálna zložka PID), o I-regulátore (využíva sa len integračná zložka PID) a o D-regulátore (využíva sa len derivačná zložka PID).
+
+Zároveň je možné uvažovať aj vzájomné kombinácie uvedených regulátorov. Veľmi častým prípadom je PI regulátor. Aj PD regulátor je v praxi používaný. Niečo ako „ID regulátor“ môže mať uplatnenie ale ide o ojedinelé prípady.
+
+
+
+\subsection{Príklady}
+
+
+\subsubsection{P regulátor a SS1R}
+
+Majme URO, kde
+\begin{align}
+    G_R(s) = r_0 \qquad \text{a} \qquad  G_S(s) = \frac{K}{Ts+1}
+\end{align}
+teda:
+
+\begin{center}
+
+    \makebox[\textwidth][c]{%
+    \input{../fig_standalone/URO_P_SS1R.pdf_tex}
+    }
+
+	\figcaption{}
+	\label{URO_P_SS1R}
+
+\end{center}
+
+
+
+\paragraph{Prenosová funkcia ORO}
+Nájdime prenosovú funkciu ORO.
+\begin{align}
+    G_{ORO}(s) = G_R(s) G_S(s) = \frac{r_0 K}{Ts+1}
+\end{align}
+
+
+\paragraph{Prenosová funkcia URO}
+Nájdime prenosovú funkciu URO.
+\begin{align}
+    G_{URO}(s)
+    =  \frac{G_{ORO}(s)}{1+G_{ORO}(s)}
+    = \frac{\frac{r_0 K}{Ts+1}}{1+\frac{r_0 K}{Ts+1}}
+    = \frac{\frac{r_0 K}{Ts+1}}{\frac{Ts+1 + r_0 K}{Ts+1}}
+    = \frac{r_0 K}{Ts+ (1 + r_0 K)}
+    = \frac{ \frac{r_0 K}{T}}{s+ \frac{1 + r_0 K}{T}}
+\end{align}
+URO je systémom prvého rádu bez astatizmu.
+
+
+
+
+\paragraph{Stabilita}
+Vyšetrime stabilitu URO. Charakteristický polynóm URO je
+\begin{align}
+    A(s) = s + \frac{1 + r_0 K}{T}
+\end{align}
+Pól URO je $s_1 = - \frac{1 + r_0 K}{T}$. URO je stabilný ak $\Re\{ s_1 \} > 0$.
+
+
+\paragraph{Kvalita v ustálenom stave}
+Uvažujme $w(t) = 1$ a vyšetrime veľkosť trvalej regulačnej odchýlky $e(\infty)$.
+
+L-obrazom žiadanej hodnoty je $W(s) = \frac{1}{s}$. Teda
+\begin{align}
+    Y(s) = G_{URO}(s) \frac{1}{s}
+\end{align}
+Podľa vety o konečnej hodnote platí
+\begin{align}
+    y(\infty) = \lim_{s\to 0} s Y(s) = \lim_{s\to 0} \left( \ s \ G_{URO}(s) \ \frac{1}{s} \right)
+\end{align}
+takže ak uvažujeme $w(t) = 1$, potom
+\begin{align}
+    y(\infty) =  \lim_{s\to 0} \ G_{URO}(s)
+\end{align}
+V tomto prípade
+\begin{align}
+    y(\infty)
+    =  \lim_{s\to 0} \left(  \frac{r_0 K}{Ts+ (1 + r_0 K)} \right)
+    =  \frac{r_0 K}{(1 + r_0 K)}
+\end{align}
+Trvalá regulačná odchýlka je $e(\infty) = w(\infty) - y(\infty)$, pričom v tomto prípade samozrejme $ w(\infty) = 1$, teda
+\begin{align}
+    e(\infty)
+    = w(\infty) - y(\infty)
+    = 1 -  \frac{r_0 K}{(1 + r_0 K)}
+    =\frac{1 + r_0 K - r_0 K}{(1 + r_0 K)}
+    =\frac{1}{(1 + r_0 K)}
+\end{align}
+Trvalá regulačná odchýlka bude vždy nenulová.
+
+
+
+\paragraph{Prechodný dej}
+V tomto prípade URO opisuje prenosová funkcia 1. rádu. Tým je daný aj typický tvar prechodovej charakteristiky URO (tri prípady: kladný/záporný/nulový pól). Zároveň tu má význam hovoriť o časovej konštante URO, ktorá má hodnotu $\frac{T}{(1 + r_0 K)}$ a zosilnení URO, ktoré má hodnotu $\frac{r_0 K}{(1 + r_0 K)}$.
+
+
+
+\paragraph{Simulácia}
+
+Pre príklad uvažujme $K = 1$, $T = 1$ a parameter $r_0 = 1$. Výsledok simulácie je nasledovný:
+
+
+\begin{center}
+
+    \makebox[\textwidth][c]{%
+    \includegraphics{MRS06_prikl_01a_panel_wy.pdf}
+    }
+
+    \makebox[\textwidth][c]{%
+    \includegraphics{MRS06_prikl_01a_panel_u.pdf}
+    }
+
+    \figcaption{}
+
+\end{center}
+
+\noindent
+Pre ilustráciu, regulačná odchýlka:
+
+
+\begin{center}
+
+    \makebox[\textwidth][c]{%
+    \includegraphics{MRS06_prikl_01a_panel_e_log.pdf}
+    }
+
+    % \makebox[\textwidth][c]{%
+    % \includegraphics{MRS06_prikl_01a_panel_int_e_log.pdf}
+    % }
+    %
+    % \makebox[\textwidth][c]{%
+    % \includegraphics{MRS06_prikl_01a_panel_der_e_log.pdf}
+    % }
+
+    \figcaption{}
+
+\end{center}
+
+
+
+
+
+
+
+
+\subsubsection{PI regulátor a SS1R}
+
+Majme URO, kde
+\begin{align}
+    G_R(s) = r_0 + \frac{r_{-1}}{s} \qquad \text{a} \qquad  G_S(s) = \frac{K}{Ts+1}
+\end{align}
+teda:
+
+\begin{center}
+
+    \makebox[\textwidth][c]{%
+    \input{../fig_standalone/URO_PI_SS1R.pdf_tex}
+    }
+
+	\figcaption{}
+	\label{URO_PI_SS1R}
+
+\end{center}
+
+
+\paragraph{Prenosová funkcia ORO}
+Nájdime prenosovú funkciu ORO.
+\begin{align}
+    G_{ORO}(s) = G_R(s) G_S(s) =  \frac{K r_0 s + Kr_{-1}}{Ts^2+s}
+\end{align}
+
+
+
+
+\paragraph{Prenosová funkcia URO}
+Nájdime prenosovú funkciu URO.
+\begin{align}
+    \begin{aligned}
+    G_{URO}(s)
+    &=  \frac{G_{ORO}(s)}{1+G_{ORO}(s)}
+    = \frac{   \frac{K r_0 s + Kr_{-1}}{Ts^2+s}   }{   1+  \frac{K r_0 s + Kr_{-1}}{Ts^2+s} }
+    = \frac{   \frac{K r_0 s + Kr_{-1}}{Ts^2+s}   }{   \frac{Ts^2+s + K r_0 s + Kr_{-1}}{Ts^2+s} } \\
+    &= \frac{   \frac{K r_0 s + Kr_{-1}}{Ts^2+s}   }{   \frac{Ts^2+  (1 + K r_0) s + Kr_{-1}}{Ts^2+s} }
+    = \frac{   K r_0 s + Kr_{-1}   }{   Ts^2+  (1 + K r_0) s + Kr_{-1} }
+    \end{aligned}
+\end{align}
+URO je systémom druhého rádu bez astatizmu s jednou nulou.
+
+
+\paragraph{Stabilita}
+Vyšetrime stabilitu URO. Charakteristický polynóm URO je
+\begin{align}
+    A(s) = Ts^2+  (1 + K r_0) s + Kr_{-1}
+\end{align}
+Zaujímajú nás podmienky, pri ktorých bude URO stabilný. Tieto podmienky ba malo byť možné využiť pri návrhu/voľbe parametrov regulátora. Využime skutočnosť, že ak sú všetky koeficienty polynómu druhého stupňa kladné, potom jeho korene majú zápornú reálnu časť.
+
+URO bude teda stabilný ak
+\begin{align}
+    T>0 \qquad 1+K r_0 >0 \qquad K r_{-1} > 0
+\end{align}
+
+
+\paragraph{Kvalita v ustálenom stave}
+Uvažujme $w(t) = 1$ a vyšetrime veľkosť trvalej regulačnej odchýlky $e(\infty)$.
+
+Cieľom je zistiť aká je dosiahnuteľná minimálna trvalá regulačná odchýlka, teda  $e(\infty) = w(\infty) - y(\infty)$.
+
+Keďže $W(s) = \frac{1}{s}$ a URO je stabilný, potom
+\begin{align}
+    y(\infty) = \lim_{s\to0} G_{URO}(s) = \frac{K r_{-1}}{K r_{-1}} = 1
+\end{align}
+Trvalá regulačná odchýlka je $e(\infty) = w(\infty) - y(\infty)$, pričom v tomto prípade samozrejme $ w(\infty) = 1$, teda
+\begin{align}
+    e(\infty)
+    = w(\infty) - y(\infty)
+    = 1 - 1
+    = 0
+\end{align}
+Trvalá regulačná odchýlka bude vždy nulová.
+
+
+\paragraph{Prechodný dej}
+Cieľom je vyhodnotiť možnosti ovplyvnenia prechodného deja, ktorý vykazuje URO, pomocou parametrov regulátora.
+
+V tomto prípade je prenosová funkcia URO prenosovou funkciou druhého rádu. Prechodný dej teda môže byť kmitavý (dva komplexne združené póly) alebo aperiodický (dva reálne póly).
+
+Charakteristický polynóm v tomto prípade je
+\begin{align}
+    A(s)  =  Ts^2+  (1 + K r_0) s + Kr_{-1}
+\end{align}
+a jeho korene
+\begin{align}
+    s_{1,2} = \frac{-(1+K r_0)}{2T} \pm \frac{ \sqrt{(1+K r_0)^2 - 4TKr_{-1} }}{2T}
+\end{align}
+O charaktere koreňov rozhoduje diskriminant, teda v tomto prípade ak
+\begin{align}
+     (1+K r_0)^2 - 4TKr_{-1} \geq 0
+\end{align}
+tak prechodný dej URO bude aperiodický, inak bude kmitavý.
+
+
+
+
+\paragraph{Simulácia 1 (nekmitavý prechodný dej)}
+
+Pre príklad uvažujme $K = 1$, $T = 10$ a $r_0 = 15$, $r_{-1} = 1$. Výsledok je nasledovný:
+
+\begin{center}
+
+    \makebox[\textwidth][c]{%
+    \includegraphics{MRS06_prikl_02a_panel_wy.pdf}
+    }
+
+    \makebox[\textwidth][c]{%
+    \includegraphics{MRS06_prikl_02a_panel_u.pdf}
+    }
+
+    \figcaption{}
+
+\end{center}
+
+\noindent
+Pre ilustráciu, regulačná odchýlka:
+
+
+\begin{center}
+
+    \makebox[\textwidth][c]{%
+    \includegraphics{MRS06_prikl_02a_panel_e_log.pdf}
+    }
+
+    \makebox[\textwidth][c]{%
+    \includegraphics{MRS06_prikl_02a_panel_int_e_log.pdf}
+    }
+    %
+    % \makebox[\textwidth][c]{%
+    % \includegraphics{MRS06_prikl_01a_panel_der_e_log.pdf}
+    % }
+
+    \figcaption{}
+
+\end{center}
+
+
+
+
+
+
+\paragraph{Simulácia 2 (kmitavý prechodný dej)}
+
+Pre príklad uvažujme $K = 1$, $T = 10$ a $r_0 = 2$, $r_{-1} = 0,5$. Výsledok je nasledovný:
+
+\begin{center}
+
+    \makebox[\textwidth][c]{%
+    \includegraphics{MRS06_prikl_02b_panel_wy.pdf}
+    }
+
+    \makebox[\textwidth][c]{%
+    \includegraphics{MRS06_prikl_02b_panel_u.pdf}
+    }
+
+    \figcaption{}
+
+\end{center}
+
+\noindent
+Pre ilustráciu, regulačná odchýlka:
+
+
+\begin{center}
+
+    \makebox[\textwidth][c]{%
+    \includegraphics{MRS06_prikl_02b_panel_e_log.pdf}
+    }
+
+    \makebox[\textwidth][c]{%
+    \includegraphics{MRS06_prikl_02b_panel_int_e_log.pdf}
+    }
+    %
+    % \makebox[\textwidth][c]{%
+    % \includegraphics{MRS06_prikl_01a_panel_der_e_log.pdf}
+    % }
+
+    \figcaption{}
+
+\end{center}
+
+
+
+
+
+
+
+
+
+\subsubsection{PI regulátor a AS1R}
+
+Majme URO, kde
+\begin{align}
+    G_R(s) = r_0 + \frac{r_{-1}}{s} \qquad \text{a} \qquad  G_S(s) = \frac{1}{s}
+\end{align}
+teda:
+
+\begin{center}
+
+    \makebox[\textwidth][c]{%
+    \input{../fig_standalone/URO_PI_AS1R.pdf_tex}
+    }
+
+	\figcaption{}
+	\label{URO_PI_AS1R}
+
+\end{center}
+
+\paragraph{Prenosová funkcia ORO}
+Nájdime prenosovú funkciu ORO.
+\begin{align}
+    G_{ORO}(s) = G_R(s) G_S(s) =  \frac{r_0 s + r_{-1}}{s^2}
+\end{align}
+
+
+\paragraph{Prenosová funkcia URO}
+Nájdime prenosovú funkciu URO.
+\begin{align}
+    \begin{aligned}
+    G_{URO}(s)
+    &=  \frac{G_{ORO}(s)}{1+G_{ORO}(s)}
+    = \frac{   \frac{r_0 s + r_{-1}}{s^2}   }{     \frac{s^2 + r_0 s + r_{-1}}{s^2}   }
+    = \frac{  r_0 s + r_{-1}   }{    s^2 + r_0 s + r_{-1}   }
+    \end{aligned}
+\end{align}
+URO je systémom druhého rádu bez astatizmu s jednou nulou.
+
+\paragraph{Stabilita}
+Vyšetrime stabilitu URO. Charakteristický polynóm URO je
+\begin{align}
+    A(s) =  s^2 + r_0 s + r_{-1}
+\end{align}
+Nutnou a postačujúcou podmienkou stability teda je ak sú oba parametre regulátora kladné, $r_0 > 0$, $r_{-1} > 0$.
+
+\paragraph{Kvalita v ustálenom stave}
+Uvažujme $w(t) = 1$ a vyšetrime veľkosť trvalej regulačnej odchýlky $e(\infty)$. Keďže $W(s) = \frac{1}{s}$ (a URO je stabilný), potom
+\begin{align}
+    y(\infty) = \lim_{s\to0} G_{URO}(s) = \frac{r_{-1}}{r_{-1}} = 1
+\end{align}
+teda
+\begin{align}
+    e(\infty)
+    = w(\infty) - y(\infty)
+    = 1 - 1
+    = 0
+\end{align}
+Trvalá regulačná odchýlka bude vždy nulová.
+
+\paragraph{Prechodný dej}
+Je závislý od pólov URO. Póly URO sú
+\begin{align}
+    s_{1,2} = \frac{-(r_0)}{2} \pm \frac{ \sqrt{r_0^2 - 4r_{-1} }}{T}
+\end{align}
+Ak teda
+\begin{align}
+     r_0^2 - 4r_{-1} \geq 0
+\end{align}
+prechodný dej bude aperiodický, inak bude kmitavý.
+
+\paragraph{Simulácia 1 (nekmitavý prechodný dej)}
+
+Pre príklad uvažujme $r_0 = 10$, $r_{-1} = 1$. Vtedy jednoznačne platí $r_0^2 - 4r_{-1} \geq 0$. Výsledok je nasledovný:
+
+\begin{center}
+
+    \makebox[\textwidth][c]{%
+    \includegraphics{MRS06_prikl_03a_panel_wy.pdf}
+    }
+
+    \makebox[\textwidth][c]{%
+    \includegraphics{MRS06_prikl_03a_panel_u.pdf}
+    }
+
+    % \makebox[\textwidth][c]{%
+    % \includegraphics{MRS06_prikl_03a_panel_e_log.pdf}
+    % }
+    %
+    % \makebox[\textwidth][c]{%
+    % \includegraphics{MRS06_prikl_03a_panel_int_e_log.pdf}
+    % }
+
+    \figcaption{}
+
+\end{center}
+
+
+\paragraph{Simulácia 2 (dva reálne póly)}
+
+Pre príklad uvažujme $r_0 = 2$, $r_{-1} = 1$. Vtedy stále platí, že $r_0^2 - 4r_{-1} \geq 0$. Výsledok je však nasledovný, prejavuje sa vplyv nuly prenosovej funkcie URO na prechodovú charakteristiku URO.
+
+
+
+
+\begin{center}
+
+    \makebox[\textwidth][c]{%
+    \includegraphics{MRS06_prikl_03b_panel_wy.pdf}
+    }
+
+    \makebox[\textwidth][c]{%
+    \includegraphics{MRS06_prikl_03b_panel_u.pdf}
+    }
+
+    % \makebox[\textwidth][c]{%
+    % \includegraphics{MRS06_prikl_03a_panel_e_log.pdf}
+    % }
+    %
+    % \makebox[\textwidth][c]{%
+    % \includegraphics{MRS06_prikl_03a_panel_int_e_log.pdf}
+    % }
+
+    \figcaption{}
+
+\end{center}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\paragraph{Simulácia 3 (dva komplexne združené póly)}
+
+Pre príklad uvažujme $r_0 = 0.5$, $r_{-1} = 1$. Vtedy  platí, že $r_0^2 - 4r_{-1} < 0$. Výsledok je nasledovný:
+
+
+\begin{center}
+
+    \makebox[\textwidth][c]{%
+    \includegraphics{MRS06_prikl_03c_panel_wy.pdf}
+    }
+
+    \makebox[\textwidth][c]{%
+    \includegraphics{MRS06_prikl_03c_panel_u.pdf}
+    }
+
+    % \makebox[\textwidth][c]{%
+    % \includegraphics{MRS06_prikl_03a_panel_e_log.pdf}
+    % }
+    %
+    % \makebox[\textwidth][c]{%
+    % \includegraphics{MRS06_prikl_03a_panel_int_e_log.pdf}
+    % }
+
+    \figcaption{}
+
+\end{center}
+
+
+
+
+
+
+
+
+\section{Otázky a úlohy}
+
+
+\begin{enumerate}[leftmargin=0pt, labelsep=3mm, itemsep=0pt]
+
+
+    \item Schematicky znázornite všeobecný regulačný obvod, opíšte bloky a~signály, z~ktorých pozostáva.
+
+    \item Vysvetlite pojem \emph{regulačná odchýlka}.
+
+    \item Schematicky znázornite lineárny uzavretý regulačný obvod, opíšte prenosové funkcie a~signály (L-obrazy signálov), z~ktorých pozostáva.
+
+    \item Vysvetlite pojem \emph{prenosová funkcia otvoreného regulačného obvodu}.
+
+    \item S využitím algebry prenosových funkcii odvoďte prenosovú funkciu regulačnej odchýlky v klasickom lineárnom URO.
+
+    \item Majme lineárny uzavretý regulačný obvod s uvažovaním poruchovej veličiny $D(s)$ ako je znázornené na obr.:
+
+    \noindent
+    \makebox[\textwidth][c]{%
+    \includegraphics[scale=0.75]{schLinURO_basic_porucha.pdf}
+    }
+
+    \noindent
+    S využitím algebry prenosových funkcií odvoďte prenosovú funkciu definovanú pomerom L-obrazov $\frac{Y(s)}{D(s)}$ pri $W(s) = 0$.
+
+
+
+
+
+    \item Stručne opíšte PID regulátor.
+
+    \item Napíšte prenosovú funkciu PID regulátora.
+
+    \item Nakreslite blokovú schému PID regulátora.
+
+    \item Uvažujte klasický lineárny URO, kde $\displaystyle G_R(s) = r_0$ a $\displaystyle G_S(s) = \frac{K}{Ts + 1}$.
+    \begin{enumerate}
+        \item Nájdite prenosovú funkciu URO a vhodne komentujte postup.
+        \item Určte veľkosť trvalej regulačnej odchýlky ak $w(t) = 1$.
+    \end{enumerate}
+
+    \item Uvažujte klasický lineárny URO, kde $\displaystyle G_R(s) = r_0 + \frac{r_{-1}}{s}$ a $\displaystyle G_S(s) = \frac{K}{Ts + 1}$.
+    \begin{enumerate}
+        \item Nájdite prenosovú funkciu URO a vhodne komentujte postup.
+        \item Určte veľkosť trvalej regulačnej odchýlky ak $w(t) = 1$.
+    \end{enumerate}
+
+    \item Uvažujte klasický lineárny URO, kde $\displaystyle G_R(s) = r_0 + \frac{r_{-1}}{s}$ a $\displaystyle G_S(s) = \frac{1}{s}$.
+    \begin{enumerate}
+        \item Nájdite prenosovú funkciu URO a vhodne komentujte postup.
+        \item Určte veľkosť trvalej regulačnej odchýlky ak $w(t) = 1$.
+        \item Nájdite podmienku, ktorá musí byť splnená, aby prechodová charakteristika URO bola aperiodická.
+    \end{enumerate}
+
+
+
+
+
+
+\end{enumerate}
+
+
+
+
+
+
+
+
+
+
+\end{document}
