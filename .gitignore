@@ -1,4 +1,4 @@
-
+.gitignore
 
 .ipynb_checkpoints
 
@@ -23,3 +23,5 @@ dev
 
 slprj
 *.slxc
+
+.vscode
