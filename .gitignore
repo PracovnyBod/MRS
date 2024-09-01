@@ -1,10 +1,10 @@
-.gitignore
+
 
 .ipynb_checkpoints
 
 old
 dev
-
+bib_nonpub
 
 
 *.pyc
