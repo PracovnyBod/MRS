@@ -40,6 +40,52 @@ def fcn_panelformat_variant01(fig):
         ax.yaxis.set_minor_locator(AutoMinorLocator())
         ax.xaxis.set_minor_locator(AutoMinorLocator())
 
+        # ax.yaxis.set_major_locator(MultipleLocator(5))
+
+
+
+        ax.ticklabel_format(axis='y', useOffset=False)
+
+        ax.set_xlabel('čas [s]', ha='left', va='top')
+        ax.xaxis.set_label_coords(1.05, -0.08)
+
+
+        ax.yaxis.set_label_coords(-0.02, 1.08)
+
+
+        #-----------------------------
+
+
+        #-----------------------------
+
+        handles_ax, labels_ax = ax.get_legend_handles_labels()
+
+
+        # ax.legend(handles_ax, labels_ax, ncol=1, handlelength=1.0, markerfirst=True, loc=2, bbox_to_anchor=(1.02, 1.00))
+        ax.legend(handles_ax, labels_ax, ncol=1, handlelength=1.0, markerfirst=True, loc=1, bbox_to_anchor=(0.98, 1.12))
+
+
+
+
+
+
+
+
+###############################################################################
+
+
+
+def fcn_panelformat_variant02(fig):
+
+    for ax in fig.get_axes():
+
+        fcnDefaultAxisStyle(ax)
+
+        ax.yaxis.set_minor_locator(AutoMinorLocator())
+        ax.xaxis.set_minor_locator(AutoMinorLocator())
+
+        # ax.yaxis.set_major_locator(MultipleLocator(5))
+
 
 
         ax.ticklabel_format(axis='y', useOffset=False)
@@ -60,16 +106,7 @@ def fcn_panelformat_variant01(fig):
 
 
         ax.legend(handles_ax, labels_ax, ncol=1, handlelength=1.0, markerfirst=True, loc=2, bbox_to_anchor=(1.02, 1.00))
-
-
-
-
-
-
-
-
-###############################################################################
-
+        # ax.legend(handles_ax, labels_ax, ncol=1, handlelength=1.0, markerfirst=True, loc=1, bbox_to_anchor=(0.98, 1.12))
 
 
 
@@ -79,36 +116,35 @@ def fcn_panelformat_variant01(fig):
 
 
 
+# def fcn_panelformat_variant02(fig):
 
-def fcn_panelformat_variant02(fig):
+#     for ax in fig.get_axes():
 
-    for ax in fig.get_axes():
+#         fcnDefaultAxisStyle(ax)
 
-        fcnDefaultAxisStyle(ax)
-
-        ax.yaxis.set_minor_locator(AutoMinorLocator())
-        ax.xaxis.set_minor_locator(AutoMinorLocator())
-
+#         ax.yaxis.set_minor_locator(AutoMinorLocator())
+#         ax.xaxis.set_minor_locator(AutoMinorLocator())
 
 
-        ax.ticklabel_format(axis='y', useOffset=False)
 
-        ax.set_xlabel('čas', ha='left', va='top')
-        ax.xaxis.set_label_coords(1.05, -0.08)
+#         ax.ticklabel_format(axis='y', useOffset=False)
 
-
-        ax.yaxis.set_label_coords(-0.02, 1.08)
+#         ax.set_xlabel('čas', ha='left', va='top')
+#         ax.xaxis.set_label_coords(1.05, -0.08)
 
 
-        #-----------------------------
+#         ax.yaxis.set_label_coords(-0.02, 1.08)
 
 
-        #-----------------------------
-
-        handles_ax, labels_ax = ax.get_legend_handles_labels()
+#         #-----------------------------
 
 
-        ax.legend(handles_ax, labels_ax, ncol=1, handlelength=0.8, labelspacing=0.3, markerfirst=True, loc=2, bbox_to_anchor=(1.01, 1.00))
+#         #-----------------------------
+
+#         handles_ax, labels_ax = ax.get_legend_handles_labels()
+
+
+#         ax.legend(handles_ax, labels_ax, ncol=1, handlelength=0.8, labelspacing=0.3, markerfirst=True, loc=2, bbox_to_anchor=(1.01, 1.00))
 
 
 
