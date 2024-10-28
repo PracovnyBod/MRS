@@ -113,6 +113,38 @@ def fcn_panelformat_variant02(fig):
 
 
 
+def fcn_panelformat_variant03(fig):
+
+    for ax in fig.get_axes():
+
+        fcnDefaultAxisStyle(ax)
+
+        ax.yaxis.set_minor_locator(AutoMinorLocator())
+        ax.xaxis.set_minor_locator(AutoMinorLocator())
+
+        # ax.yaxis.set_major_locator(MultipleLocator(5))
+
+
+
+        ax.ticklabel_format(axis='y', useOffset=False)
+
+        ax.set_xlabel('čas', ha='left', va='top')
+        ax.xaxis.set_label_coords(1.05, -0.08)
+
+
+        ax.yaxis.set_label_coords(-0.02, 1.08)
+
+
+        #-----------------------------
+
+
+        #-----------------------------
+
+        handles_ax, labels_ax = ax.get_legend_handles_labels()
+
+
+        ax.legend(handles_ax, labels_ax, ncol=1, handlelength=0.8, markerfirst=True, loc=2, bbox_to_anchor=(1.01, 1.00))
+
 
 
 
