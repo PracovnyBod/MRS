@@ -770,7 +770,7 @@ tak prechodný dej URO bude aperiodický, inak bude kmitavý.
 
 Pre príklad uvažujme $K = 1$, $T = 10$ a $r_0 = 15$, $r_{-1} = 1$. Výsledok je nasledovný:
 
-\vfill
+% \vfill
 
 \begin{center}
 
@@ -788,7 +788,7 @@ Pre príklad uvažujme $K = 1$, $T = 10$ a $r_0 = 15$, $r_{-1} = 1$. Výsledok j
 
 \end{center}
 
-\vfill
+% \vfill
 
 \noindent
 Pre ilustráciu, regulačná odchýlka:
@@ -1059,10 +1059,6 @@ Pre príklad uvažujme $r_0 = 0.5$, $r_{-1} = 1$. Vtedy  platí, že $r_0^2 - 4r
     }
 
 \end{center}
-
-
-
-
 
 
 
@@ -1724,6 +1720,71 @@ Výsledky simulácie regulácie na žiadanú hodnotu ($w(t) = 0,5$) sú na nasle
         \end{bmatrix}
     \end{equation}
 \end{itemize}
+
+
+
+
+
+
+
+
+
+
+
+
+\section{O ukazovateľoch kvality PCH URO}
+
+Typicky sa pri posudzovaní kvality uzavretého regulačného obvodu (URO) využíva prechodová charakteristika (PCH). Vstupom URO je želaná hodnota (referenčný signál) $w(t)$ a výstupom je výstupná veličina riadeného systému $y(t)$. Prechodová charakteristika URO je teda priebeh výstupnej veličiny po skokovej zmene želanej hodnoty.
+
+V tomto prípade teda ide takpovediac o kvalitu URO pri prechodných dejoch.
+
+Prechodová charakteristika URO v mnohých prípadoch vykazuje tlmené oscilácie pred dosiahnutím ustáleného stavu. Príkladom nech je obr.~\ref{MRS11_kvalitaPCHURO_panel_wy}.
+
+\begin{center}
+
+    \vbox{%
+    \makebox[\textwidth][c]{%
+    \includegraphics{MRS11_kvalitaPCHURO_panel_wy.pdf}
+    }
+
+
+    \figcaption{}
+    \label{MRS11_kvalitaPCHURO_panel_wy}
+    }
+
+\end{center}
+
+\noindent
+Z prechodovej charakteristiky URO je možné odčítať niekoľko hodnôt, ktoré sa používajú ako ukazovatele kvality URO (pri prechodnom deji):
+
+\begin{itemize}[leftmargin=0pt, labelsep=3mm, itemsep=0pt]
+    \item Maximálne preregulovanie $\eta_{max}$
+    \item Doba regulácie $t_{reg}$ (alebo čas regulácie)
+    \item Doba nábehu $t_n$ (alebo čas nábehu)	
+\end{itemize}
+
+\paragraph{Maximálne preregulovanie}
+
+Maximalne preregulovanie $\eta_{max}$ sa typicky udáva v percentách pričom $100$ \% je ustálená hodnota výstupnej veličiny $y(\infty)$. Maximálne preregulovanie je
+\begin{equation}
+    \eta_{max} = \frac{y_{max} - y(\infty)}{y(\infty)} \times 100 \%
+\end{equation}
+kde $y_{max}$ je maximálna hodnota výstupnej veličiny $y(t)$, ktorá nastala v čase $t_{max}$ po skokovej zmene želanej hodnoty.
+
+\paragraph{Doba regulácie}
+
+Doba regulácie $t_{reg}$ je čas, ktorý uplynie od skokovej zmeny želanej hodnoty kým sa výstupná veličina dostane do pásma necitlivosti a ostane v ňom.
+
+Pásmo necitlivosti je určené percentom z ustálenej hodnoty výstupnej veličiny $y(\infty)$. Toto percento je typicky $2$ až $5$ \%, prípadne aj viac v závislosti od konkrétnej aplikácie. Uvažuje sa teda pásmo so stredom v $y(\infty)$ a šírkou $2 \delta$ pričom $\delta$ je daná uvedeným percentom, napríklad
+\begin{equation}
+    \delta = 0,05  \cdot y(\infty) 
+\end{equation}
+
+\paragraph{Doba nábehu}
+
+Ukazovateľom rýchlosti regulácie môže byť aj takzvaná doba nábehu $t_n$. Je to čas, za ktorý sa výstupná veličina $y(t)$ zvýši z $10$ \% na $90$ \% svojej ustálenej hodnoty $y(\infty)$. Používajú sa aj iné percentá, napríklad $5$ a $95$ \% alebo $0$ a $100$ \%, opäť v závislosti na aplikácii.
+
+
 
 
 
