@@ -1,0 +1,888 @@
+\documentclass[a4paper, 10pt, ]{article}
+
+\input{../misc_LaTeX/preamble.tex}
+
+\def\oznacenieCasti{MRS06 - ZS2025}
+
+
+\usepackage{longtable}
+
+
+
+
+\begin{document}
+
+
+\lstset{%
+style=mystyle,
+rangebeginprefix=\#\#\#\ cellB\ ,%
+rangebeginsuffix=\ \#\#\#,%
+rangeendprefix=\#\#\#\ cellE\ ,%
+rangeendsuffix=\ \#\#\#,%
+includerangemarker=false,
+}
+
+
+
+
+
+\fontsize{12pt}{22pt}\selectfont
+
+\centerline{\textsf{Modelovanie a riadenie systémov} \hfill \textsf{\oznacenieCasti}}
+
+\fontsize{18pt}{22pt}\selectfont
+
+
+
+
+
+\begin{flushleft}
+	\textbf{\textsf{Polprednáška o vybraných charakteristikách dynamického systému}}
+\end{flushleft}
+
+
+
+
+
+\normalsize
+
+\bigskip
+
+{\hypersetup{hidelinks}
+
+\tableofcontents
+
+}
+
+\bigskip
+
+\vspace{18pt}
+
+
+
+\noindent
+\lettrine[lines=3, nindent=0pt]{H}{lavnou} témou tohto textu sú \emph{prevodová charakteristika} a \emph{prechodová charakteristika} dynamického systému. Uvažuje sa systém, ktorý má jeden vstupný signál $u(t)$ a jeden výstupný signál $y(t)$ a~tieto sú spojité v čase a dynamický systém je časovo invariantný.
+
+
+
+
+
+\section{O ustálenom stave systému}
+
+Pri skúmaní vlastností systému je často ako prvé potrebné poznať tzv. statické vlastnosti systému. Vo všeobecnosti sa to týka ustálených stavov systému. Typickým príkladom je situácia, keď vstupný signál $u(t)$ je konštantný, jeho hodnota sa nemení v čase. Ustálenú hodnotu vstupného signálu označme $u(\infty)$, čím sa zdôrazňuje, že ide o hodnotu akoby v čase nekonečno, čo v praxi je čas taký, keď všetky prechodné deje považujeme za skončené. Otázkou je, či sa aj hodnota výstupného signálu $y(t)$ ustáli na nejakej hodnote $y(\infty)$. 
+
+Na prvý pohľad je zrejmé, že naznačené statické vlastnosti systému nemá zmysel skúmať pre systém, ktorý je nestabilný.
+
+
+
+\paragraph{Stabilita systému}
+
+Pod pomenovanim \emph{stabilita systému} sa typicky rozumie niekoľko rôznych prípadov týkajúcich sa všeobecného riešenia diferenciálnej rovnice opisujúcej dynamický systém. Intuitívnym je termín \emph{BIBO stabilita} (bounded input, bounded output), kde sa skúma prípad, keď vstupný signál $u(t)$ je ohraničený, jeho max. hodnota je menej ako nekonečno. Ak je potom výstupný signál $y(t)$ tiež ohraničený, hovoríme, že systém je BIBO stabilný. V podstate sa tak skúma vnútená zložka riešenia nehomogénnej diferenciálnej rovnice. Vlastnú zložku riešenia, závislú od začiatočných podmienok, je možné skúmať rovnako a súvisí to s pojmom \emph{asymptotická stabilita}. 
+
+\smallskip
+
+Pri lineárnom systéme systéme platí, že vlastnosti systému z akéhokoľvek hľadiska stability sú kompletne určené pólmi systému, teda koreňmi charakteristického polynómu. Nutnou a postačujúcou podmienkou stability lineárneho systému je, aby všetky póly systému ležali v ľavej polrovine komplexnej roviny, t.j. aby ich reálne časti boli záporné. Ak aspoň jeden pól leží na imaginárnej osi, hovoríme, že systém je na hranici stability. Ak je aspoň jeden pól v pravej polrovine, jeho reálna časť je kladná, hovoríme, že systém je nestabilný.
+
+
+
+
+\paragraph{Statické zosilnenie verzus astatizmus}
+
+Uvažujme systém, ktorý nie je nestabilný. Z hľadiska statických vlastností systému je možné rozlišovať dve základné vlastnosti, ktoré súvisia s ustáleným stavom systému. Prvou je \emph{statické zosilnenie} systému, druhou je \emph{astatizmus} systému.
+
+Ak je vstupný signál $u(t)$ konštantný, jeho hodnota je $u(\infty)$, a výstupný signál $y(t)$ sa ustáli na hodnote $y(\infty)$, potom hovoríme, že systém je v ustálenom stave. Je možné určiť statické zosilnenie systému, ktoré je pomer ustálenej hodnoty výstupného signálu k ustálenej hodnote vstupného signálu.
+
+Ak je vstupný signál $u(t)$ konštantný, jeho hodnota je $u(\infty)$, a výstupný signál $y(t)$ sa neustáli, neprestane sa meniť, neprestane rásť, hovoríme o astatizme systému, systém je astatický, neustáli sa.
+
+
+\smallskip
+
+Pri lineárnom systéme ak žiadny z pólov systému nie je nulový, potom systému dávame prívlastok statický. Stále však máme na mysli dynamický systém, ktorý ja daný napríklad prenosovou funkciou systému. Pre takýto systém je možné určiť jeho statické zosilnenie. Statické zosilnenie je pomer výstupu ku vstupu v ustálenom stave. Ak je jeden z pólov systému nulový, hovoríme, že systém je astatický („obsahuje astatizmus“). Ak práve jeden pól je nulový, hovoríme o astatizme prvého rádu (ak dva póly, potom astatizmus druhého rádu, atď). Pripomeňme, že uvažujeme systém, ktorý nie je nestabilný. Nulový pól znamená, samozrejme, že jeho reálna časť je nulová. Z~hľadiska stability to znamená, že systém je na hranici stability.
+
+
+\paragraph{Prevodová charakteristika}
+
+V kontexte statických vlastností systému má vo všeobecnosti význam hovoriť o~prevodovej charakteristike systému. Prevodová charakteristika je závislosť ustálených hodnôt výstupného signálu systému od ustálených hodnôt vstupného signálu systému.
+
+Je zrejmé, že prevodová charakteristika sa týka systémov s prívlastkom statické, teda takých, ktoré nie sú astatické.
+
+\smallskip
+
+V prípade lineárnych systémov je prevodová charakteristika priamka a bez straty na všeobecnosti môžeme uvažovať, že prechádza začiatkom súradnicového systému. Sklon priamky je daný statickým zosilnením systému.
+
+
+
+
+
+
+
+\section{O meraní prevodovej charakteristiky}
+
+
+Prevodová charakteristika je závislosť ustálených hodnôt výstupnej veličiny od ustálených hodnôt vstupnej veličiny. Prevodová charakteristika, niekde sa nazýva aj statická charakteristika, teda charakterizuje systém len v~ustálených stavoch. Neobsahuje informáciu o dynamike systému.
+
+
+\paragraph{Simulovaný systém}
+
+V nasledujúcom sa pokúsime načrtnúť meranie prevodovej charakteristiky. Tu sa však nebude naozaj niečo merať, ale reálny systém bude nahradený simulovaným. Proces získavania „surových“ dát, ktoré sú potrebné pre určenie prevodovej charakteristiky a~proces spracovania týchto dát bude však rovnaký akoby išlo o reálny systém.
+
+
+Systém, ktorý bude predmetom skúmania, ktorého prevodovú charakteristiku budeme merať, je kyvadlo, tak ako bolo už skôr opísané. Navyše však bude k výstupnej veličine simulovaného systému pridaný čitateľovi neznámy šum. Dôvodom je lepšie napodobenie situácie v akej by bol čitateľ ak by sa zaoberal výstupnou veličinou reálneho systému.
+
+Pripomeňme, že uvažujme kyvadlo, ktorého kmity sú tlmené viskóznym trením s~koeficientom $\beta$ [kg~m$^2$~s$^{-1}$]. Kyvadlo je na Obr.~\ref{Kyvadlo}, kde hmotný bod s~hmotnosťou $m$ [kg] pripevnený na ramene so zanedbateľnou hmotnosťou a~dĺžkou $l$ [m] kmitá, $o$~označuje os otáčania kolmú na rovinu, v~ktorej kyvadlo kmitá, uhol medzi zvislicou a~ramenom kyvadla je označený $\varphi$ [rad] a~gravitačné zrýchlenie $g$~[m~s$^{-2}$].
+\begin{center}
+
+    \vbox{%
+	\makebox[\textwidth][c]{%
+	\includegraphics{Obr_Kyvadlo.pdf}
+	}
+	\vspace{-9mm}
+
+	\figcaption{Kyvadlo}
+	\label{Kyvadlo}
+    }
+
+	\vspace{-3mm}
+\end{center}
+Pohybová rovnica opisujúca dynamiku rotačného pohybu kyvadla môže byť v tvare
+\begin{align}
+	\ddot{\varphi}(t) = - \frac{\beta}{ml^2} \dot{\varphi}(t) - \frac{g}{l} \sin\left(\varphi(t)\right) + \frac{1}{ml^2}u(t)
+\end{align}
+kde $u(t)$ [kg~m$^2$~s$^{-2}$] je externý moment sily pôsobiaci na rameno kyvadla, $\dot{\varphi}(t)$ [rad~s$^{-1}$] je uhlová rýchlosť a~$\ddot{\varphi}(t)$~[rad~s$^{-2}$] je uhlové zrýchlenie ramena kyvadla. Číselné hodnoty parametrov kyvadla sú uvedené v tabuľke~\ref{Parametre kyvadla}.
+\begin{center}
+
+    \vbox{
+    
+    \tabcaption{Parametre kyvadla}
+    \label{Parametre kyvadla}
+    
+    \vspace{-3mm}
+    
+    \begin{tabular*}{\textwidth}{ c @{\extracolsep{\fill}} c c}
+        
+        \toprule
+        Parameter   & Hodnota    & Jednotky              \\
+        \midrule
+            $m$       & $1$   & kg             \\
+            $l$    &  $1$  & m \\
+            $g$   & $9,81$  & m s$^{-2}$ \\
+            $\beta$  &  $2\ \sqrt{g/l}$ &  kg~m$^2$~s$^{-1}$ \\
+        \bottomrule\
+    
+    \end{tabular*}
+    } 
+    
+    \vspace{-3mm}
+    
+\end{center}
+
+
+
+\subsection{Dáta pre určenie prevodovej charakteristiky}
+
+Ako už bolo uvedené, predmetom záujmu sú ustálené hodnoty výstupného signálu. Ak na vstup privedieme vstupný signál s nejakou konštantnou vstupnou hodnotou, následne počkáme istý čas nech sa výstupný signál ustáli, tak potom môžeme odčítať (odmerať) ustálenú hodnotu výstupného signálu. Takto sa získa jeden bod z prevodovej charakteristiky.
+
+Hneď potom je však možné zmeniť hodnotu vstupného signálu a opäť čakať, kým sa výstup ustáli.
+
+Tento postup, hodnoty vstupného signálu a doby, počas ktorých sa „čaká“ na ustálenie výstupu, možno vyjadriť tabuľkou nasledovne. Prvý stĺpec je čas, v ktorom sa zmení (prepne) vstup a druhý stĺpec je hodnota (konštanta), na ktorú sa zmení (prepne).
+\begin{center}
+
+    \vbox{
+    
+    \tabcaption{Hodnoty vstupného signálu}
+    \label{Hodnoty vstupného signálu}
+    
+    % \vspace{-3mm}
+    
+    \begin{tabular}{     c      c       }
+        \toprule
+        čas [s] & hodnota [kg m$^2$ s$^{-2}$] \\
+        \midrule
+        $0$ & $0,0$ \\
+        $10$ & $1,0$ \\
+        $30$ & $2,0$ \\
+        $20$ & $3,0$ \\
+        $40$ & $4,0$ \\
+        $50$ & $5,0$ \\
+        $60$ & $6,0$ \\
+        $70$ & $7,0$ \\
+        $80$ & $8,0$ \\
+        $95$ & $9,0$ \\
+        $110$ & $9,5$ \\
+        $135$ & $9,81$ \\
+        \bottomrule
+        \end{tabular}
+    } 
+    
+    % \vspace{-3mm}
+    
+\end{center}
+Z uvedeného je zároveň jasné, že interval vstupných hodnôt, pre ktorý zisťujeme ustálené hodnoty výstupu je $0$ až $9,81$ [kg m$^2$ s$^{-2}$]. Iné by vzhľadom na konkrétne kyvadlo, ktoré sa tu uvažuje, malo pramalý význam.
+
+Vstupný signál tak ako je definovaný tabuľkou~\ref{Hodnoty vstupného signálu} možno znázorniť ako na obr.~\ref{MRS06_figsc_01_1}.
+\begin{center}
+
+    \vbox{%
+	\makebox[\textwidth][c]{%
+	\includegraphics{MRS06_figsc_01_1.pdf}
+	}
+
+    \vspace{-6pt}
+
+	\figcaption{Priebeh vstupného signálu}
+	\label{MRS06_figsc_01_1}
+    }
+
+\end{center}
+
+Simulujme teraz priebeh výstupnej veličiny kyvadla (výchylky kyvadla) pri uvedenom vstupnom signály. Výsledok je na obr.~\ref{Surové dáta}.
+\begin{center}
+
+    \vbox{%
+	\makebox[\textwidth][c]{%
+	\includegraphics{MRS06_figsc_02_2.pdf}
+	}
+
+    \vspace{-6pt}
+
+	\figcaption{Surové dáta. Poznámka: výstupná veličina na obr.~\ref{Surové dáta} je schválne „zašumená“. Napodobňujeme tu tým potenciálny šum snímača, ktorý meria danú veličinu. Dôvodom je najmä skutočnosť, že sa tak lepšie ilustrujú jednotlivé kroky potrebné pre všeobecné spracovanie nameraného signálu, ktoré sú uvedené v ďalších častiach.}
+	\label{Surové dáta}
+    }
+
+\end{center}
+
+
+
+
+\subsection[Spracovanie dát]{Spracovanie dát}
+
+Zo surových dát je potrebné získať jednotlivé body prevodovej charakteristiky. To v~prvom rade znamená byť schopný odčítať ustálenú hodnotu výstupného signálu (zo surových dát). Pre ilustráciu, venujme sa nameraným dátam od desiatej sekundy po dvadsiatu sekundu, teda pre interval, počas ktorého bola na vstupe hodnota $u=1$ [kg m$^2$ s$^{-2}$]. Táto časť dát je nakreslená na obr.~\ref{Surové dáta - detail}.
+\begin{center}
+
+    \vbox{%
+    \makebox[\textwidth][c]{%
+    \includegraphics{MRS06_figsc_03_3.pdf}
+    }
+
+    \vspace{-6pt}
+
+    \figcaption{Surové dáta - detail}
+    \label{Surové dáta - detail}
+    }
+
+\end{center}
+Z obr.~\ref{Surové dáta - detail} je zrejmé, že v poslednej tretine intervalu je už možné považovať hodnotu výstupu za ustálenú. Vyznačme túto časť dát - viď obr.~\ref{Surové dáta - detail2}.
+\begin{center}
+
+    \vbox{%
+    \makebox[\textwidth][c]{%
+    \includegraphics{MRS06_figsc_04_4.pdf}
+    }
+
+    \vspace{-6pt}
+
+    \figcaption{Surové dáta - detail}
+    \label{Surové dáta - detail2}
+    }
+
+\end{center}
+Otázka je, ako z vyznačeného úseku určiť jednu hodnotu - ustálenú hodnotu. Prirodzenou voľbou je urobiť priemer z vybranej (vyznačenej) časti dát. Priemer je vyznačený na obr.~\ref{Surové dáta - detail3}
+\begin{center}
+
+    \vbox{%
+    \makebox[\textwidth][c]{%
+    \includegraphics{MRS06_figsc_05_5.pdf}
+    }
+
+    \vspace{-6pt}
+
+    \figcaption{Surové dáta - detail}
+    \label{Surové dáta - detail3}
+    }
+
+\end{center}
+Rovnako je samozrejme možné postupovať pri všetkých bodoch prevodovej charakteristiky. Všetky ustálené hodnoty odčítané zo „surových dát“ sú znázornené na obr.~ \ref{Surové dáta2}.
+\begin{center}
+
+    \vbox{%
+    \makebox[\textwidth][c]{%
+    \includegraphics{MRS06_figsc_06_6.pdf}
+    }
+
+    \vspace{-6pt}
+
+    \figcaption{Surové dáta}
+    \label{Surové dáta2}
+    }
+
+\end{center}
+Odčítané hodnoty sú následne uvedené v tabuľke~\ref{Prevodová charakteristika}. Prevodová charakteristika je graficky znázornená na obr.~\ref{Prevodová charakteristika graf}.
+\begin{center}
+
+    \vbox{
+    
+    \tabcaption{Prevodová charakteristika}
+    \label{Prevodová charakteristika}
+    
+    % \vspace{-3mm}
+    
+    \begin{tabular}{     c      c       }
+        \toprule
+        vstup [kg m$^2$ s$^{-2}$] & výstup [°] \\
+        \midrule
+        $0,0$ & $0,00691$\\
+        $1,0$ & $5,7$\\
+        $2,0$ & $11,8$\\
+        $3,0$ & $17,7$\\
+        $4,0$ & $24,3$\\
+        $5,0$ & $30,6$\\
+        $6,0$ & $37,6$\\
+        $7,0$ & $45,2$\\
+        $8,0$ & $54,5$\\
+        $9,0$ & $66,5$\\
+        $9,5$ & $75,6$\\
+        $9,81$ & $88,7$\\
+        \bottomrule
+        \end{tabular}
+    } 
+    
+    % \vspace{-3mm}
+    
+\end{center}
+\begin{center}
+
+    \vbox{%
+    \makebox[\textwidth][c]{%
+    \includegraphics{MRS06_figsc_07_7.pdf}
+    }
+
+    \vspace{-6pt}
+
+    \figcaption{Prevodová charakteristika}
+    \label{Prevodová charakteristika graf}
+    }
+
+\end{center}
+
+
+\subsection{Doplnkový text: o aproximácii prevodovej charakteristiky}
+
+Majme nameranú prevodovú charakteristiku, dáta sú v tabuľke~\ref{Prevodová charakteristika}. Prevodová charakteristika je graficky znázornená na obr.~\ref{Prevodová charakteristika graf}.
+
+Body prevodovej charakteristiky zodpovedajú istej vlastnosti reálneho systému (reálne existujúceho systému). Zodpovedajú závislosti výstupu systému od vstupu systému, samozrejme v ustálenom stave. Nameraných je však len niekoľko bodov. V týchto bodoch je daná vlastnosť systému známa. Čo však v prípade ak by bolo potrebné poznať danú vlastnosť mimo nameraných bodov? Teda mimo hodnôt vstupu, pre ktoré bola prevodová charakteristika nameraná.
+
+Aj pre tieto účely je výhodné využiť model. Model reálnej vlastnosti systému. Samotnej vlastnosti systému zodpovedá nameraná závislosť (prevodová charakteristika). Aproximáciou tejto závislosti je možné získať model.
+
+Model nech je v tomto prípade matematický vzťah, funkčná závislosť, istý predpis. Ak hodnota na vstupe modelu bude rovnaká ako hodnota na vstupe reálneho systému, potom hodnota na výstupe modelu nech je „približne rovnaká“ ako hodnota reálna. Toto nech však platí pre všetky namerané body prevodovej charakteristiky. Teda model nech sa približne zhoduje s reálnymi dátami. Ak toto platí v nameraných bodoch, potom to, zrejme, platí aj v iných bodoch. Platí to pre akúkoľvek hodnotu na vstupe modelu: že výstup modelu sa približne zhoduje s reálnym výstupom systému.
+
+
+\subsubsection{Model}
+
+Takto všeobecne opísaný model možno skonkretizovať napríklad nasledovne: Nech modelom je polynomiálna funkcia
+\begin{equation} \label{polyFcnDef}
+    \hat y = \Theta_3 u^3 + \Theta_2 u^2 + \Theta_1 u + \Theta_0
+\end{equation}
+kde „vstup modelu“ je $u$ a „výstup modelu“ je $\hat y$. Parametrami modelu sú koeficienty (čísla) $\Theta_3$, $\Theta_2$, $\Theta_1$ a $\Theta_0$.
+
+Mimochodom, ide o lineárny model. Parametre modelu sú v lineárnom vzťahu k~„signálom“ modelu (k~vstupom modelu).
+
+
+\subsubsection{Jednoduché hľadanie parametrov (koeficientov) polynómu}
+
+V tejto časti sa použije MATLAB pre nájdenie parametrov (koeficientov) polynomiálnej funkcie \eqref{polyFcnDef}. Pre tieto účely majme premennú \verb|prevodChar|, ktorej prvý stĺpec sú hodnoty vstupnej veličiny a druhý stĺpec sú hodnoty výstupnej veličiny. Teda obr.~\ref{Prevodová charakteristika graf} by sme v~MATLABe nakreslili takto
+\begin{lstlisting}[language=Matlab, numbers=none]
+figure(1);
+plot(prevodChar(:,1), prevodChar(:,2), '+r');
+\end{lstlisting}
+
+
+\subsubsection{Funkcia polyfit}
+
+Funkcia \verb|polyfit| slúži vo všeobecnosti na hľadanie koeficientov polynómu (polynomiálnej funkcie) daného stupňa tak aby polynomiálna funkcia aproximovala dané dáta (napr. nameranú x-y závislosť). Kritériom pre hľadanie koeficientov je minimalizácia štvorcov (kvadrátov) odchýlok medzi nameranou hodnotou a jej aproximáciou. Presnejšie, minimalizácia sumy štvorcov odchýlok.
+
+Použitie funkcie \verb|polyfit| v tu uvažovanom konkrétnom prípade by bolo nasledovné
+\begin{lstlisting}[language=Matlab, numbers=none]
+polyKoef = polyfit(prevodChar(:,1),prevodChar(:,2), 3)
+\end{lstlisting}
+a premenná \verb|polyKoef| obsahuje hodnoty koeficientov polynómu. Rovnica \eqref{polyFcnDef} s~nájdenými koeficientami je:
+\begin{equation} \label{modelPolifitVysl}
+    \hat y = 0,1105 u^3  -1,1071 u^2 + 8,8873 u  -1,146
+\end{equation}
+
+
+\subsubsection{Funkcia polyval}
+
+Pre vypočítanie hodnôt (výstupov) $\hat y$ pre požadované vstupy $u$ je možné použiť funkciu \verb|polyval|. Ak teda chceme ku každému vstupu, pre ktorý bola nameraná hodnota výstupu, vypočítať jej aproximáciu $\hat y$ podľa modelu \eqref{modelPolifitVysl}, potom stačí zavolať:
+\begin{lstlisting}[language=Matlab, numbers=none]
+y_hat = polyval(polyKoef, prevodChar(:,1));
+\end{lstlisting}
+Obrázok, na ktorom sú naraz zobrazené namerané dáta aj výstup modelu \eqref{modelPolifitVysl} možno nakresliť nasledovne:
+\begin{lstlisting}[language=Matlab, numbers=none]
+figure(2);
+hold on;
+plot(prevodChar(:,1), prevodChar(:,2), '+r')
+plot(prevodChar(:,1), y_hat, '.b')
+\end{lstlisting}
+Samotný obrázok by bol podobný obr.~\ref{Prevodová charakteristika namer vs model}
+\begin{center}
+
+    \vbox{%
+    \makebox[\textwidth][c]{%
+    \includegraphics{MRS06_figsc_02_a_2.pdf}
+    }
+
+    \vspace{-6pt}
+
+    \figcaption{Prevodová charakteristika}
+    \label{Prevodová charakteristika namer vs model}
+    }
+
+\end{center}
+
+\subsubsection{Používanie modelu}
+
+Model, samozrejme, umožňuje vypočítať aproximáciu reálneho výstupu pre akúkoľvek hodnotu vstupu - nie len pre hodnoty vstupov, pre ktoré boli merané hodnoty skutočného systému. Vypočítajme výstupy modelu pre tieto vstupné hodnoty (dané vektorom):
+\begin{lstlisting}[language=Matlab, numbers=none]
+u_ine = [0:0.1:9.81];
+\end{lstlisting}
+Teda zavoláme funkciu \verb|polyval|.
+\begin{lstlisting}[language=Matlab, numbers=none]
+y_ine_1 = polyval(polyKoef, u_ine);
+\end{lstlisting}
+Nakreslime obrázok (viď obr.~\ref{Prevodová charakteristika nuine})
+\begin{lstlisting}[language=Matlab, numbers=none]
+figure(3);
+hold on;
+plot(prevodChar(:,1), prevodChar(:,2), '+r')
+plot(u_ine, y_ine_1, '.b')
+\end{lstlisting}
+\begin{center}
+
+    \vbox{%
+    \makebox[\textwidth][c]{%
+    \includegraphics{MRS06_figsc_03_a_3.pdf}
+    }
+
+    \vspace{-6pt}
+
+    \figcaption{Prevodová charakteristika}
+    \label{Prevodová charakteristika nuine}
+    }
+
+\end{center}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\section{O meraní prechodovej charakteristiky}
+
+Nasledujúci text má za cieľ inšpirovať čitateľa tak, aby získal lepšiu predstavu o~tom ako zrealizovať zmysluplné meranie prechodových charakteristík (aj keď v tomto prípade sa čitateľ bude zaoberať len simuláciami). V tomto prípade totiž nie je úlohou len samotné získanie prechodovej charakteristiky. Potrebný je tiež rozbor problému z hľadiska daného reálneho (simulovaného) systému (ktorého vlastnosti skúmame). Preto je v prvom rade potrebné vysvetlenie pojmov používaných pri opise dynamického systému.
+
+Pripomeňme, že v tomto bode máme dostupnú istú informáciu o predmetnom skúmanom systéme. Je ňou prevodová charakteristika - viď obr.~\ref{Prevodová charakteristika graf}.
+
+Samotná prevodová charakteristika vystihuje tzv. statické vlastnosti systému. Vlastnosti systému v ustálenom stave. Celkom konkrétne je možné z prevodovej charakteristiky získať statické zosilnenie systému.
+
+Prevodová charakteristika na obr.~\ref{Prevodová charakteristika graf} ukazuje, že zosilnenie systému pri nižších hodnotách vstupného signálu je iné ako zosilnenie pri vyšších hodnotách vstupného signálu. Využime skutočnosť, že v tomto prípade máme dostupný model prevodovej charakteristiky (nie je nevyhnutné mať takýto model). Modelom je polynomiálna funkcia, konkrétne:
+\begin{equation} \label{modelPolifitVysl2}
+    \hat y = 0,1105 u^3  -1,1071 u^2 + 8,8873 u  -1,146
+\end{equation}
+Použime tento model pre vypočítanie výstupov (odhadov výstupov) systému v týchto hodnotách vstupného signálu:
+\begin{lstlisting}[language=Matlab, numbers=none]
+u_ine = [0:0.1:9.81];
+\end{lstlisting}
+Získame obrázok~\ref{Prevodová charakteristika graf2}.
+\begin{center}
+
+    \vbox{%
+    \makebox[\textwidth][c]{%
+    \includegraphics{MRS06_figsc_03_a_666.pdf}
+    }
+
+    \vspace{-6pt}
+
+    \figcaption{}
+    \label{Prevodová charakteristika graf2}
+    }
+
+\end{center}
+
+
+
+
+\subsection{Pracovný bod}
+
+Hlavnou úlohou v tomto texte je získať prechodové charakteristiky predmetného systému (laboratórny systém) v rôznych pracovných bodoch. Pracovné body nech sú zvolené s prihliadnutím na prevodovú charakteristiku systému. V prvom rade, čo je to \emph{pracovný bod}?
+
+Pracovný bod je definovaný ustálenou hodnotou vstupného signálu, ku ktorej (jednoznačne) prislúcha ustálená hodnota výstupného signálu. Dvojica hodnôt, hodnota na vstupe a hodnota na výstupe, tvorí pracovný bod.
+
+Ak je daná ustálená hodnota vstupného signálu, potom je možné pomocou prevodovej charakteristiky nájsť prislúchajúcu ustálenú hodnotu výstupného signálu.
+
+Pojem pracovný bod na seba viaže aj pojem \emph{okolie pracovného bodu}. V okolí pracovného bodu sú vlastnosti systému relatívne rovnaké ako v pracovnom bode. Z~hľadiska statických vlastností systému to znamená, že v okolí pracovného bodu sa sklon prevodovej charakteristiky relatívne nemení. Inými slovami, statické zosilnenie systému sa nemení. Rovnako aj dynamické vlastnosti systému sú v okolí pracovného bodu relatívne nemenné - časové konštanty systému sa nemenia.
+
+V dvoch rôznych pracovných bodoch môže mať reálny systém napríklad rozdielne statické zosilnenie, teda statické vlastnosti. Statické zosilnenie systému v pracovnom bode je možné určiť na základe prevodovej charakteristiky. Je dané sklonom prevodovej charakteristiky v okolí pracovného bodu.
+
+Prípadný rozdiel v statických vlastnostiach v rôznych pracovných bodoch však nehovorí nič o prípadnom rozdiele dynamických vlastnostiach systému. Dynamické vlastnosti je možné vyhodnocovať na základe prechodovej charakteristiky.
+
+\emph{Prechodová charakteristika} je odozva systému na jednotkový skok.
+
+Pod pojmom \emph{jednotkový skok} sa rozumie skoková zmena signálu (vstupného) a veľkosť tejto zmeny je jednotková. Je jednotková zmysle, že akúkoľvek veľkosť skokovej zmeny má zmysel (prípadne) vyjadriť ako násobok jednotkovej skokovej zmeny. Prirodzene sa predpokladá, že jednotková zmena je taká, že nespôsobí, že systém sa dostane mimo okolia pracovného bodu.
+
+
+
+
+
+
+\subsection{Voľba pracovných bodov}
+
+Pracovné body nech sú zvolené s prihliadnutím na prevodovú charakteristiku systému. Ako teda prihliadnuť? Ako už bolo uvedené, z prevodovej charakteristiky je zrejmé, že istá vlastnosť systému je iná pri nízkych hodnotách vstupného signálu a iná pri vysokých hodnotách. Tou vlastnosťou je statické zosilnenie. Iné než tzv. statické vlastnosti systému z prevodovej charakteristiky nie je možné vyčítať. Otázkou teda je či sú aj iné vlastnosti systému rozdielne pri rôznych hodnotách vstupného signálu.
+
+Zvoľme preto dva pracovné body - jeden nech reprezentuje nízku hodnotu vstupného signálu a druhý vysokú. Zvolené pracovné body sú uvedené v tabuľke~\ref{Zvolené pracovné body}.
+\begin{center}
+
+    \vbox{
+    
+    \tabcaption{Zvolené pracovné body}
+    \label{Zvolené pracovné body}
+    
+    \begin{tabular}{ccc}
+        \toprule
+        PB & hodnota & jednotky \\
+        \midrule
+        1. & $4$ & [kg m$^2$ s$^{-2}$] \\
+        2. & $9,5$ & [kg m$^2$ s$^{-2}$] \\
+        \bottomrule
+    \end{tabular}
+    } 
+    
+\end{center}
+Na základe nameraných bodov prevodovej charakteristiky by sme mohli k~zvoleným ustáleným vstupným hodnotám priradiť výstupné hodnoty:
+
+\noindent
+\begin{tabular}{@{}l l}
+    1.PB: & $y=23,76$ [°] \\
+    2.PB: & $y=78,13$ [°]
+\end{tabular}
+
+
+Pracujme však s aproximáciou prevodovej charakteristiky, teda s jej modelom. Model nám umožní získať aj také informácie, ktoré neboli reálne namerané.
+
+Pre $u = 4$ [kg m$^2$ s$^{-2}$] podľa modelu prevodovej charakteristiky prislúcha hodnota ustáleného výstupu:
+\begin{equation}
+    \hat y_{PB1} = 0,1105\ u_{PB1}^3  -1,1071\ u_{PB1}^2 + 8,8873\ u_{PB1}  -1,146
+\end{equation}
+kde ak $u_{PB1} = 4$ [kg m$^2$ s$^{-2}$], potom $\hat y_{PB1} = 23,73$ [°]. Podobne pre $u = 9,5$ [kg m$^2$ s$^{-2}$] podľa modelu prevodovej charakteristiky prislúcha hodnota ustáleného výstupu $\hat y_{PB2} = 78,06$ [°]. Znázornime pracovné body - viď obr.~\ref{Prevodová charakteristika graf4}.
+\begin{center}
+
+    \vbox{%
+    \makebox[\textwidth][c]{%
+    \includegraphics{MRS06_PCH_figsc_04_0.pdf} 
+    }
+
+    \vspace{-6pt}
+
+    \figcaption{}
+    \label{Prevodová charakteristika graf4}
+    }
+
+\end{center}
+Ďalej je, samozrejme, potrebné vhodne zvoliť okolie pracovného bodu (pre každý pracovný bod). V podstate je potrebné voliť pracovný bod a prislúchajúce okolie pracovného bodu naraz. Len tu sme to pre lepšiu názornosť oddelili.
+
+Pripomeňme, že v okolí pracovného bodu sa očakáva, že vlastnosti systému sú relatívne nemenné. Na základe prevodovej charakteristiky možno posúdiť statické vlastnosti systému. Na základe toho, pre 1. pracovný bod (PB1) zvoľme okolie $u = 4 \pm 0,8$ [kg m$^2$ s$^{-2}$]. Pre PB2 zvoľme $u = 9,5 \pm 0,25$ [kg m$^2$ s$^{-2}$]. Znázornime pracovné body a ich okolia - viď obr.~\ref{Prevodová charakteristika graf5}. Na obrázku~\ref{Prevodová charakteristika graf5} sú tiež vyznačené hranice okolia pracovného bodu, napr. $u_{PB1_l}$ ako dolná hranica okolia pracovného bodu a~$u_{PB1_h}$ ako horná hranica. K tomu zodpovedajúce hodnoty výstupnej veličiny, hodnoty $y_{PB1_l}$ a~$y_{PB1_h}$ sú taktiež vyznačené. Obdobne aj pre druhý pracovný bod.
+\begin{center}
+
+    \vbox{%
+    \makebox[\textwidth][c]{%
+    \includegraphics{MRS06_PCH_figsc_05_0.pdf}
+    }
+
+    \vspace{-6pt}
+
+    \figcaption{}
+    \label{Prevodová charakteristika graf5}
+    }
+
+\end{center}
+Ďalej je v tomto prípade potrebné uvážiť veľkosť skokovej zmeny, ktorú budeme používať ako jednotkovú. Vzhľadom na okolnosti nie je dôvod, aby jednotkovou veľkosťou nebola hodnota definujúca okolie pracovného bodu. Spĺňa sa tak požiadavka, že jednotkový skok nespôsobí, že systém sa dostane mimo okolia pracovného bodu (bude na hrane, ale nie mimo). Preto pre PB1 nech je jednotková veľkosť skokovej zmeny rovná hodnote $u_{s1} = 0,8$ [kg m$^2$ s$^{-2}$] a pre PB2 nech je jednotková veľkosť skoku rovná hodnote $u_{s2} = 0,25$ [kg m$^2$ s$^{-2}$].
+
+
+
+
+
+\subsection{Zrealizovanie merania prechodovej charakteristiky}
+
+Aby bolo možné vykonať jednotkový skok (skokovú zmenu vstupného signálu systému s~jednotkovou veľkosťou) v okolí pracovného bodu najskôr je potrebné dostať systém do pracovného bodu. Ak bude hodnota vstupného signálu $u_{PB}$, a necháme ju tak nejaký čas, potom očakávame, na základe prevodovej charakteristiky, že výstup systému sa ustáli na hodnote $y_{PB}$. Systém bude v pracovnom bode. Potom je možné skokovo zvýšiť hodnotu vstupného signálu o hodnotu $u_{s}$. Tým sa zrealizuje jednotkový skok v~okolí pracovného bodu. Simulácia uvedeného je na obr.~\ref{graf6}.
+\begin{center}
+
+    \vbox{%
+    \makebox[\textwidth][c]{%
+    \includegraphics{MRS06_PCH_figsc_06_0.pdf}
+    }
+
+    \vspace{-6pt}
+
+    \figcaption{}
+    \label{graf6}
+    }
+
+\end{center}
+Veľkosť skokovej zmeny vstupného signálu je na obrázku~\ref{graf6} označená ako $u_{s1}$. V~tomto prípade, vzhľadom na zvolené okolie pracovného bodu, je $u_{s1} = 0,8$.
+
+Jednotkový skok nastal v čase $t=10$ [s]. Pred týmto časom sa systém dostával do pracovného bodu. Od času $t=10$ [s] až pokým sa výstupná veličina systému opäť neustálila prebieha prechodový dej, to je prechodová charakteristika (keďže na vstupe bol jednotkový skok).
+
+
+
+
+
+
+\subsection{Spracovanie nameraného}
+
+
+Pred jednotkovým skokom sme očakávali, že výstupná veličina sa ustáli na hodnote $y_{PB}$. Podľa modelu prevodovej charakteristiky to pre tento pracovný bod je hodnota $\hat y_{PB1} = 23,73$ [°]
+
+Priemerná hodnota výstupnej veličiny počas doby 5 sekúnd pred jednotkovým skokom je $24,04$ [°]. Odchýlka priemernej hodnoty, okolo ktorej sa systém ustálil v~pracovnom bode, od očakávanej hodnoty podľa modelu prevodovej charakteristiky je približne 1 \%. To je samozrejme prijateľná odchýlka. Ďalej teda môžeme považovať hodnotu $\hat y_{PB1}$ podľa modelu prevodovej charakteristiky za hodnotu, na ktorej bola ustálená výstupná veličina pred skokovou zmenou vstupného signálu.
+
+Po ukončení prechodového deja sa podľa modelu prevodovej charakteristiky očakáva, že výstupná veličina sa ustáli na hodnote $\hat y_{PB1_h} = 28,19$ [°]
+
+Už z obr.~\ref{graf6} je zrejmé, že v skutočnosti sa výstupná veličina ustáli na o niečo vyššej hodnote. Presnejšie, ak uvažujeme časový úsek po jednotkovom skoku, na ktorom je už výstupná veličina ustálená, nech je to úsek 2,5 až 5 sekúnd po jednotkovom skoku, tak na tomto úseku je priemerná hodnota výstupnej veličiny $29,2$ [°].
+
+Ak pri hodnote $y_{PB1}$ bol rozdiel medzi očakávaným (podľa modelu prevodovej charakteristiky) a nameraným priam zanedbateľný, pri hodnote $y_{PB1_h}$ to už nie je také jednoznačné. Nie je jednoznačné, že rozdiel je zanedbateľný. Tento problém však súvisí s meraním prevodovej charakteristiky a následnou voľbou modelu prevodovej charakteristiky, ktorý sme sa tu rozhodli používať pri odhadovaní očakávaných hodnôt $y_{PB1}$ a $y_{PB1_h}$. Ak sme sa raz rozhodli používať daný model prevodovej charakteristiky, potom s prípadnými odchýlkami, ktoré zjavne nie sú omyly, je potrebné počítať.
+
+Týmto sme chceli povedať, že napriek tomu, že čo sa očakávaných hodnôt týka, po jednotkovom skoku výstupná veličina opustila očakávané okolie pracovného bodu. Avšak je to len očakávané, odhadované okolie (na základe modelu prevodovej charakteristiky). Odchýlky od „reálnych“ hodnôt sú prijateľné a teda môžeme pokračovať bez nutnosti prehodnotiť voľbu okolia pracovného bodu.
+
+
+
+
+\subsubsection{„Vystrihnutie“ prechodovej charakteristiky}
+
+Vyberme z dát na obr.~\ref{graf6} len tú časť, ktorá zodpovedá prechodovej charakteristike, teda dáta od času 10 až po ustálenie (nech je to čas 15). Výsledkom je obr.~\ref{graf7}.
+\begin{center}
+
+    \vbox{%
+    \makebox[\textwidth][c]{%
+    \includegraphics{MRS06_PCH_figsc_07_0.pdf}
+    }
+
+    \vspace{-6pt}
+
+    \figcaption{}
+    \label{graf7}
+    }
+
+\end{center}
+
+
+
+\subsubsection{„Posunutie“ prechodovej charakteristiky}
+
+Pre potreby ďalšej práce s prechodovou charakteristikou je zvyčajne výhodné posunúť namerané dáta tak aby začiatok prechodovej charakteristiky bol v bode (0,0), to znamená, že PCH začína v  čase 0 a hodnota výstupnej veličiny v začiatku je tiež nula (aspoň filozoficky).
+
+Konkrétne: od získaného priebehu výstupnej veličiny je potrebné odčítať hodnotu $y_{PB}$, pretože tak sa začiatok posunie v smere osi y do nuly (filozoficky... teraz nám to asi bude kaziť šum). Rovnako priebeh vstupnej veličiny je potrebné posunúť v~smere osi o hodnotu $u_{PB}$. Samozrejme, od časového vektora je potrebné odčítať čas, v~ktorom nastal jednotkový skok. Výsledok je na obr.~\ref{graf8}.
+\begin{center}
+
+    \vbox{%
+    \makebox[\textwidth][c]{%
+    \includegraphics{MRS06_PCH_figsc_08_0.pdf}
+    }
+
+    \vspace{-6pt}
+
+    \figcaption{}
+    \label{graf8}
+    }
+
+\end{center}
+
+
+
+
+\subsection{Poznámky k odčítavaniu hodnôt z grafu prechodovej charakteristiky}
+
+
+
+\subsubsection{Nameraná prechodová charakteristika}
+
+Z predchádzajúceho je dostupná nameraná a spracovaná prechodová charakteristika (PCH) predmetného systému. Ide o prechodovú charakteristiku v prvom pracovnom bode. Je zobrazená na obr.~\ref{graf8}.
+
+Ďalej sú dostupné informácie o pracovnom bode, v ktorom bola PCH meraná. Hodnota vstupného signálu v pracovnom bode je $u = 4$ [kg m$^2$ s$^{-2}$] a uvažuje sa okolie pracovného bodu $u = 4 \pm 0,8$ [kg m$^2$ s$^{-2}$].
+
+Je dostupný podel prevodovej charakteristiky a teda je možné odhadnúť hodnotu výstupnej veličiny v pracovnom bode, teda
+\begin{equation}
+    \hat y_{PB1} = 0,1105\ u_{PB1}^3  -1,1071\ u_{PB1}^2 + 8,8873\ u_{PB1}  -1,146
+\end{equation}
+kde $u_{PB1} = 4$ [kg m$^2$ s$^{-2}$] a teda $\hat y_{PB1} = 23,73$ [°]. Rovnako je možné vypočítať hodnotu výstupného signálu pre, nazvime to, hornú hranicu okolia pracovného bodu, to znamená pre hodnotu na vstupe $u_{PB1_h} = 4 + 0,8$ [kg m$^2$ s$^{-2}$]. Tejto zodpovedá hodnota $\hat y_{PB1_h} = 28.19$ [°].
+
+Keďže prechodová charakteristika na obr.~\ref{graf8} je posunutá do nuly, teda od skutočných hodnôt sú odčítané hodnoty v pracovnom bode, tak urobme túto úpravu aj pre práve vypočítané hodnoty, teda
+\begin{align}
+    \Delta u_{PB1} &= u_{PB1_h} - u_{PB1} = 0,8 \\
+    \Delta \hat y_{PB1} &= \hat y_{PB1_h} -  \hat y_{PB1} = 4,52
+\end{align}
+
+
+
+\subsubsection{Statické zosilnenie $K$}
+
+Zistime statické zosilnenie systému v okolí uvažovaného pracovného bodu. Potrebujeme hodnotu, na ktorej sa ustálila výstupná veličina po prechodovom deji. Z grafu PCH uvažujme, že výstupná veličina je už ustálená po čase $t=3$ [s] (dajme tomu teraz takto). Priemerná hodnota výstupnej veličiny po tomto čase je $\Delta y = 5.52$ [°].
+
+Teda, po uskutočnení jednotkového skoku v okolí pracovného bodu sa výstupná veličina zmenila o $\Delta y$ [°]. Zmena na vstupe $\Delta u$ bola, samozrejme, práve jednotková (pretože jednotkový skok). V tomto prípade má jednotkový skok veľkosť okolia pracovného bodu  $\Delta u = 0,8$ [kg m$^2$ s$^{-2}$].
+
+Statické zosilnenie systému, na základe prechodovej charakteristiky, označme $K$, je $K = \frac{\Delta y}{\Delta u}$, číselne
+\begin{equation}
+     K = 6,9 \text{[°/(kg m$^2$ s$^{-2}$)]}
+\end{equation}
+Uvedené možno znázorniť aj do grafu - viď obr.~\ref{graf20}
+\begin{center}
+
+    \vbox{%
+    \makebox[\textwidth][c]{%
+    \includegraphics{MRS06_PCH_figsc_10_02_0.pdf}
+    }
+
+    \vspace{-6pt}
+
+    \figcaption{}
+    \label{graf20}
+    }
+
+\end{center}
+
+Statické zosilnenie systému je, samozrejme, možné zistiť aj pomocou prevodovej charakteristiky. V skutočnosti, všetko potrebné už máme k dispozícii.
+
+Mimochodom, ak by sme neboli leniví, tak nájdeme dotyčnicu v pracovnom bode, a jej smernica (sklon) by mala byť statické zosilnenie. To by bol formálne korektný postup.
+
+My však leniví sme, preto: hľadáme sklon prevodovej charakteristiky v okolí pracovného bodu. Z praktického hľadiska, nech je sklon daný pracovným bodom a bodom ohraničujúcim okolie pracovného bodu zhora. Formálne $\text{sklon} = \frac{\Delta y}{\Delta u}$ kde $\Delta y = \hat y_{PB_h} - \hat y_{PB}$ a~$\Delta u = u_{PB_h} - u_{PB}$. To je, samozrejme, to isté ako vyplynulo z~využitia prechodovej charakteristiky vyššie. Tu však číselné hodnoty nie sú odčítané z~prechodovej charakteristiky ale z~modelu prevodovej charakteristiky. Konkrétne čísla:
+\begin{equation}
+    \text{sklon} = \frac{\hat y_{PB_h} - \hat y_{PB}}{u_{PB_h} - u_{PB}} = \frac{4,52}{0,8} = 5.65
+\end{equation}
+Odchýlka od statického zosilnenia určeného z prechodovej charakteristiky je $-1,25$ [°], t.j. $18,10$ [\%] (tá je samozrejme daná aj tým, že používame model prevodovej charakteristiky, keďže konkrétne potrebné hodnoty v rámci nameranej prevodovej charakteristiky nie sú dostupné).
+
+
+
+
+\subsubsection[Časová konštanta $T$ pre lineárny dynamický systém 1. rádu]{Časová konštanta $T$ pre lineárny dynamický systém 1. rádu}
+
+
+Ďalej je možné nájsť model, ktorý má vystihovať dynamiku (dynamické vlastnosti) reálneho systému. Modelom nech je lineárny dynamický systém.
+
+Kvalifikovaný odhad založený na grafickom znázornení predmetnej prechodovej charakteristiky vedie k možnosti, že modelom systému môže byť dynamický systém 1. rádu. Tento je možné zapísať v tvare prenosovej funkcie
+\begin{equation}
+    G(s) = \frac{y(s)}{u(s)} = \frac{K}{Ts+1}
+\end{equation}
+kde $K$ je možné interpretovať ako statické zosilnenie systému a $T$ je časová konštanta.
+
+Časovú konštantu je možné nájsť na základe prechodovej charakteristiky. Je to čas od začiatku prechodovej charakteristiky (od času jednotkového skoku), v ktorom výstupná veličina dosiahla približne 63 \% zo svojej ustálenej hodnoty.
+
+Prečo práve 63 \%? Odpoveď sa ponecháva na čitateľa.
+
+100 \% z ustálenej hodnoty na nasledujúcom obrázku~\ref{graf30} je samozrejme hodnota $\Delta y$. Potom 63 \% je hodnota $\Delta y_{63} =  3,48$ [°]
+\begin{center}
+
+    \vbox{%
+    \makebox[\textwidth][c]{%
+    \includegraphics{MRS06_PCH_figsc_10_03_0.pdf}
+    }
+
+    \vspace{-6pt}
+
+    \figcaption{}
+    \label{graf30}
+    }
+
+\end{center}
+Hodnotu $T$ teraz možno hľadať „od oka“, doslova pomocou grafu PCH, prípadne „od oka“, ale trošku inak - napr: Nájdime hodnoty výstupnej veličiny, ktoré sú v~pásme (volajme ho „od oka“) $\pm ? \%$ v okolí hodnoty $\Delta y_{63}$. Presnejšie, nájdime časy tých vzoriek, ktoré sú v~tom pásme. Nájdené body v~pásme „od oka“ okolo hodnoty $\Delta y_{63}$ sú na obr.~\ref{graf30} vyznačené ako malé zelené kružnice. Priemer z nájdených časov je
+\begin{equation}
+    T =  0,81 \text{[s]}
+\end{equation}
+A táto hodnota môže byť celkom dobre „od oka“ odčítaná časová konštanta. Všetko uvedené je nakreslené na obr.~\ref{graf30}.
+
+
+
+
+\subsubsection{Verifikácia identifikovaného dynamického modelu}
+
+
+V predchádzajúcom boli na základe prechodovej charakteristiky určené parametre lineárneho dynamického systému, ktorý má byť modelom skutočného systému. Tento model je možné vyjadriť v tvare prenosovej funkcie
+\begin{equation}
+    \frac{y(s)}{u(s)} = \frac{K}{Ts+1}
+\end{equation}
+
+
+
+Pre verifikáciu modelu je možné využiť grafické porovnanie prechodovej charakteristiky modelu a skutočnej prechodovej charakteristiky. Pre získanie PCH modelu využime numerickú simuláciu. Daná prenosová funkcia zodpovedá diferenciálnej rovnici v tvare
+\begin{align}
+    T \dot y(t) + y(t) &= K u(t) \\
+    T \dot y(t) &= - y(t) + K u(t) \\
+    \dot y(t) &= - \frac{1}{T} y(t) + \frac{K}{T} u(t)
+\end{align}
+Vstupný signál zvoľme rovnaký ako je veľkosť $\Delta u$. Tak zabezpečíme zodpovedajúcu veľkosť jednotkového skoku, ktorý je použitý v numerickej simulácii pre získanie PCH.
+
+Do spoločného obrázka nakreslime nameranú PCH a PCH modelu systému - viď obr.~\ref{graf40}
+\begin{center}
+
+    \vbox{%
+    \makebox[\textwidth][c]{%
+    \includegraphics{MRS06_PCH_figsc_10_04_0.pdf}
+    }
+
+    \vspace{-6pt}
+
+    \figcaption{}
+    \label{graf40}
+    }
+
+\end{center}
+Týmto (aspoň pre naše potreby) možno model považovať za verifikovaný - znamená to, že daný model je schopný vystihnúť vlastnosti skutočného systému a že je možné na základe dostupných informácií (prechodová charakteristika) nájsť parametre modelu.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}
