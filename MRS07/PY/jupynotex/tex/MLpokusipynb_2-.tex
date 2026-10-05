@@ -1,0 +1,85 @@
+\vbox{%
+\begin{lstlisting}[language=Python, caption=Súbor \lstinline|MLpokus.ipynb cell:02|]
+beta = 0.5;
+omega_0 = 3;
+
+polyA = [1, 2*beta*omega_0, omega_0^2]
+
+
+
+
+roots(polyA)
+% sqrt(3)*(3/2)
+
+G = tf([polyA(end)], polyA)
+
+impulse(G)
+
+
+
+ \end{lstlisting}
+\begin{footnotesize}
+\begin{verbatim}
+polyA = 1x3 double
+     1     3     9
+\end{verbatim}
+\end{footnotesize}
+
+\begin{footnotesize}
+\begin{verbatim}
+ans =
+  -1.5000 + 2.5981i
+  -1.5000 - 2.5981i
+\end{verbatim}
+\end{footnotesize}
+
+\begin{footnotesize}
+\begin{verbatim}
+
+G =
+
+        9
+  -------------
+  s^2 + 3 s + 9
+
+Continuous-time transfer function.
+
+\end{verbatim}
+\end{footnotesize}
+
+\begin{center}\includegraphics[width=0.68\textwidth]{MLpokusipynb_cell02out.png}\end{center}}%end of vbox
+\vbox{%
+\begin{lstlisting}[language=Python, caption=Súbor \lstinline|MLpokus.ipynb cell:03|]
+syms s
+
+As = polyA(1)*s^2 + polyA(2)*s + polyA(3)
+Bs = polyA(3)
+
+Gs = Bs/As
+
+y_i = ilaplace(Gs) \end{lstlisting}
+$As =s^2 +3\,s+9$
+\begin{footnotesize}
+\begin{verbatim}
+Bs = 9
+\end{verbatim}
+\end{footnotesize}
+
+$Gs =\frac{9}{s^2 +3\,s+9}$
+$y_i =2\,\sqrt{3}\,{\mathrm{e}}^{-\frac{3\,t}{2}} \,\sin \left(\frac{3\,\sqrt{3}\,t}{2}\right)$}%end of vbox
+\vbox{%
+\begin{lstlisting}[language=Python, caption=Súbor \lstinline|MLpokus.ipynb cell:04|]
+
+
+% p_1 = [1 -1+0.5i];
+% p_2 = [1 -1-0.5i];
+
+% polyA = conv(p_1, p_2)
+
+ \end{lstlisting}
+\begin{footnotesize}
+\begin{verbatim}
+ans = 2.5981
+\end{verbatim}
+\end{footnotesize}
+}%end of vbox

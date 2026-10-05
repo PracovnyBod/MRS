@@ -1,0 +1,84 @@
+\vbox{%
+\begin{lstlisting}[language=Python, caption=Súbor \lstinline|MRS01_ODEsolver.ipynb cell:01|]
+# Import potrebných modulov
+import numpy as np
+import matplotlib.pyplot as plt
+from scipy.integrate import odeint \end{lstlisting}
+}%end of vbox
+\vbox{%
+\begin{lstlisting}[language=Python, caption=Súbor \lstinline|MRS01_ODEsolver.ipynb cell:02|]
+# Definovanie funkcie, ktorá realizuje predmetnú diferenciálnu rovnicu
+
+def fcn_difRovnica_01(x, t, param):
+
+    R, C = param
+    Q = x
+    dotQ = (-1.0/(R*C)) * Q
+
+    return dotQ \end{lstlisting}
+}%end of vbox
+\vbox{%
+\begin{lstlisting}[language=Python, caption=Súbor \lstinline|MRS01_ODEsolver.ipynb cell:03|]
+# Použitie ODE solvera (odeint imporotvaný z knižnice scipy)
+
+# Príprava parametrov a začiatočných podmienok
+param_C = 10**-6
+param_R = 10**6
+param = [param_R, param_C]          # zoznam parametrov
+
+Q_0 = 2*10**-6                      # Začiatočná podmienka
+
+# Časový vektor, pre ktorý požadujeme riešenie
+sim_t_start = 0
+sim_t_final = 5
+sim_T_s = 0.05
+timeVect = np.arange(sim_t_start, sim_t_final+sim_T_s, sim_T_s)
+
+# Volanie ODE solvera
+odeOut = odeint(fcn_difRovnica_01,  # volaná funkcia (dif. rovnica)
+                Q_0,                # začiatočná podmienka
+                timeVect,           # časový vektor
+                args=(param,)       # argumenty volanej funkcie
+                )
+
+print(odeOut[:,0]) # Výpis výsledkov simulácie - numerické riešenie... \end{lstlisting}
+\begin{footnotesize}
+\begin{verbatim}
+[2.00000000e-06 1.90242604e-06 1.80961688e-06 1.72134793e-06
+ 1.63737823e-06 1.55765170e-06 1.48195836e-06 1.41008245e-06
+ 1.34180819e-06 1.27691980e-06 1.21520151e-06 1.15643755e-06
+ 1.10041214e-06 1.04690950e-06 9.95852513e-07 9.47340655e-07
+ 9.01247200e-07 8.57438923e-07 8.15782598e-07 7.76145000e-07
+ 7.38392904e-07 7.02393084e-07 6.68012315e-07 6.35129586e-07
+ 6.03824871e-07 5.74086386e-07 5.45838175e-07 5.19004282e-07
+ 4.93508750e-07 4.69275623e-07 4.46228943e-07 4.24292755e-07
+ 4.03391101e-07 3.77739286e-07 3.60602172e-07 3.44032035e-07
+ 3.28028877e-07 3.12592697e-07 2.97723495e-07 2.83421271e-07
+ 2.69686025e-07 2.56517758e-07 2.43914212e-07 2.31827496e-07
+ 2.20238343e-07 2.09146754e-07 1.98552727e-07 1.88456263e-07
+ 1.78857363e-07 1.69756026e-07 1.61152252e-07 1.53046041e-07
+ 1.45437393e-07 1.38326308e-07 1.31649509e-07 1.25254891e-07
+ 1.19135788e-07 1.13292200e-07 1.07724127e-07 1.02431569e-07
+ 9.74145263e-08 9.26729984e-08 8.82069856e-08 8.40164877e-08
+ 8.01015049e-08 7.64573621e-08 7.29848135e-08 6.96439350e-08
+ 6.64347268e-08 6.33571888e-08 6.04113210e-08 5.75971234e-08
+ 5.49145960e-08 5.23637388e-08 4.99445518e-08 4.76570350e-08
+ 4.55011884e-08 4.34600932e-08 4.14930814e-08 3.95983705e-08
+ 3.77759605e-08 3.60258514e-08 3.43480432e-08 3.27425359e-08
+ 3.12093294e-08 2.97484239e-08 2.83598192e-08 2.70435154e-08
+ 2.57986173e-08 2.46061198e-08 2.34583775e-08 2.23553905e-08
+ 2.12971589e-08 2.02836825e-08 1.93149614e-08 1.83909957e-08
+ 1.75117852e-08 1.66773301e-08 1.58876302e-08 1.51426857e-08
+ 1.44373720e-08]
+\end{verbatim}
+\end{footnotesize}
+}%end of vbox
+\vbox{%
+\begin{lstlisting}[language=Python, caption=Súbor \lstinline|MRS01_ODEsolver.ipynb cell:04|]
+# Grafické zobrazenie výsledkov simulácie
+
+plt.plot(timeVect , odeOut)
+plt.xlabel('čas [sec]')
+plt.ylabel('$Q(t)$ [Coulomb]')
+plt.show() \end{lstlisting}
+\begin{center}\includegraphics[width=0.68\textwidth]{MRS01_ODEsolveripynb_cell04out.png}\end{center}}%end of vbox

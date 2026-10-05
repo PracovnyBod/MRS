@@ -1,0 +1,33 @@
+\vbox{%
+\begin{lstlisting}[language=Python, caption=Súbor \lstinline|MRS07_ICH2R_ML.ipynb cell:01|]
+p_1 = -1;
+p_2 = -2;
+
+polyA = conv([1, -p_1], [1, -p_2]);
+
+syms s
+As = polyA(1)*s^2 + polyA(2)*s + polyA(3);
+Bs = polyA(end);
+
+Gs = Bs/As;
+
+y = ilaplace(Gs) \end{lstlisting}
+$y =2\,{\mathrm{e}}^{-t} -2\,{\mathrm{e}}^{-2\,t}$}%end of vbox
+\vbox{%
+\begin{lstlisting}[language=Python, caption=Súbor \lstinline|MRS07_ICH2R_ML.ipynb cell:02|]
+G = tf(polyA(end), polyA)
+impulse(G) \end{lstlisting}
+\begin{footnotesize}
+\begin{verbatim}
+
+G =
+
+        2
+  -------------
+  s^2 + 3 s + 2
+
+Continuous-time transfer function.
+\end{verbatim}
+\end{footnotesize}
+
+\begin{center}\includegraphics[width=0.68\textwidth]{MRS07_ICH2R_MLipynb_cell02out.png}\end{center}}%end of vbox

@@ -1,0 +1,31 @@
+\vbox{%
+\begin{lstlisting}[language=Python, caption=Súbor \lstinline|MRS07_PCH2R_ML.ipynb cell:05|]
+polyA = [1, 3, 9];
+
+syms s
+As = polyA(1)*s^2 + polyA(2)*s + polyA(3);
+Bs = 9;
+
+Gs = (Bs/As) * (1/s);
+
+y = ilaplace(Gs)
+% latex(y)
+
+G = tf(9, polyA)
+step(G) \end{lstlisting}
+$y =1-{\mathrm{e}}^{-\frac{3\,t}{2}} \,{\left(\cos \left(\frac{3\,\sqrt{3}\,t}{2}\right)+\frac{\sqrt{3}\,\sin \left(\frac{3\,\sqrt{3}\,t}{2}\right)}{3}\right)}$
+\begin{footnotesize}
+\begin{verbatim}
+
+G =
+
+        9
+  -------------
+  s^2 + 3 s + 9
+
+Continuous-time transfer function.
+
+\end{verbatim}
+\end{footnotesize}
+
+\begin{center}\includegraphics[width=0.68\textwidth]{/MRS07_PCH2R_MLipynb_cell05out.png}\end{center}}%end of vbox

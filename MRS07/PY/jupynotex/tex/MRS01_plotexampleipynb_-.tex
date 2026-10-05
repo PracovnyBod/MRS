@@ -1,0 +1,23 @@
+\vbox{%
+\begin{lstlisting}[language=Python, caption=Súbor \lstinline|MRS01_plotexample.ipynb cell:01|]
+import numpy as np
+import matplotlib.pyplot as plt \end{lstlisting}
+}%end of vbox
+\vbox{%
+\begin{lstlisting}[language=Python, caption=Súbor \lstinline|MRS01_plotexample.ipynb cell:02|]
+# Parametre
+R = 10**6
+C = 10**-6
+Q_0 = 2*10**-6
+
+# Súradnice bodov na x osi
+plotData_x = np.arange(0,5.1,0.1)
+
+# Výpočet hodnôt na y osi v zmysle danej časovej funkcie
+plotData_y = Q_0 * np.exp( (-1.0/(R*C)) * plotData_x )
+
+plt.plot(plotData_x , plotData_y)
+plt.xlabel('čas [sec]')
+plt.ylabel('$Q(t)$ [Coulomb]')
+plt.show () \end{lstlisting}
+\begin{center}\includegraphics[width=0.68\textwidth]{MRS01_plotexampleipynb_cell02out.png}\end{center}}%end of vbox
