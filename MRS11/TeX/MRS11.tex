@@ -1,0 +1,134 @@
+\documentclass[a4paper, 10pt, ]{article}
+
+\input{./COMMONFILES/preamble.tex}
+
+\def\oznacenieCasti{MRS11 - ZS2026}
+
+
+\usepackage{longtable}
+
+
+
+
+\begin{document}
+
+
+\lstset{%
+style=mystyle,
+rangebeginprefix=\#\#\#\ cellB\ ,%
+rangebeginsuffix=\ \#\#\#,%
+rangeendprefix=\#\#\#\ cellE\ ,%
+rangeendsuffix=\ \#\#\#,%
+includerangemarker=false,
+}
+
+
+
+
+
+\fontsize{12pt}{22pt}\selectfont
+
+\centerline{\textsf{Modelovanie a riadenie systémov} \hfill \textsf{\oznacenieCasti}}
+
+\fontsize{18pt}{22pt}\selectfont
+
+
+
+
+
+\begin{flushleft}
+	\textbf{\textsf{Cvičenie deviate}}
+\end{flushleft}
+
+
+
+
+
+\normalsize
+
+% \bigskip
+
+% {\hypersetup{hidelinks}
+
+% \tableofcontents
+
+% }
+
+\bigskip
+
+\vspace{18pt}
+
+
+
+
+
+\section*{Úloha 1}
+
+Majme lineárny uzavretý regulačný obvod, kde $G_R(s)$ je prenosová funkcia regulátora a  $G_S(s)$ je prenosová funkcia riadeného systému:
+
+\begin{center}
+
+    \vbox{%
+    \makebox[\textwidth][c]{%
+	% \includegraphics{schLinURO_basic.pdf}
+    \input{../FIG/schLinURO_basic.pdf_tex}
+	}
+
+    \vspace{-3mm}
+
+	\figcaption{Lineárny uzavretý regulačný obvod.}
+    \label{schLinURO_basic.pdf}
+    }
+	
+\end{center}
+
+
+\subsection*{a)}
+
+Stanovte prenosovú funkciu uzavretého regulačného obvodu, označme $G_{URO}(s)$.
+
+\subsection*{b)}
+
+Stanovte prenosovú funkciu regulačnej odchýlky, označme $G_{E}(s)$, pričom
+\begin{equation}
+    G_{E}(s)  = \frac{E(s)}{W(s)}
+\end{equation}
+
+
+
+
+
+
+
+\section*{Úloha 2}
+
+Numerickou simuláciou získajte prechodové charakteristiky:
+
+\begin{itemize}
+    \item P-regulátora
+    \item I-regulátora
+    \item PI-regulátora
+\end{itemize}
+
+\noindent
+Uvážte aký vplyv by malo pridanie D-zložky (D-regulátora) na vyššie uvedené prechodové charakteristiky.
+
+
+
+
+
+
+\section*{Úloha 3}
+
+Zostavte numerickú simuláciu všeobecného regulačného obvodu kde riadiaci systém je založený na PID-regulátore a kde riadeným systémom je napríklad simulačný model kyvadla z predchádzajúcich cvičení (prípadne iný simulačný model). Parametre PID nastavte skusmo v snahe dosiahnuť cieľ riadenia, ktorý si stanovíte.
+
+
+
+
+
+
+
+
+
+
+\end{document}
