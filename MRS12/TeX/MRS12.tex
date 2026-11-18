@@ -1,0 +1,138 @@
+\documentclass[a4paper, 10pt, ]{article}
+
+\input{./COMMONFILES/preamble.tex}
+
+\def\oznacenieCasti{MRS12 - ZS2026}
+
+
+\usepackage{longtable}
+
+
+
+
+\begin{document}
+
+
+\lstset{%
+style=mystyle,
+}
+
+
+
+
+
+\fontsize{12pt}{22pt}\selectfont
+
+\centerline{\textsf{Modelovanie a riadenie systémov} \hfill \textsf{\oznacenieCasti}}
+
+\fontsize{18pt}{22pt}\selectfont
+
+
+
+
+
+\begin{flushleft}
+	\textbf{\textsf{Cvičenie desiate}}
+\end{flushleft}
+
+
+
+
+
+\normalsize
+
+% \bigskip
+
+% {\hypersetup{hidelinks}
+
+% \tableofcontents
+
+% }
+
+\bigskip
+
+\vspace{18pt}
+
+
+
+
+\section{Príklad analýzy URO}
+
+Majme URO, kde
+\begin{align}
+    G_R(s) = r_0 + \frac{r_{-1}}{s} \qquad \text{a} \qquad  G_S(s) = \frac{K}{Ts+1}
+\end{align}
+teda:
+
+\begin{center}
+
+    \vbox{%
+    \makebox[\textwidth][c]{%
+    \input{../FIG/URO_PI_SS1R.pdf_tex}
+    }
+
+	% \figcaption{}
+	% \label{URO_PI_SS1R}
+    }
+
+\end{center}
+
+
+\begin{enumerate}[label=\alph*), leftmargin=0pt, labelsep=3mm, itemsep=0pt]
+
+    \item Odvodte prenosovú funkciu URO.
+    \item Stanovte konkrétne podmienky, ktoré ak budú splnené, tak URO bude stabilný.
+    \item Určte veľkosť trvalej regulačnej odchýlky ak $w(t) = 1$.
+
+
+\end{enumerate}
+
+
+
+
+
+
+
+
+
+
+
+
+
+\section{Regulátor pre reálny dynamický systém}
+
+Majme reálny dynamický systém (laboratórne zariadenie používané v rámci semestrálneho zadania), ktorý má vstupný a výstupný signál s daným rozsahom hodnôt. Tento \emph{systém ako celok} nech je riadeným systémom. K tomuto riadenému systému pridajte (pripojte) PID regulátor (prípadne len P alebo PI) a realizujte tak uzavretý regulačný obvod. Parametre PID nastavujte skusmo v snahe dosiahnuť zvolené ciele riadenia.
+
+\bigskip
+
+\noindent
+\emph{Poznámka:} pracujte v skupinách (ako pri získavaní dát k semestrálnemu zadaniu).
+
+
+
+
+
+
+\section{Doplnkové úlohy}
+
+\subsection{Simulácia}
+
+Zvoľte si prenosovú funkciu, ktorá bude modelom riadeného systému. Odporúča sa uvažovať prenosovú funkciu, ktorá je výsledkom práce na semestrálnom zadaní. 
+
+\begin{itemize}[leftmargin=0pt, labelsep=3mm, itemsep=0pt]
+    \item Zvoľte aspoň približné ciele riadenia (trvalá regulačná odchýlka, preregulovanie a~doba regulácie).
+    \item Vyberte vhodnú štruktúru PID regulátora\footnote{Využite študijný materiál MRS10}.
+    \item Vyhovujúcou metódou stanovte parametre regulátora\footnotemark[\value{footnote}].
+    \item Zrealizujte numerickú simuláciu regulačného obvodu.
+\end{itemize}
+
+
+\subsection{Realita}
+
+Zrealizujte analyticky navrhnutý regulačný obvod z predchádzajúcej úlohy pri riadení reálneho systému v okolí príslušného pracovného bodu.
+
+
+
+
+
+\end{document}
